@@ -59,7 +59,7 @@ body:
     validations:
       required: false
   - type: textarea
-    id: browser version
+    id: browser-version
     attributes:
       label: "Browser Version"
       description: "Please enter the version of the browser you are facing issue on"
