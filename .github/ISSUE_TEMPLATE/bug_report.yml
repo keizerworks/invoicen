@@ -16,25 +16,6 @@ body:
       placeholder: "Short and explicit description of your issue..."
     validations:
       required: true
-  - type: input
-    id: cli-version
-    attributes:
-      label: "CLI Version"
-      description: "Please enter the CLI version you're using."
-      placeholder: "e.g. v1.0"
-    validations:
-      required: true
-  - type: dropdown
-    id: os
-    attributes:
-      label: "Operating System"
-      description: "What is the impacted environment?"
-      options:
-        - Windows
-        - Linux
-        - macOS
-    validations:
-      required: true
   - type: textarea
     id: steps-to-reproduce
     attributes:
@@ -48,11 +29,11 @@ body:
     validations:
       required: true
   - type: textarea
-    id: expected-actual
+    id: expected
     attributes:
-      label: "Expected vs Actual Behavior"
-      description: "Please describe what you expected to happen vs what actually happened."
-      placeholder: "Expected: ... / Actual: ..."
+      label: "Expected Behavior"
+      description: "Please describe what you expected to happen"
+      placeholder: "Expected: ..."
     validations:
       required: true
   - type: textarea
@@ -75,6 +56,13 @@ body:
         - label: Microsoft Edge
         - label: Opera
         - label: Other
+    validations:
+      required: false
+  - type: textarea
+    id: browser version
+    attributes:
+      label: "Browser Version"
+      description: "Please enter the version of the browser you are facing issue on"
     validations:
       required: false
   - type: textarea
