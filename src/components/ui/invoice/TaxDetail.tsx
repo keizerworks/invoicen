@@ -14,12 +14,7 @@ interface TaxDetailProps {
   updateTaxDetails: (newTaxDetails: TaxDetail[]) => void;
 }
 
-const TaxDetail = ({
-  tax,
-  index,
-  taxDetails,
-  updateTaxDetails,
-}: TaxDetailProps) => {
+const TaxDetail = ({ tax, index, taxDetails, updateTaxDetails }: TaxDetailProps) => {
   const { theme } = useTheme();
   const handleChange = (field: keyof TaxDetail, value: string | number) => {
     const validatedValue = field === "percentage" ? Number(value) || 0 : value;
@@ -37,7 +32,7 @@ const TaxDetail = ({
         <Input
           value={tax.description}
           onChange={(e) => handleChange("description", e.target.value)}
-          className={`border-none ${theme === "light" ? "bg-white text-black" : "bg-black text-white"} focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-opacity-0`}
+          className={`border-none bg-white text-black"  dark:bg-black dark:text-white focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-opacity-0`}
           placeholder="Enter tax description..."
         />
       </TableCell>
@@ -47,7 +42,7 @@ const TaxDetail = ({
           value={tax.percentage}
           onChange={(e) => handleChange("percentage", e.target.value)}
           min={0}
-          className={`border-none ${theme === "light" ? "bg-white text-black" : "bg-black text-white"} focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-opacity-0`}
+          className={`border-none bg-white text-black"  dark:bg-black dark:text-white focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-opacity-0 text-right`}
         />
       </TableCell>
     </TableRow>

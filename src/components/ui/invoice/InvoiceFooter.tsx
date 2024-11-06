@@ -1,6 +1,7 @@
 import Typography from "@/components/ui/typography";
-import { Input } from "@/components/ui/input";
 import { Button } from "../button";
+import { Textarea } from "@/components/ui/textarea";
+import { Separator } from "../separator";
 
 interface InvoiceFooterProps {
   totalWithTax: number;
@@ -9,17 +10,20 @@ interface InvoiceFooterProps {
 const InvoiceFooter = ({ totalWithTax }: InvoiceFooterProps) => {
   return (
     <div className="my-4 space-y-4 w-full ">
-      <div className="flex items-center justify-between w-full mt-4">
+      <div className="flex items-center justify-end w-full mt-4">
         <Typography variant="h3" className="font-semibold">
           Total:
         </Typography>
-        {/* TODO: open calendar when clicked on this */}
         <Typography variant="h3" className="ml-[1rem]">
-          ${totalWithTax}
+          {/* TODO: format currency */}
+          {totalWithTax}
         </Typography>
       </div>
-      <Input type="text" placeholder="Add a custom message" />
-      <Button>Generate Invoice</Button>
+      <Separator className="mt-4" />
+      <Textarea placeholder="Add a custom message" className="border-none shadow-none mt-4" />
+      <div className="flex justify-end">
+        <Button className="text-right">Generate Invoice</Button>
+      </div>
     </div>
   );
 };
