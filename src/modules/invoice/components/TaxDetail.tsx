@@ -1,5 +1,5 @@
-import { TableCell, TableRow } from "../table";
-import { Input } from "../input";
+import { TableCell, TableRow } from "@/components/ui/table";
+import { Input } from "@/components/ui/input";
 import { useTheme } from "next-themes";
 
 interface TaxDetail {

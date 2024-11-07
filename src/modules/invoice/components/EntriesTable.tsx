@@ -7,7 +7,7 @@ import {
   TableFooter,
   TableHeader,
 } from "@/components/ui/table";
-import EntryRow from "@/components/ui/invoice/EntryRow";
+import EntryRow from "@/modules/invoice/components/EntryRow";
 import Typography from "@/components/ui/typography";
 
 interface Entry {

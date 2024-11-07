@@ -1,13 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import InvoiceHeader from "./InvoiceHeader";
-import BillingInfo from "./BillingInfo";
-import EntriesTable from "./EntriesTable";
-import TaxDetailsTable from "./TaxDetailsTable";
-import InvoiceFooter from "./InvoiceFooter";
-import Typography from "../typography";
-import { Separator } from "../separator";
+import InvoiceHeader from "@/modules/invoice/components/InvoiceHeader";
+import BillingInfo from "@/modules/invoice/components/BillingInfo";
+import EntriesTable from "@/modules/invoice/components/EntriesTable";
+import TaxDetailsTable from "@/modules/invoice/components/TaxDetailsTable";
+import InvoiceFooter from "@/modules/invoice/components/InvoiceFooter";
+import Typography from "@/components/ui/typography";
+import { Separator } from "@/components/ui/separator";
 
 interface Entry {
   description: string;

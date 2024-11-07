@@ -1,6 +1,6 @@
 import Typography from "@/components/ui/typography";
 import Image from "next/image";
-import { Input } from "../input";
+import { Input } from "@/components/ui/input";
 import type React from "react";
 
 interface HeaderDetails {

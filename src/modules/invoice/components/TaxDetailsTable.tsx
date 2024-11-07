@@ -6,7 +6,7 @@ import {
   TableFooter,
   TableHeader,
 } from "@/components/ui/table";
-import TaxDetail from "@/components/ui/invoice/TaxDetail";
+import TaxDetail from "@/modules/invoice/components/TaxDetail";
 import Typography from "@/components/ui/typography";
 
 interface TaxDetails {

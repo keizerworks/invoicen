@@ -1,7 +1,7 @@
 import Typography from "@/components/ui/typography";
-import { Button } from "../button";
+import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-import { Separator } from "../separator";
+import { Separator } from "@/components/ui/separator";
 
 interface InvoiceFooterProps {
   totalWithTax: number;

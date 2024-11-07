@@ -1,4 +1,4 @@
-import GenerateInvoice from "@/components/ui/invoice/GenerateInvoice";
+import GenerateInvoice from "@/modules/invoice/pages/GenerateInvoice";
 
 /**
  * TODO:
