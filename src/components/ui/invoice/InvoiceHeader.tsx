@@ -1,19 +1,28 @@
 import Typography from "@/components/ui/typography";
 import Image from "next/image";
+import { Input } from "../input";
+import type React from "react";
 
-interface InvoiceHeaderProps {
+interface HeaderDetails {
   invoiceId: string;
   invoiceDate: string;
   dueDate: string;
   paymentTerms: string;
 }
 
-const InvoiceHeader = ({
-  invoiceId = "Keizer-00-01", // Default value for demo purposes
-  invoiceDate = "11/12/2006", // Default value for demo purposes
-  dueDate = "11/12/2006", // Default value for demo purposes
-  paymentTerms = "30 days", // Default value for demo purposes
-}: InvoiceHeaderProps) => {
+interface InvoiceHeaderProps {
+  headerDetails: HeaderDetails;
+  setHeaderDetails: React.Dispatch<React.SetStateAction<HeaderDetails>>;
+}
+
+const InvoiceHeader = ({ headerDetails, setHeaderDetails }: InvoiceHeaderProps) => {
+  const onChangeHandler = (key: keyof HeaderDetails, value: string) => {
+    setHeaderDetails((prev) => ({
+      ...prev,
+      [key]: value,
+    }));
+  };
+
   return (
     <div className="flex items-center justify-between">
       {/* Basic details */}
@@ -23,42 +32,49 @@ const InvoiceHeader = ({
         </Typography>
 
         <div className="flex items-center justify-between w-full mt-2">
-          <Typography variant="p" className="md:text-[18px] text-[15px] font-semibold">
+          <Typography variant="p" className="md:text-lg text-sm font-semibold">
             Invoice Id:
           </Typography>
-          <Typography variant="p" className="md:text-[18px] text-[15px] ml-[5rem]">
-            {invoiceId}
-          </Typography>
+          <Input
+            value={headerDetails?.invoiceId}
+            onChange={(e) => onChangeHandler("invoiceId", e.target.value)}
+            className="md:text-lg text-sm ml-[5rem] text-right border-none w-fit mt-2"
+          />
         </div>
 
         <div className="flex items-center justify-between w-full">
-          <Typography variant="p" className="md:text-[18px] text-[15px] font-semibold">
+          <Typography variant="p" className="md:text-lg text-sm font-semibold">
             Invoice Date:
           </Typography>
           {/* TODO: open calendar when clicked on this */}
-          <Typography variant="p" className="md:text-[18px] text-[15px] ml-[5rem]">
-            {invoiceDate}
-          </Typography>
+          <Input
+            value={headerDetails?.invoiceDate}
+            onChange={(e) => onChangeHandler("invoiceDate", e.target.value)}
+            className="md:text-lg text-sm ml-[5rem] text-right border-none w-fit mt-2"
+          />
         </div>
 
         <div className="flex items-center justify-between w-full">
-          <Typography variant="p" className="md:text-[18px] text-[15px] font-semibold">
+          <Typography variant="p" className="md:text-lg text-sm font-semibold">
             Due Date:
           </Typography>
           {/* TODO: open calendar when clicked on this */}
-          <Typography variant="p" className="md:text-[18px] text-[15px] ml-[5rem]">
-            {dueDate}
-          </Typography>
+          <Input
+            value={headerDetails?.dueDate}
+            onChange={(e) => onChangeHandler("dueDate", e.target.value)}
+            className="md:text-lg text-sm ml-[5rem] text-right border-none w-fit mt-2"
+          />
         </div>
 
         <div className="flex items-center justify-between w-full">
-          <Typography variant="p" className="md:text-[18px] text-[15px] font-semibold">
+          <Typography variant="p" className="md:text-lg text-sm font-semibold">
             Payment terms:
           </Typography>
-          {/* TODO: open calendar when clicked on this */}
-          <Typography variant="p" className="md:text-[18px] text-[15px] ml-[5rem]">
-            {paymentTerms}
-          </Typography>
+          <Input
+            value={headerDetails?.paymentTerms}
+            onChange={(e) => onChangeHandler("paymentTerms", e.target.value)}
+            className="md:text-lg text-sm ml-[5rem] text-right border-none w-fit mt-2"
+          />
         </div>
       </div>
       {/* Logo */}
