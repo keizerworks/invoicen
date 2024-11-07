@@ -1,6 +1,6 @@
 import { TableCell, TableRow } from "../table";
 import { Input } from "../input";
-import { useTheme } from "next-themes";
+// import { useTheme } from "next-themes";
 
 interface Entry {
   description: string;
@@ -16,7 +16,7 @@ interface EntryRowProps {
 }
 
 const EntryRow = ({ entry, index, entries, updateEntries }: EntryRowProps) => {
-  const { theme } = useTheme();
+  // const { theme } = useTheme();
   const handleChange = (field: keyof Entry, value: string | number) => {
     const validatedValue =
       field === "quantity" || field === "amount" ? Number(value) || 0 : value;

@@ -1,6 +1,6 @@
 import { TableCell, TableRow } from "../table";
 import { Input } from "../input";
-import { useTheme } from "next-themes";
+// import { useTheme } from "next-themes";
 
 interface TaxDetail {
   description: string;
@@ -20,7 +20,7 @@ const TaxDetail = ({
   taxDetails,
   updateTaxDetails,
 }: TaxDetailProps) => {
-  const { theme } = useTheme();
+  // const { theme } = useTheme();
   const handleChange = (field: keyof TaxDetail, value: string | number) => {
     const validatedValue = field === "percentage" ? Number(value) || 0 : value;
 
