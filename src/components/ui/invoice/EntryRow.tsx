@@ -18,7 +18,8 @@ interface EntryRowProps {
 const EntryRow = ({ entry, index, entries, updateEntries }: EntryRowProps) => {
   const { theme } = useTheme();
   const handleChange = (field: keyof Entry, value: string | number) => {
-    const validatedValue = field === "quantity" || field === "amount" ? Number(value) || 0 : value;
+    const validatedValue =
+      field === "quantity" || field === "amount" ? Number(value) || 0 : value;
 
     const updatedEntries = entries.map((e, i) =>
       i === index ? { ...e, [field]: validatedValue } : e,

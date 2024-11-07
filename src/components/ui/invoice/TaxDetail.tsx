@@ -14,7 +14,12 @@ interface TaxDetailProps {
   updateTaxDetails: (newTaxDetails: TaxDetail[]) => void;
 }
 
-const TaxDetail = ({ tax, index, taxDetails, updateTaxDetails }: TaxDetailProps) => {
+const TaxDetail = ({
+  tax,
+  index,
+  taxDetails,
+  updateTaxDetails,
+}: TaxDetailProps) => {
   const { theme } = useTheme();
   const handleChange = (field: keyof TaxDetail, value: string | number) => {
     const validatedValue = field === "percentage" ? Number(value) || 0 : value;

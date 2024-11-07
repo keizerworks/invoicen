@@ -32,8 +32,12 @@ interface BillingDetails {
   payTo: string;
 }
 
-const initialEntries: Entry[] = [{ description: "Logo designing", quantity: 20, amount: 250 }];
-const initialTaxDetails: TaxDetails[] = [{ description: "GST", percentage: 18 }];
+const initialEntries: Entry[] = [
+  { description: "Logo designing", quantity: 20, amount: 250 },
+];
+const initialTaxDetails: TaxDetails[] = [
+  { description: "GST", percentage: 18 },
+];
 
 const GenerateInvoice = () => {
   const [entries, setEntries] = useState<Entry[]>(initialEntries);
@@ -52,7 +56,10 @@ const GenerateInvoice = () => {
   });
 
   useEffect(() => {
-    const subtotal = entries.reduce((sum, entry) => sum + entry.amount * entry.quantity, 0);
+    const subtotal = entries.reduce(
+      (sum, entry) => sum + entry.amount * entry.quantity,
+      0,
+    );
     setTotalAmount(subtotal);
 
     const totalTax = taxDetails.reduce((sum, tax) => sum + tax.percentage, 0);
@@ -65,12 +72,25 @@ const GenerateInvoice = () => {
         Create your invoice
       </Typography>
       <div className="shadow-xl md:my-6 my-4 md:px-8 flex flex-col gap-4 rounded">
-        <InvoiceHeader headerDetails={headerDetails} setHeaderDetails={setHeaderDetails} />
+        <InvoiceHeader
+          headerDetails={headerDetails}
+          setHeaderDetails={setHeaderDetails}
+        />
         <Separator />
-        <BillingInfo billingDetails={billingDetails} setBillingDetails={setBillingDetails} />
-        <EntriesTable entries={entries} setEntries={setEntries} totalAmount={totalAmount} />
+        <BillingInfo
+          billingDetails={billingDetails}
+          setBillingDetails={setBillingDetails}
+        />
+        <EntriesTable
+          entries={entries}
+          setEntries={setEntries}
+          totalAmount={totalAmount}
+        />
         <Separator />
-        <TaxDetailsTable taxDetails={taxDetails} setTaxDetails={setTaxDetails} />
+        <TaxDetailsTable
+          taxDetails={taxDetails}
+          setTaxDetails={setTaxDetails}
+        />
         <InvoiceFooter totalWithTax={totalWithTax} />
       </div>
     </main>
