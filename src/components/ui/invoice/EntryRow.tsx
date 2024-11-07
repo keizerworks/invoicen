@@ -1,6 +1,8 @@
 import { TableCell, TableRow } from "../table";
 import { Input } from "../input";
 import { useTheme } from "next-themes";
+import { Button } from "../button";
+import { useState } from "react";
 
 interface Entry {
   description: string;
@@ -17,6 +19,7 @@ interface EntryRowProps {
 
 const EntryRow = ({ entry, index, entries, updateEntries }: EntryRowProps) => {
   const { theme } = useTheme();
+  const [showDeleteButton, setShowDeleteButton] = useState(false);
   const handleChange = (field: keyof Entry, value: string | number) => {
     const validatedValue = field === "quantity" || field === "amount" ? Number(value) || 0 : value;
 
@@ -26,9 +29,18 @@ const EntryRow = ({ entry, index, entries, updateEntries }: EntryRowProps) => {
 
     updateEntries(updatedEntries);
   };
+  const deleteEntry = () => {
+    const updatedEntries = entries.filter((_,i) => i !== index)
+    updateEntries(updatedEntries)
+  }
 
   return (
-    <TableRow key={index} className="relative">
+    <TableRow
+      key={index}
+      className="relative"
+      onMouseEnter={() => setShowDeleteButton(true)}
+      onMouseLeave={() => setShowDeleteButton(false)}
+    >
       <TableCell className="font-medium">
         <Input
           value={entry.description}
@@ -54,6 +66,14 @@ const EntryRow = ({ entry, index, entries, updateEntries }: EntryRowProps) => {
           min={0}
           className={`border-none bg-white text-black"  dark:bg-black dark:text-white focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-opacity-0 text-right`}
         />
+      </TableCell>
+      <TableCell
+        className={`bg-red-500 hover:bg-red-600 cursor-pointer ${
+          showDeleteButton ? '' : 'hidden'
+        }`}
+        onClick={deleteEntry}
+      >
+        Delete
       </TableCell>
     </TableRow>
   );
