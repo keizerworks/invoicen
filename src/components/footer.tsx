@@ -13,7 +13,7 @@ export default function Footer() {
   }, []);
   return (
     <>
-      <footer className="h-fit py-8 shadow-t-2xl shadow-primary bg-gradient-to-b from-muted/80 dark:from-muted/30">
+      <footer className="h-fit relative overflow-hidden py-8 border-t">
         <section className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
             <div className="flex items-center gap-1 font-bold">

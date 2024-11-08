@@ -17,7 +17,7 @@ export default function Hero() {
             10,000+ freelancers
           </Badge>
           <div className="absolute z-[-1] transition-all duration-700 ease-out opacity-35 left-[50%] translate-x-[-50%] rounded-xl bg-gradient-to-t from-primary to-blue-500 blur-[8em] top-[-35rem] md:-top-[55rem] size-[20rem] md:size-[40rem]"></div>
-          <div className="absolute transition-all duration-700 ease-out opacity-35 -left-[50%rem] rotate-[50deg] bg-gradient-to-t from-primary to-blue-500 blur-[4em] md:blur-[8em] rounded-full top-[10rem] h-[20rem] w-[10rem]  md:h-[40rem] md:w-[30rem]"></div>
+          <div className="absolute z-[-1] transition-all duration-700 ease-out opacity-35 -left-[50%rem] rotate-[50deg] bg-gradient-to-t from-primary to-blue-500 blur-[4em] md:blur-[8em] rounded-full top-[13rem] h-[20rem] w-[10rem]  md:h-[40rem] md:w-[30rem]"></div>
 
           <div className="dark:text-neutral-200 z-20 flex flex-col text-center items-center font-bold text-neutral-900 text-5xl md:text-6xl">
             <div>
