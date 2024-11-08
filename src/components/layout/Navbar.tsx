@@ -24,7 +24,7 @@ const Navbar: FC = () => {
       aria-label="Navbar"
       className="my-5 top-0  flex items-center md:max-w-7xl mx-auto px-4 justify-center w-full"
     >
-      <div className="flex border-2 border-muted p-2 items-center justify-between w-full rounded-xl">
+      <div className="flex border-2 z-10 p-2 items-center justify-between w-full rounded-xl">
         <div className="flex items-center gap-1 font-bold">
           {mounted ? (
             <Link href={"/"}>
