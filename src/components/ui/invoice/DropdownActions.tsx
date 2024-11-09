@@ -24,7 +24,7 @@ export const DropdownActions = ({ onDelete }: { onDelete: () => void }) => {
           >
             <DropdownMenuItem 
               onClick={onDelete}
-              className="text-red-600 dark:text-red-400 focus:text-red-600 dark:focus:text-red-400"
+              className="text-red-600 dark:text-red-400 focus:text-red-600 dark:focus:text-red-400 cursor-pointer"
             >
               <Trash2 className="mr-2 h-4 w-4" />
               Delete
