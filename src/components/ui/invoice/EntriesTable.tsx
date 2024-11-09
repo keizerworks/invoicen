@@ -35,10 +35,11 @@ const EntriesTable = ({
       <Typography variant="h3">Entries</Typography>
       <Table className="mt-2">
         <TableHeader>
-          <TableRow>
+          <TableRow className="gap-2">
             <TableHead className="w-[50%]">Description</TableHead>
             <TableHead className="w-[25%]">Quantity</TableHead>
-            <TableHead className="text-right w-[25%]">Amount</TableHead>
+            <TableHead className=" w-[25%]">Amount</TableHead>
+            <TableHead className="text-right ">Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>

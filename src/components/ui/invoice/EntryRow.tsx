@@ -35,7 +35,7 @@ const EntryRow = ({ entry, index, entries, updateEntries }: EntryRowProps) => {
   };
 
   return (
-    <TableRow key={index} className="relative">
+    <TableRow key={index} className="relative ">
       <TableCell className="font-medium">
         <Input
           value={entry.description}
@@ -44,7 +44,7 @@ const EntryRow = ({ entry, index, entries, updateEntries }: EntryRowProps) => {
           placeholder="Enter description..."
         />
       </TableCell>
-      <TableCell>
+      <TableCell >
         <Input
           type="number"
           value={entry.quantity}
@@ -53,13 +53,13 @@ const EntryRow = ({ entry, index, entries, updateEntries }: EntryRowProps) => {
           className="border-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-opacity-0"
         />
       </TableCell>
-      <TableCell className="text-right">
+      <TableCell >
         <Input
           type="number"
           value={entry.amount}
           onChange={(e) => handleChange("amount", e.target.value)}
           min={0}
-          className="border-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-opacity-0 text-right"
+          className="border-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-opacity-0"
         />
       </TableCell>
       <TableCell className="text-right">
