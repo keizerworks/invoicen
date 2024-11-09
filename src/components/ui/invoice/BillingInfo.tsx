@@ -12,7 +12,10 @@ interface BillingInfoProps {
   setBillingDetails: React.Dispatch<React.SetStateAction<BillingDetails>>;
 }
 
-const BillingInfo: React.FC<BillingInfoProps> = ({ billingDetails, setBillingDetails }) => {
+const BillingInfo: React.FC<BillingInfoProps> = ({
+  billingDetails,
+  setBillingDetails,
+}) => {
   const onChangeHandler = (key: keyof BillingDetails, value: string) => {
     setBillingDetails((prev) => ({
       ...prev,

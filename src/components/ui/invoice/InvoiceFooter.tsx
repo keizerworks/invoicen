@@ -20,7 +20,10 @@ const InvoiceFooter = ({ totalWithTax }: InvoiceFooterProps) => {
         </Typography>
       </div>
       <Separator className="mt-4" />
-      <Textarea placeholder="Add a custom message" className="border-none shadow-none mt-4" />
+      <Textarea
+        placeholder="Add a custom message"
+        className="border-none shadow-none mt-4"
+      />
       <div className="flex justify-end">
         <Button className="text-right">Generate Invoice</Button>
       </div>
