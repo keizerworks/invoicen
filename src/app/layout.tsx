@@ -6,6 +6,7 @@ import type React from "react";
 import "./styles/globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/footer";
 
 const satioshi = localFont({
   src: "./fonts/satoshi.ttf",
@@ -57,6 +58,7 @@ export default function RootLayout({
           >
             <Navbar />
             {children}
+            <Footer />
           </ThemeProvider>
         </div>
       </body>

@@ -34,7 +34,7 @@ const EntryRow = ({ entry, index, entries, updateEntries }: EntryRowProps) => {
         <Input
           value={entry.description}
           onChange={(e) => handleChange("description", e.target.value)}
-          className={`border-none bg-white text-black"  dark:bg-black dark:text-white focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-opacity-0`}
+          className={`border-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-opacity-0`}
           placeholder="Enter description..."
         />
       </TableCell>
@@ -44,7 +44,7 @@ const EntryRow = ({ entry, index, entries, updateEntries }: EntryRowProps) => {
           value={entry.quantity}
           onChange={(e) => handleChange("quantity", e.target.value)}
           min={0}
-          className={`border-none bg-white text-black"  dark:bg-black dark:text-white focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-opacity-0`}
+          className={`border-none   focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-opacity-0`}
         />
       </TableCell>
       <TableCell className="text-right">
@@ -53,7 +53,7 @@ const EntryRow = ({ entry, index, entries, updateEntries }: EntryRowProps) => {
           value={entry.amount}
           onChange={(e) => handleChange("amount", e.target.value)}
           min={0}
-          className={`border-none bg-white text-black"  dark:bg-black dark:text-white focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-opacity-0 text-right`}
+          className={`border-none   focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-opacity-0 text-right`}
         />
       </TableCell>
     </TableRow>
