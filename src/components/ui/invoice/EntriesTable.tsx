@@ -64,7 +64,7 @@ const EntriesTable = ({
         <TableFooter>
           <TableRow>
             <TableCell
-              colSpan={3}
+              colSpan={4}
               className="cursor-pointer text-center"
               onClick={addEntry}
             >
