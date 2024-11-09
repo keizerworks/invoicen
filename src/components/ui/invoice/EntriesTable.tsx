@@ -54,7 +54,7 @@ const EntriesTable = ({
           <TableRow className="h-[60px]">
             <TableCell className="font-semibold text-xl">Subtotal: </TableCell>
             <TableCell
-              colSpan={2}
+              colSpan={3}
               className="text-right font-semibold text-2xl"
             >
               ${totalAmount}
