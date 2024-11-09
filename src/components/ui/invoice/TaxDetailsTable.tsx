@@ -50,7 +50,7 @@ const TaxDetailsTable = ({
         <TableFooter>
           <TableRow>
             <TableCell
-              colSpan={2}
+              colSpan={3}
               className="cursor-pointer text-center"
               onClick={addTax}
             >

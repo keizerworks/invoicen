@@ -2,6 +2,7 @@ import { TableCell, TableRow } from "../table";
 import { Input } from "../input";
 import { useTheme } from "next-themes";
 import { useState } from "react";
+import { DropdownActions } from "./DropdownActions";
 
 interface TaxDetail {
   description: string;
@@ -57,13 +58,8 @@ const TaxDetail = ({ tax, index, taxDetails, updateTaxDetails }: TaxDetailProps)
           className={`border-none bg-white text-black"  dark:bg-black dark:text-white focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-opacity-0 text-right`}
         />
       </TableCell>
-      <TableCell
-        className={`bg-red-500 hover:bg-red-600 cursor-pointer text-center w-0.5 ${
-          showDeleteButton ? '' : 'hidden'
-        }`}
-        onClick={deleteTaxDetail}
-      >
-        Delete
+      <TableCell className="flex justify-end mt-1">
+        <DropdownActions onDelete={deleteTaxDetail} />
       </TableCell>
     </TableRow>
   );

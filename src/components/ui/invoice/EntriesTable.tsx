@@ -53,7 +53,7 @@ const EntriesTable = ({
           ))}
           <TableRow className="h-[60px]">
             <TableCell className="font-semibold text-xl">Subtotal: </TableCell>
-            <TableCell colSpan={2} className="text-right font-semibold text-2xl">
+            <TableCell colSpan={3} className="text-right font-semibold text-2xl">
               ${totalAmount}
             </TableCell>
           </TableRow>
@@ -61,7 +61,7 @@ const EntriesTable = ({
         <TableFooter>
           <TableRow>
             <TableCell
-              colSpan={3}
+              colSpan={4}
               className="cursor-pointer text-center"
               onClick={addEntry}
             >
