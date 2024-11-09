@@ -1,6 +1,6 @@
 import { TableCell, TableRow } from "../table";
 import { Input } from "../input";
-import { useTheme } from "next-themes";
+// import { useTheme } from "next-themes";
 
 interface TaxDetail {
   description: string;
@@ -14,8 +14,13 @@ interface TaxDetailProps {
   updateTaxDetails: (newTaxDetails: TaxDetail[]) => void;
 }
 
-const TaxDetail = ({ tax, index, taxDetails, updateTaxDetails }: TaxDetailProps) => {
-  const { theme } = useTheme();
+const TaxDetail = ({
+  tax,
+  index,
+  taxDetails,
+  updateTaxDetails,
+}: TaxDetailProps) => {
+  // const { theme } = useTheme();
   const handleChange = (field: keyof TaxDetail, value: string | number) => {
     const validatedValue = field === "percentage" ? Number(value) || 0 : value;
 
@@ -32,7 +37,7 @@ const TaxDetail = ({ tax, index, taxDetails, updateTaxDetails }: TaxDetailProps)
         <Input
           value={tax.description}
           onChange={(e) => handleChange("description", e.target.value)}
-          className={`border-none bg-white text-black"  dark:bg-black dark:text-white focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-opacity-0`}
+          className={`border-none   focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-opacity-0`}
           placeholder="Enter tax description..."
         />
       </TableCell>
@@ -42,7 +47,7 @@ const TaxDetail = ({ tax, index, taxDetails, updateTaxDetails }: TaxDetailProps)
           value={tax.percentage}
           onChange={(e) => handleChange("percentage", e.target.value)}
           min={0}
-          className={`border-none bg-white text-black"  dark:bg-black dark:text-white focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-opacity-0 text-right`}
+          className={`border-none   focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-opacity-0 text-right`}
         />
       </TableCell>
     </TableRow>
