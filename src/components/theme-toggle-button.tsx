@@ -9,7 +9,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdow-menu";
+} from "@/components/ui/dropdown-menu";
 
 export function ThemeToggleButton() {
   const { setTheme } = useTheme();

@@ -1,5 +1,6 @@
 import { TableCell, TableRow } from "../table";
 import { Input } from "../input";
+import { TripledotDropdown } from "../triple-dot-dropdown";
 // import { useTheme } from "next-themes";
 
 interface Entry {
@@ -22,39 +23,47 @@ const EntryRow = ({ entry, index, entries, updateEntries }: EntryRowProps) => {
       field === "quantity" || field === "amount" ? Number(value) || 0 : value;
 
     const updatedEntries = entries.map((e, i) =>
-      i === index ? { ...e, [field]: validatedValue } : e,
+      i === index ? { ...e, [field]: validatedValue } : e
     );
 
     updateEntries(updatedEntries);
   };
 
+  const deleteInvoice = () => {
+    const updatedEntries = entries.filter((_, i) => i !== index);
+    updateEntries(updatedEntries);
+  };
+
   return (
-    <TableRow key={index} className="relative">
+    <TableRow key={index} className="relative ">
       <TableCell className="font-medium">
         <Input
           value={entry.description}
           onChange={(e) => handleChange("description", e.target.value)}
-          className={`border-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-opacity-0`}
+          className="border-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-opacity-0"
           placeholder="Enter description..."
         />
       </TableCell>
-      <TableCell>
+      <TableCell >
         <Input
           type="number"
           value={entry.quantity}
           onChange={(e) => handleChange("quantity", e.target.value)}
           min={0}
-          className={`border-none   focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-opacity-0`}
+          className="border-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-opacity-0"
         />
       </TableCell>
-      <TableCell className="text-right">
+      <TableCell >
         <Input
           type="number"
           value={entry.amount}
           onChange={(e) => handleChange("amount", e.target.value)}
           min={0}
-          className={`border-none   focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-opacity-0 text-right`}
+          className="border-none focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-opacity-0"
         />
+      </TableCell>
+      <TableCell className="text-right">
+        <TripledotDropdown deleteInvoice={deleteInvoice} />
       </TableCell>
     </TableRow>
   );

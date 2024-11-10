@@ -32,11 +32,12 @@ const TaxDetailsTable = ({
       <Table>
         <TableHeader>
           <TableRow>
-            <TableCell>Description</TableCell>
+            <TableCell >Description</TableCell>
             <TableCell className="text-right">Percentage (%)</TableCell>
+            <TableCell className="text-right w-[10%]">Actions</TableCell>
           </TableRow>
         </TableHeader>
-        <TableBody>
+        <TableBody >
           {taxDetails.map((tax, index) => (
             <TaxDetail
               key={index}
@@ -50,7 +51,7 @@ const TaxDetailsTable = ({
         <TableFooter>
           <TableRow>
             <TableCell
-              colSpan={2}
+              colSpan={3} // Keep this as is since there are two columns in the table
               className="cursor-pointer text-center"
               onClick={addTax}
             >

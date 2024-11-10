@@ -35,10 +35,11 @@ const EntriesTable = ({
       <Typography variant="h3">Entries</Typography>
       <Table className="mt-2">
         <TableHeader>
-          <TableRow>
+          <TableRow className="gap-2">
             <TableHead className="w-[50%]">Description</TableHead>
             <TableHead className="w-[25%]">Quantity</TableHead>
-            <TableHead className="text-right w-[25%]">Amount</TableHead>
+            <TableHead className=" w-[25%]">Amount</TableHead>
+            <TableHead className="text-right ">Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -54,7 +55,7 @@ const EntriesTable = ({
           <TableRow className="h-[60px]">
             <TableCell className="font-semibold text-xl">Subtotal: </TableCell>
             <TableCell
-              colSpan={2}
+              colSpan={3}
               className="text-right font-semibold text-2xl"
             >
               ${totalAmount}
@@ -64,7 +65,7 @@ const EntriesTable = ({
         <TableFooter>
           <TableRow>
             <TableCell
-              colSpan={3}
+              colSpan={4}
               className="cursor-pointer text-center"
               onClick={addEntry}
             >
