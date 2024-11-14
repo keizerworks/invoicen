@@ -58,7 +58,7 @@ const EntriesTable = ({
               colSpan={3}
               className="text-right font-semibold text-2xl"
             >
-              ${totalAmount}
+              {totalAmount}
             </TableCell>
           </TableRow>
         </TableBody>

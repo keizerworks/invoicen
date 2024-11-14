@@ -8,6 +8,7 @@ import TaxDetailsTable from "./TaxDetailsTable";
 import InvoiceFooter from "./InvoiceFooter";
 import Typography from "../typography";
 import { Separator } from "../separator";
+import { FormatToUSD } from "@/lib/utils";
 
 interface Entry {
   description: string;
@@ -60,10 +61,13 @@ const GenerateInvoice = () => {
       (sum, entry) => sum + entry.amount * entry.quantity,
       0,
     );
-    setTotalAmount(subtotal);
+    setTotalAmount(FormatToUSD(subtotal));
 
     const totalTax = taxDetails.reduce((sum, tax) => sum + tax.percentage, 0);
-    setTotalWithTax(subtotal + (subtotal * totalTax) / 100);
+    // Calculation of Total amount with taxes
+    const TotalWithTaxAmount = subtotal + (subtotal * totalTax) / 100
+    // setting the hook and coverting the calculated num to USD Currency format
+    setTotalWithTax(FormatToUSD(TotalWithTaxAmount));
   }, [entries, taxDetails]);
 
   return (
