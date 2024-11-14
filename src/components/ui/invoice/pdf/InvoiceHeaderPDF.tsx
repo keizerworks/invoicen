@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   value: {
     fontSize: 12,
     textAlign: "right",
-    fontWeight: "thin",
+    fontWeight: "light",
   },
   logo: {
     width: 80,

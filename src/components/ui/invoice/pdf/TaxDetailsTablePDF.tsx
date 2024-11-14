@@ -42,15 +42,12 @@ const styles = StyleSheet.create({
   },
   table: {
     width: "auto",
-    borderStyle: "solid",
-    borderWidth: 1,
-    borderColor: "#bfbfbf",
   },
   header: {
     flexDirection: "row",
-    backgroundColor: "#f3f3f3",
-    borderBottomColor: "#bfbfbf",
+    borderBottomColor: "#E4E4E7",
     borderBottomWidth: 1,
+    color: "#71717A",
   },
   row: {
     flexDirection: "row",

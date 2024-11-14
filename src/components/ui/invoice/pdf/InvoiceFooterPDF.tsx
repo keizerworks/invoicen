@@ -17,9 +17,6 @@ const InvoiceFooter = ({ totalWithTax, customMessage }: InvoiceFooterProps) => {
           <Text style={styles.message}>{customMessage}</Text>
         </View>
       )}
-      <View style={styles.thankYouContainer}>
-        <Text style={styles.thankYou}>Thank you for your business!</Text>
-      </View>
     </View>
   );
 };
@@ -46,15 +43,12 @@ const styles = StyleSheet.create({
   },
   message: {
     fontSize: 12,
-    textAlign: "center",
   },
   thankYouContainer: {
     marginTop: 10,
   },
   thankYou: {
     fontSize: 12,
-    textAlign: "center",
-    fontStyle: "italic",
   },
 });
 

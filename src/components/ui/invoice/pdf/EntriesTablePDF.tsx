@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     borderBottomColor: "#E4E4E7",
     borderBottomWidth: 1,
-    color: "#777780",
+    color: "#71717A",
   },
   row: {
     flexDirection: "row",
@@ -87,14 +87,14 @@ const styles = StyleSheet.create({
   totalLabel: {
     width: "75%",
     padding: 5,
-    fontSize: 12,
+    fontSize: 16,
     textAlign: "right",
     fontWeight: "bold",
   },
   totalValue: {
     width: "25%",
     padding: 5,
-    fontSize: 12,
+    fontSize: 16,
     textAlign: "right",
     fontWeight: "bold",
   },

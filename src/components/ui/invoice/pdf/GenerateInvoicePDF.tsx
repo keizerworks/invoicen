@@ -74,6 +74,7 @@ const GenerateInvoicePDF = ({
 
 const styles = StyleSheet.create({
   page: {
+    fontFamily: "Manrope",
     padding: 30,
     fontSize: 12,
   },
