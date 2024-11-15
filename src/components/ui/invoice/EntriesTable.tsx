@@ -19,7 +19,7 @@ interface Entry {
 interface EntriesTableProps {
   entries: Entry[];
   setEntries: (entries: Entry[]) => void;
-  totalAmount: number;
+  totalAmount: string;
 }
 
 const EntriesTable = ({

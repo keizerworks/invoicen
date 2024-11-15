@@ -4,7 +4,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Separator } from "../separator";
 
 interface InvoiceFooterProps {
-  totalWithTax: number;
+  totalWithTax: string;
 }
 
 const InvoiceFooter = ({ totalWithTax }: InvoiceFooterProps) => {

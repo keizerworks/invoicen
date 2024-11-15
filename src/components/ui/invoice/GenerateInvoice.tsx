@@ -8,7 +8,7 @@ import TaxDetailsTable from "./TaxDetailsTable";
 import InvoiceFooter from "./InvoiceFooter";
 import Typography from "../typography";
 import { Separator } from "../separator";
-import { FormatToUSD } from "@/lib/utils";
+import { formatToCurrency } from "@/lib/utils";
 
 interface Entry {
   description: string;
@@ -43,8 +43,8 @@ const initialTaxDetails: TaxDetails[] = [
 const GenerateInvoice = () => {
   const [entries, setEntries] = useState<Entry[]>(initialEntries);
   const [taxDetails, setTaxDetails] = useState<TaxDetails[]>(initialTaxDetails);
-  const [totalAmount, setTotalAmount] = useState<number>(0);
-  const [totalWithTax, setTotalWithTax] = useState<number>(0);
+  const [totalAmount, setTotalAmount] = useState<string>("0");
+  const [totalWithTax, setTotalWithTax] = useState<string>("0");
   const [headerDetails, setHeaderDetails] = useState<HeaderDetails>({
     invoiceId: "Keizer-00-01", // Default value for demo purposes
     invoiceDate: "11/12/2006", // Default value for demo purposes
@@ -55,20 +55,21 @@ const GenerateInvoice = () => {
     billedTo: "John Doe",
     payTo: "Keizer",
   });
+  const [activeCurrency, setActiveCurrency] = useState<string>("USD");
 
   useEffect(() => {
     const subtotal = entries.reduce(
       (sum, entry) => sum + entry.amount * entry.quantity,
       0,
     );
-    setTotalAmount(FormatToUSD(subtotal));
 
     const totalTax = taxDetails.reduce((sum, tax) => sum + tax.percentage, 0);
     // Calculation of Total amount with taxes
     const TotalWithTaxAmount = subtotal + (subtotal * totalTax) / 100
     // setting the hook and coverting the calculated num to USD Currency format
-    setTotalWithTax(FormatToUSD(TotalWithTaxAmount));
-  }, [entries, taxDetails]);
+    setTotalWithTax(formatToCurrency(TotalWithTaxAmount, activeCurrency));
+    setTotalAmount(formatToCurrency(subtotal, activeCurrency));
+  }, [entries, taxDetails, activeCurrency]);
 
   return (
     <main className="md:px-6 px-4 max-w-[1200px] mx-auto">
@@ -79,6 +80,8 @@ const GenerateInvoice = () => {
         <InvoiceHeader
           headerDetails={headerDetails}
           setHeaderDetails={setHeaderDetails}
+          activeCurrency={activeCurrency}
+          setActiveCurrency={setActiveCurrency}
         />
         <Separator />
         <BillingInfo
