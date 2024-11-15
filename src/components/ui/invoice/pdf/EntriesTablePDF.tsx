@@ -16,9 +16,7 @@ const EntriesTable = ({ entries, totalAmount }: EntriesTableProps) => {
     <View style={styles.row} key={index}>
       <Text style={styles.description}>{entry.description}</Text>
       <Text style={styles.quantity}>{entry.quantity}</Text>
-      <Text style={styles.amount}>
-        ${(entry.amount * entry.quantity).toFixed(2)}
-      </Text>
+      <Text style={styles.amount}>${(entry.amount * entry.quantity).toFixed(2)}</Text>
     </View>
   ));
 
@@ -83,16 +81,15 @@ const styles = StyleSheet.create({
   },
   totalRow: {
     flexDirection: "row",
+    justifyContent: "flex-end",
   },
   totalLabel: {
-    width: "75%",
     padding: 5,
     fontSize: 16,
     textAlign: "right",
-    fontWeight: "bold",
+    fontWeight: "semibold",
   },
   totalValue: {
-    width: "25%",
     padding: 5,
     fontSize: 16,
     textAlign: "right",

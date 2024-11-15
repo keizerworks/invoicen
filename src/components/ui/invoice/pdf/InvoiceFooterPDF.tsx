@@ -32,10 +32,11 @@ const styles = StyleSheet.create({
   },
   totalLabel: {
     fontSize: 14,
-    fontWeight: "bold",
+    fontWeight: "semibold",
     marginRight: 5,
   },
   totalValue: {
+    fontWeight: "bold",
     fontSize: 14,
   },
   messageContainer: {
