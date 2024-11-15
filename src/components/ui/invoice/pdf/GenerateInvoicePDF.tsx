@@ -21,6 +21,7 @@ interface HeaderDetails {
   invoiceDate: string;
   dueDate: string;
   paymentTerms: string;
+  logoBase64: string;
 }
 
 interface BillingDetails {
@@ -44,15 +45,9 @@ const GenerateInvoicePDF = ({
   customMessage,
 }: GenerateInvoicePDFProps) => {
   // Calculate total amounts
-  const totalAmount = entries.reduce(
-    (sum, entry) => sum + entry.amount * entry.quantity,
-    0,
-  );
+  const totalAmount = entries.reduce((sum, entry) => sum + entry.amount * entry.quantity, 0);
 
-  const totalTaxPercentage = taxDetails.reduce(
-    (sum, tax) => sum + tax.percentage,
-    0,
-  );
+  const totalTaxPercentage = taxDetails.reduce((sum, tax) => sum + tax.percentage, 0);
 
   const totalWithTax = totalAmount + (totalAmount * totalTaxPercentage) / 100;
 
@@ -63,10 +58,7 @@ const GenerateInvoicePDF = ({
         <BillingInfo billingDetails={billingDetails} />
         <EntriesTable entries={entries} totalAmount={totalAmount} />
         <TaxDetailsTable taxDetails={taxDetails} />
-        <InvoiceFooter
-          totalWithTax={totalWithTax}
-          customMessage={customMessage}
-        />
+        <InvoiceFooter totalWithTax={totalWithTax} customMessage={customMessage} />
       </Page>
     </Document>
   );
