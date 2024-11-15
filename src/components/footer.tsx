@@ -3,9 +3,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Skeleton } from "./ui/skeleton";
+import { useTheme } from "next-themes";
 
 export default function Footer() {
   const [mounted, setMounted] = useState(false);
+  const { theme } = useTheme();
 
   // When mounted on client, now we can show the UI
   useEffect(() => {
@@ -13,25 +15,23 @@ export default function Footer() {
   }, []);
   return (
     <>
-      <footer className="h-fit relative overflow-hidden py-8 border-t">
-        <section className="max-w-7xl mx-auto px-4">
-          <div className="flex flex-col md:flex-row gap-4 items-center justify-between">
+      <footer className="relative py-8 border-t h-fit overflow-hidden">
+        <section className="mx-auto px-4 max-w-7xl">
+          <div className="flex md:flex-row flex-col justify-between items-center gap-4">
             <div className="flex items-center gap-1 font-bold">
               {mounted ? (
                 <Link href={"/"}>
                   <Image
-                    src={"/assets/logos/logo-icon-dark.svg"}
+                    src={theme === "light" ? "/assets/logos/logo-icon-light.svg" : "/assets/logos/logo-icon-dark.svg"}
                     height={50}
-                    width={50}
+                    width={100}
                     alt="logo"
                     aria-label="logo"
                   />
                 </Link>
               ) : (
-                <Skeleton className="h-[60px] w-[60px]" />
+                <Skeleton className="w-[120px] h-[60px]" />
               )}
-
-              <div className="text-2xl font-extrabold">Keizer .</div>
             </div>
             All rights reserved @ {new Date().getFullYear()}
           </div>
