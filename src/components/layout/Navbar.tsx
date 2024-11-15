@@ -47,7 +47,7 @@ const Navbar: FC = () => {
               )}
             </Link>
           ) : (
-            <Skeleton className="w-[60px] h-[60px]" />
+            <Skeleton className="w-[120px] h-[60px]" />
           )}
         </div>
         <div className="flex items-center">

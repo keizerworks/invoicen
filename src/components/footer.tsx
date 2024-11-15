@@ -30,7 +30,7 @@ export default function Footer() {
                   />
                 </Link>
               ) : (
-                <Skeleton className="w-[60px] h-[60px]" />
+                <Skeleton className="w-[120px] h-[60px]" />
               )}
             </div>
             All rights reserved @ {new Date().getFullYear()}
