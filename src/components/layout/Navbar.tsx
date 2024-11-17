@@ -22,9 +22,9 @@ const Navbar: FC = () => {
   return (
     <nav
       aria-label="Navbar"
-      className="my-5 top-0  flex items-center md:max-w-7xl mx-auto px-4 justify-center w-full"
+      className="top-0 flex justify-center items-center mx-auto my-5 px-4 w-full md:max-w-7xl"
     >
-      <div className="flex border-2 z-10 p-2 items-center justify-between w-full rounded-xl">
+      <div className="z-10 flex justify-between items-center border-2 p-2 rounded-xl w-full">
         <div className="flex items-center gap-1 font-bold">
           {mounted ? (
             <Link href={"/"}>
@@ -32,7 +32,7 @@ const Navbar: FC = () => {
                 <Image
                   src={"/assets/logos/logo-icon-light.svg"}
                   height={50}
-                  width={50}
+                  width={100}
                   alt="logo"
                   aria-label="logo"
                 />
@@ -40,19 +40,15 @@ const Navbar: FC = () => {
                 <Image
                   src={"/assets/logos/logo-icon-dark.svg"}
                   height={50}
-                  width={50}
+                  width={100}
                   alt="logo"
                   aria-label="logo"
                 />
               )}
             </Link>
           ) : (
-            <Skeleton className="h-[60px] w-[60px]" />
+            <Skeleton className="w-[120px] h-[60px]" />
           )}
-
-          <div className="text-2xl hidden md:block font-extrabold">
-            Keizer .
-          </div>
         </div>
         <div className="flex items-center">
           <ThemeToggleButton />
