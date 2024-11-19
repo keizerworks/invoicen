@@ -15,9 +15,7 @@ interface HeaderDetails {
 
 interface InvoiceHeaderProps {
   headerDetails: HeaderDetails;
-  activeCurrency: string;
   setHeaderDetails: React.Dispatch<React.SetStateAction<HeaderDetails>>;
-  setActiveCurrency: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const LogoPlaceholder: React.FC = () => {
@@ -63,8 +61,6 @@ const UploadLogo: React.FC = () => {
 const InvoiceHeader = ({
   headerDetails,
   setHeaderDetails,
-  activeCurrency,
-  setActiveCurrency
 }: InvoiceHeaderProps) => {
   const onChangeHandler = (key: keyof HeaderDetails, value: string) => {
     setHeaderDetails((prev) => ({
@@ -123,17 +119,6 @@ const InvoiceHeader = ({
           <Input
             value={headerDetails?.paymentTerms}
             onChange={(e) => onChangeHandler("paymentTerms", e.target.value)}
-            className="md:text-lg text-sm ml-[5rem] text-right border-none w-fit mt-2 bg-transparent"
-          />
-        </div>
-        <div className="flex items-center justify-between w-full">
-          <Typography variant="p" className="md:text-lg text-sm font-semibold">
-            Invoice Currency:
-          </Typography>
-          <InputSelect
-            activeCurrency={activeCurrency}
-            setActiveCurrency={setActiveCurrency}
-            value={activeCurrency}
             className="md:text-lg text-sm ml-[5rem] text-right border-none w-fit mt-2 bg-transparent"
           />
         </div>

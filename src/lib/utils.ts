@@ -6,6 +6,14 @@ export function cn(...inputs: ClassValue[]) {
 }
 // this helper converts the numbers to any currency format for further use in project :)
 export function formatToCurrency(input:number, currencyType:string): string {
- return Intl.NumberFormat('en-US', { style: 'currency', currency: currencyType }).format(input,);
- 
+  switch (currencyType) {
+    case "USD":
+      return Intl.NumberFormat('en-US', { style: 'currency', currency: "USD" }).format(input,);
+    case "Euro":
+      return Intl.NumberFormat('de-DE', { style: 'currency', currency: "EUR" }).format(input,); 
+    case "Rupee":
+      return Intl.NumberFormat('en-IN', { style: 'currency', currency: "INR" }).format(input,);
+    default:
+      return Intl.NumberFormat('en-US', { style: 'currency', currency: "USD" }).format(input,); 
+  }
 }

@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import type { FC } from "react";
 import Image from "next/image";
 import { ThemeToggleButton } from "@/components/theme-toggle-button";
+import { CurrencyToggleButton } from "../currency-toggle-button";
 import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -13,7 +14,6 @@ const Navbar: FC = () => {
   const { theme } = useTheme();
   const [mounted, setMounted] = useState(false);
   const pathname = usePathname();
-
   // When mounted on client, now we can show the UI
   useEffect(() => {
     setMounted(true);
@@ -55,6 +55,7 @@ const Navbar: FC = () => {
           </div>
         </div>
         <div className="flex items-center">
+          <CurrencyToggleButton />
           <ThemeToggleButton />
           {pathname.startsWith("/generate") || (
             <Link href={"/generate"}>

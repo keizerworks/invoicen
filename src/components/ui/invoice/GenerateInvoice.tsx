@@ -56,6 +56,12 @@ const GenerateInvoice = () => {
     payTo: "Keizer",
   });
   const [activeCurrency, setActiveCurrency] = useState<string>("USD");
+  useEffect(() => {
+    const saveActiveCurrency = JSON.parse(localStorage.getItem("currencyType") || "{}");
+    setActiveCurrency(saveActiveCurrency)
+    
+  }, [entries,taxDetails,activeCurrency])
+  
 
   useEffect(() => {
     const subtotal = entries.reduce(
@@ -79,10 +85,7 @@ const GenerateInvoice = () => {
       <div className="shadow-xl md:my-6 my-4 md:px-8 flex flex-col gap-4 rounded">
         <InvoiceHeader
           headerDetails={headerDetails}
-          setHeaderDetails={setHeaderDetails}
-          activeCurrency={activeCurrency}
-          setActiveCurrency={setActiveCurrency}
-        />
+          setHeaderDetails={setHeaderDetails}/>
         <Separator />
         <BillingInfo
           billingDetails={billingDetails}
