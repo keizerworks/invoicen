@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import type { FC } from "react";
 import Image from "next/image";
 import { ThemeToggleButton } from "@/components/theme-toggle-button";

@@ -1,7 +1,6 @@
 import Typography from "@/components/ui/typography";
 import Image from "next/image";
 import { Input } from "../input";
-import { InputSelect } from "../input-select";
 import type React from "react";
 import { FileIcon } from "@radix-ui/react-icons";
 import { useState } from "react";

@@ -1,15 +1,16 @@
 import { DollarSign, Euro, IndianRupee } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
+import { CurrencyContext } from "@/components/layout/Client";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useContext } from "react";
 
 export function CurrencyToggleButton() {
-    const [activeCurrency, setActiveCurrency] = useState("USD");   
+    const [activeCurrency, setActiveCurrency] = useContext<any>(CurrencyContext);   
 
     function getCurrencyLogo() {
         switch (activeCurrency) {
@@ -22,11 +23,7 @@ export function CurrencyToggleButton() {
             default: <DollarSign className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all"/>;
                 break;
         }
-    }
-    useEffect(() => {
-      localStorage.setItem("currencyType", JSON.stringify(activeCurrency))
-    }, [activeCurrency])
-    
+    }    
     return (
         <>
         <DropdownMenu>

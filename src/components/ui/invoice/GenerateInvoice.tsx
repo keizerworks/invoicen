@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import InvoiceHeader from "./InvoiceHeader";
 import BillingInfo from "./BillingInfo";
 import EntriesTable from "./EntriesTable";
@@ -9,7 +9,7 @@ import InvoiceFooter from "./InvoiceFooter";
 import Typography from "../typography";
 import { Separator } from "../separator";
 import { formatToCurrency } from "@/lib/utils";
-
+import { CurrencyContext } from "@/components/layout/Client";
 interface Entry {
   description: string;
   quantity: number;
@@ -55,13 +55,7 @@ const GenerateInvoice = () => {
     billedTo: "John Doe",
     payTo: "Keizer",
   });
-  const [activeCurrency, setActiveCurrency] = useState<string>("USD");
-  useEffect(() => {
-    const saveActiveCurrency = JSON.parse(localStorage.getItem("currencyType") || "{}");
-    setActiveCurrency(saveActiveCurrency)
-    
-  }, [entries,taxDetails,activeCurrency])
-  
+  const [activeCurrency, setActiveCurrency] = useContext<any>(CurrencyContext);
 
   useEffect(() => {
     const subtotal = entries.reduce(

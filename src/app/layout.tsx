@@ -2,12 +2,11 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import { Manrope } from "next/font/google";
 import type React from "react";
-
 import "./styles/globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/footer";
-
+import Client from "@/components/layout/Client"
 const satioshi = localFont({
   src: "./fonts/satoshi.ttf",
   variable: "--font-satoshi",
@@ -26,7 +25,6 @@ export const metadata: Metadata = {
   description:
     "Invoicen is a simple invoice generator for freelancers and small businesses. It is a self hostable web application that can be used to generate invoices and download PDFs",
 };
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -56,9 +54,11 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
+            <Client>
             <Navbar />
             {children}
             <Footer />
+            </Client>
           </ThemeProvider>
         </div>
       </body>
