@@ -8,6 +8,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/footer";
 import TanstackProvider from "../providers/TanstackProvider";
 import CurrencyProvider from "../providers/CurrencyProvider";
+import PlausibleProvider from "next-plausible";
 
 const satioshi = localFont({
   src: "./fonts/satoshi.ttf",
@@ -44,6 +45,14 @@ export default function RootLayout({
           rel="icon"
           href="/assets/logos/logo-icon-dark.svg"
           media="(prefers-color-scheme: dark)"
+        />
+        <PlausibleProvider
+          domain={process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN ?? ""}
+          customDomain={process.env.NEXT_PUBLIC_ANALYTICS_FILE_URL ?? ""}
+          selfHosted
+          trackFileDownloads
+          enabled={process.env.NODE_ENV === "production"}
+          trackLocalhost
         />
       </head>
       <body
