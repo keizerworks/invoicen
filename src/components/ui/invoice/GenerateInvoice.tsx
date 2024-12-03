@@ -8,8 +8,6 @@ import TaxDetailsTable from "./TaxDetailsTable";
 import InvoiceFooter from "./InvoiceFooter";
 import Typography from "../typography";
 import { Separator } from "../separator";
-import { formatToCurrency } from "@/lib/utils";
-import { CurrencyContext } from "@/components/layout/Client";
 import { useMutation } from "@tanstack/react-query";
 import { postGenerateInvoice } from "../../../services/invoiceService";
 import { extractFileNameFromContentDisposition } from "../../../lib/utils";
@@ -55,7 +53,6 @@ const GenerateInvoice = () => {
     billedTo: "John Doe",
     payTo: "Keizer",
   });
-  const [activeCurrency, setActiveCurrency] = useContext<any>(CurrencyContext);
 
   useEffect(() => {
     const subtotal = entries.reduce((sum, entry) => sum + entry.amount * entry.quantity, 0);
@@ -65,9 +62,8 @@ const GenerateInvoice = () => {
     // Calculation of Total amount with taxes
     const TotalWithTaxAmount = subtotal + (subtotal * totalTax) / 100;
     // setting the hook and coverting the calculated num to USD Currency format
-    setTotalWithTax(formatToCurrency(TotalWithTaxAmount, activeCurrency));
-    setTotalAmount(formatToCurrency(subtotal, activeCurrency));
-  }, [entries, taxDetails, activeCurrency]);
+    setTotalWithTax(TotalWithTaxAmount);
+  }, [entries, taxDetails]);
 
   const mutation = useMutation({
     mutationKey: ["generateInvoice"],
