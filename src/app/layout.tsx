@@ -23,10 +23,51 @@ const manrope = Manrope({
   weight: ["200", "300", "400", "500", "600", "700", "800"],
 });
 
+const metaDescription =
+  "Invoicen is a simple invoice generator for freelancers and small businesses. It is a self hostable web application that can be used to generate invoices and download PDFs";
+
 export const metadata: Metadata = {
   title: "Invoicen",
-  description:
-    "Invoicen is a simple invoice generator for freelancers and small businesses. It is a self hostable web application that can be used to generate invoices and download PDFs",
+  description: metaDescription,
+  openGraph: {
+    title: "Invoicen",
+    description: metaDescription,
+    url: "https://invoicen.keizerworks.com",
+    siteName: "Invoicen",
+    locale: "en_US",
+    type: "website",
+    images: [
+      {
+        url: "/assets/logos/logo-icon-light.png",
+        alt: "Invoicen Logo",
+      },
+    ],
+  },
+
+  twitter: {
+    title: "Invoicen",
+    card: "summary",
+    creator: "@keizerHQ",
+    creatorId: "@keizerHQ",
+    site: "@keizerHQ",
+    siteId: "@keizerHQ",
+    description: metaDescription,
+    images: ["/assets/logos/logo-icon-light.png"],
+  },
+  icons: {
+    shortcut: "/assets/logos/logo-icon-light.png",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
 };
 export default function RootLayout({
   children,
@@ -38,12 +79,12 @@ export default function RootLayout({
       <head>
         <link
           rel="icon"
-          href="/assets/logos/logo-icon-light.svg"
+          href="/assets/logos/logo-icon-light.png"
           media="(prefers-color-scheme: light)"
         />
         <link
           rel="icon"
-          href="/assets/logos/logo-icon-dark.svg"
+          href="/assets/logos/logo-icon-dark.png"
           media="(prefers-color-scheme: dark)"
         />
         <PlausibleProvider
