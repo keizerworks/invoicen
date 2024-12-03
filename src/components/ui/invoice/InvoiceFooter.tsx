@@ -15,7 +15,7 @@ const InvoiceFooter: FC<InvoiceFooterProps> = ({ totalWithTax, onInvoiceGenerate
   const { activeCurrency } = useContext(CurrencyContext);
   return (
     <div className="my-4 space-y-4 w-full ">
-      <div className="flex items-center justify-end w-full mt-4">
+      <div className="flex items-center justify-end w-full">
         <Typography variant="h3" className="font-semibold">
           Total:
         </Typography>

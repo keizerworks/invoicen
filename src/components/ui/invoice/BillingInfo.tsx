@@ -17,8 +17,8 @@ const BillingInfo: React.FC<BillingInfoProps> = ({ billingDetails, setBillingDet
   };
 
   return (
-    <div className="flex items-center justify-between">
-      <div className="w-1/2">
+    <div className="flex items-center gap-32">
+      <div>
         <Typography variant="h3" className="font-semibold">
           Billed To
         </Typography>
@@ -26,9 +26,10 @@ const BillingInfo: React.FC<BillingInfoProps> = ({ billingDetails, setBillingDet
           value={billingDetails?.billedTo}
           onChange={(e) => onChangeHandler("billedTo", e.target.value)}
           className="md:text-lg text-sm shadow-none text-left border-none w-fit mt-2"
+          placeholder="Address"
         />
       </div>
-      <div className="w-1/2">
+      <div>
         <Typography variant="h3" className="font-semibold">
           Pay To
         </Typography>
@@ -36,6 +37,7 @@ const BillingInfo: React.FC<BillingInfoProps> = ({ billingDetails, setBillingDet
           value={billingDetails?.payTo}
           onChange={(e) => onChangeHandler("payTo", e.target.value)}
           className="md:text-lg text-sm shadow-none text-left border-none w-fit mt-2"
+          placeholder="Address"
         />
       </div>
     </div>

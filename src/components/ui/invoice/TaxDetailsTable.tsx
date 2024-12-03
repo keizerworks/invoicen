@@ -19,7 +19,7 @@ const TaxDetailsTable = ({ taxDetails, setTaxDetails }: TaxDetailsTableProps) =>
   const addTax = () => setTaxDetails([...taxDetails, { description: "", percentage: 0 }]);
 
   return (
-    <div className="mt-4">
+    <div className="mt-10">
       <Typography variant="h3">Tax Details</Typography>
       <Table>
         <TableHeader>
