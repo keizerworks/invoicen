@@ -26,14 +26,34 @@ const LogoPlaceholder: React.FC = () => {
   );
 };
 
-const UploadLogo: React.FC = () => {
+interface IUploadLogoProps {
+  setHeaderDetails: React.Dispatch<React.SetStateAction<HeaderDetails>>;
+}
+
+const UploadLogo: React.FC<IUploadLogoProps> = ({ setHeaderDetails }) => {
   const [uploadedLogo, setUploadedLogo] = useState<string | null>(null);
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files?.[0]) {
-      setUploadedLogo(URL.createObjectURL(e.target.files[0]));
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const base64String = reader.result as string;
+        setUploadedLogo(base64String);
+        // Update headerDetails with the Base64 logo
+        setHeaderDetails((prev) => ({
+          ...prev,
+          logoBase64: base64String,
+        }));
+      };
+      reader.readAsDataURL(file);
     } else {
       setUploadedLogo(null);
+      // Remove logo from headerDetails if no file is selected
+      setHeaderDetails((prev) => ({
+        ...prev,
+        logoBase64: null,
+      }));
     }
   };
 
@@ -57,10 +77,7 @@ const UploadLogo: React.FC = () => {
   );
 };
 
-const InvoiceHeader = ({
-  headerDetails,
-  setHeaderDetails,
-}: InvoiceHeaderProps) => {
+const InvoiceHeader = ({ headerDetails, setHeaderDetails }: InvoiceHeaderProps) => {
   const onChangeHandler = (key: keyof HeaderDetails, value: string) => {
     setHeaderDetails((prev) => ({
       ...prev,
@@ -124,8 +141,7 @@ const InvoiceHeader = ({
       </div>
       {/* Logo */}
       <div>
-        <UploadLogo />
-        {/* TODO: Make this a placeholder instead of a hard coded logo */}
+        <UploadLogo setHeaderDetails={setHeaderDetails} />
       </div>
     </div>
   );

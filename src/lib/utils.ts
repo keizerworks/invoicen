@@ -17,3 +17,7 @@ export function formatToCurrency(input: number, currencyType: "USD" | "Euro" | "
       return Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(input);
   }
 }
+
+export const extractFileNameFromContentDisposition = (contentDisposition: string) => {
+  return contentDisposition.split(";")[1].split("=")[1].replace(/"/g, "");
+};
