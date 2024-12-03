@@ -5,7 +5,7 @@ interface HeaderDetails {
   invoiceDate: string;
   dueDate: string;
   paymentTerms: string;
-  logoBase64: string;
+  logoBase64?: string;
 }
 
 interface InvoiceHeaderProps {
@@ -34,9 +34,11 @@ const InvoiceHeader = ({ headerDetails }: InvoiceHeaderProps) => {
           <Text style={styles.value}>{headerDetails.paymentTerms}</Text>
         </View>
       </View>
-      <View>
-        <Image style={styles.logo} src={headerDetails.logoBase64} />
-      </View>
+      {headerDetails?.logoBase64 && (
+        <View>
+          <Image style={styles.logo} src={headerDetails.logoBase64} />
+        </View>
+      )}
     </View>
   );
 };

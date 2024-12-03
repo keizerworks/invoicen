@@ -21,7 +21,7 @@ interface HeaderDetails {
   invoiceDate: string;
   dueDate: string;
   paymentTerms: string;
-  logoBase64: string;
+  logoBase64?: string;
 }
 
 interface BillingDetails {
