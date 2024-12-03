@@ -9,26 +9,20 @@ import {
 } from "@/components/ui/table";
 import EntryRow from "@/components/ui/invoice/EntryRow";
 import Typography from "@/components/ui/typography";
-
-interface Entry {
-  description: string;
-  quantity: number;
-  amount: number;
-}
+import { formatToCurrency } from "../../../lib/utils";
+import { useContext } from "react";
+import { CurrencyContext } from "../../../providers/CurrencyProvider";
+import { Entry } from "../../../services/invoiceService";
 
 interface EntriesTableProps {
   entries: Entry[];
   setEntries: (entries: Entry[]) => void;
-  totalAmount: string;
+  totalAmount: number;
 }
 
-const EntriesTable = ({
-  entries,
-  setEntries,
-  totalAmount,
-}: EntriesTableProps) => {
-  const addEntry = () =>
-    setEntries([...entries, { description: "", quantity: 0, amount: 0 }]);
+const EntriesTable = ({ entries, setEntries, totalAmount }: EntriesTableProps) => {
+  const { activeCurrency } = useContext(CurrencyContext);
+  const addEntry = () => setEntries([...entries, { description: "", quantity: 0, amount: 0 }]);
 
   return (
     <div className="mt-4">
@@ -54,21 +48,14 @@ const EntriesTable = ({
           ))}
           <TableRow className="h-[60px]">
             <TableCell className="font-semibold text-xl">Subtotal: </TableCell>
-            <TableCell
-              colSpan={3}
-              className="text-right font-semibold text-2xl"
-            >
-              {totalAmount}
+            <TableCell colSpan={3} className="text-right font-semibold text-2xl">
+              {formatToCurrency(totalAmount, activeCurrency)}
             </TableCell>
           </TableRow>
         </TableBody>
         <TableFooter>
           <TableRow>
-            <TableCell
-              colSpan={4}
-              className="cursor-pointer text-center"
-              onClick={addEntry}
-            >
+            <TableCell colSpan={4} className="cursor-pointer text-center" onClick={addEntry}>
               Add another entry
             </TableCell>
           </TableRow>

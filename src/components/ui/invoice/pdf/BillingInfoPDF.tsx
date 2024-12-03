@@ -1,10 +1,6 @@
 import type React from "react";
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
-
-interface BillingDetails {
-  billedTo: string;
-  payTo: string;
-}
+import { BillingDetails } from "../../../../services/invoiceService";
 
 interface BillingInfoProps {
   billingDetails: BillingDetails;

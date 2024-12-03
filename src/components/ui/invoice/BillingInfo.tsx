@@ -1,21 +1,14 @@
 import Typography from "@/components/ui/typography";
 import type React from "react";
 import { Textarea } from "@/components/ui/textarea";
-
-interface BillingDetails {
-  billedTo: string;
-  payTo: string;
-}
+import { BillingDetails } from "../../../services/invoiceService";
 
 interface BillingInfoProps {
   billingDetails: BillingDetails;
   setBillingDetails: React.Dispatch<React.SetStateAction<BillingDetails>>;
 }
 
-const BillingInfo: React.FC<BillingInfoProps> = ({
-  billingDetails,
-  setBillingDetails,
-}) => {
+const BillingInfo: React.FC<BillingInfoProps> = ({ billingDetails, setBillingDetails }) => {
   const onChangeHandler = (key: keyof BillingDetails, value: string) => {
     setBillingDetails((prev) => ({
       ...prev,

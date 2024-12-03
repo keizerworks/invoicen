@@ -1,9 +1,5 @@
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
-
-interface TaxDetails {
-  description: string;
-  percentage: number;
-}
+import { TaxDetails } from "../../../../services/invoiceService";
 
 interface TaxDetailsTableProps {
   taxDetails: TaxDetails[];

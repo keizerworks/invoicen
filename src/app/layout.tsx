@@ -6,8 +6,8 @@ import "./styles/globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/footer";
-import Client from "@/components/layout/Client";
 import TanstackProvider from "../providers/TanstackProvider";
+import CurrencyProvider from "../providers/CurrencyProvider";
 
 const satioshi = localFont({
   src: "./fonts/satoshi.ttf",
@@ -50,7 +50,7 @@ export default function RootLayout({
         className={`${manrope.variable} ${satioshi.variable} font-primary antialiased flex items-center justify-center`}
       >
         <TanstackProvider>
-          <Client>
+          <CurrencyProvider>
             <div className="mx-0 w-full">
               <ThemeProvider
                 attribute="class"
@@ -63,7 +63,7 @@ export default function RootLayout({
                 <Footer />
               </ThemeProvider>
             </div>
-          </Client>
+          </CurrencyProvider>
         </TanstackProvider>
       </body>
     </html>

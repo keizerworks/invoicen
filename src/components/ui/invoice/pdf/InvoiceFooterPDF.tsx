@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
 
 interface InvoiceFooterProps {
-  totalWithTax: number;
+  totalWithTax: string;
   customMessage?: string;
 }
 
@@ -10,7 +10,7 @@ const InvoiceFooter = ({ totalWithTax, customMessage }: InvoiceFooterProps) => {
     <View style={styles.container}>
       <View style={styles.totalContainer}>
         <Text style={styles.totalLabel}>Total:</Text>
-        <Text style={styles.totalValue}>${totalWithTax.toFixed(2)}</Text>
+        <Text style={styles.totalValue}>{totalWithTax}</Text>
       </View>
       {customMessage && (
         <View style={styles.messageContainer}>
