@@ -13,7 +13,7 @@ const InvoiceFooter = ({ totalWithTax, customMessage }: InvoiceFooterProps) => {
         <Text style={styles.totalValue}>{totalWithTax}</Text>
       </View>
       {customMessage && (
-        <View style={styles.messageContainer}>
+        <View>
           <Text style={styles.message}>{customMessage}</Text>
         </View>
       )}
@@ -23,7 +23,7 @@ const InvoiceFooter = ({ totalWithTax, customMessage }: InvoiceFooterProps) => {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 20,
+    marginTop: 32,
   },
   totalContainer: {
     flexDirection: "row",
@@ -31,24 +31,15 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   totalLabel: {
-    fontSize: 14,
+    fontSize: 16,
     fontWeight: "semibold",
     marginRight: 5,
   },
   totalValue: {
     fontWeight: "bold",
-    fontSize: 14,
-  },
-  messageContainer: {
-    marginBottom: 10,
+    fontSize: 16,
   },
   message: {
-    fontSize: 12,
-  },
-  thankYouContainer: {
-    marginTop: 10,
-  },
-  thankYou: {
     fontSize: 12,
   },
 });
