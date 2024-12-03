@@ -77,16 +77,17 @@ const styles = StyleSheet.create({
   totalRow: {
     flexDirection: "row",
     justifyContent: "flex-end",
+    marginTop: 32,
   },
   totalLabel: {
     padding: 5,
-    fontSize: 16,
+    fontSize: 14,
     textAlign: "right",
     fontWeight: "semibold",
   },
   totalValue: {
     padding: 5,
-    fontSize: 16,
+    fontSize: 14,
     textAlign: "right",
     fontWeight: "bold",
   },

@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
     fontFamily: "Manrope",
     padding: 30,
     fontSize: 12,
+    gap: 28,
   },
 });
 

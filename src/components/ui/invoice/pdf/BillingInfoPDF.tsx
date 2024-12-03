@@ -9,11 +9,11 @@ interface BillingInfoProps {
 const BillingInfo: React.FC<BillingInfoProps> = ({ billingDetails }) => {
   return (
     <View style={styles.container}>
-      <View style={styles.section}>
+      <View>
         <Text style={styles.title}>Billed To</Text>
         <Text style={styles.content}>{billingDetails.billedTo}</Text>
       </View>
-      <View style={styles.section}>
+      <View>
         <Text style={styles.title}>Pay To</Text>
         <Text style={styles.content}>{billingDetails.payTo}</Text>
       </View>
@@ -24,11 +24,8 @@ const BillingInfo: React.FC<BillingInfoProps> = ({ billingDetails }) => {
 const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
-    justifyContent: "space-between",
     marginBottom: 20,
-  },
-  section: {
-    width: "45%",
+    gap: 128,
   },
   title: {
     fontSize: 14,

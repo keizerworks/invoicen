@@ -30,7 +30,7 @@ const Navbar: FC = () => {
             <Link href={"/"}>
               {theme === "light" ? (
                 <Image
-                  src={"/assets/logos/logo-icon-light.svg"}
+                  src={"/assets/logos/logo-light.svg"}
                   height={50}
                   width={100}
                   alt="logo"
@@ -38,7 +38,7 @@ const Navbar: FC = () => {
                 />
               ) : (
                 <Image
-                  src={"/assets/logos/logo-icon-dark.svg"}
+                  src={"/assets/logos/logo-dark.svg"}
                   height={50}
                   width={100}
                   alt="logo"

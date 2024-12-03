@@ -19,8 +19,8 @@ import {
 import { extractFileNameFromContentDisposition, formatToCurrency } from "../../../lib/utils";
 import { CurrencyContext } from "../../../providers/CurrencyProvider";
 
-const initialEntries: Entry[] = [{ description: "Logo designing", quantity: 20, amount: 250 }];
-const initialTaxDetails: TaxDetails[] = [{ description: "GST", percentage: 18 }];
+const initialEntries: Entry[] = [];
+const initialTaxDetails: TaxDetails[] = [];
 
 const GenerateInvoice = () => {
   const { activeCurrency } = useContext(CurrencyContext);
@@ -29,14 +29,14 @@ const GenerateInvoice = () => {
   const [totalAmount, setTotalAmount] = useState<number>(0);
   const [totalWithTax, setTotalWithTax] = useState<number>(0);
   const [headerDetails, setHeaderDetails] = useState<HeaderDetails>({
-    invoiceId: "Keizer-00-01", // Default value for demo purposes
-    invoiceDate: "11/12/2006", // Default value for demo purposes
-    dueDate: "11/12/2006", // Default value for demo purposes
-    paymentTerms: "30 days", // Default value for demo purposes
+    invoiceId: "",
+    invoiceDate: new Date().toLocaleDateString("en-IN"),
+    dueDate: new Date().toLocaleDateString("en-IN"),
+    paymentTerms: "",
   });
   const [billingDetails, setBillingDetails] = useState<BillingDetails>({
-    billedTo: "John Doe",
-    payTo: "Keizer",
+    billedTo: "",
+    payTo: "",
   });
 
   useEffect(() => {
@@ -83,16 +83,11 @@ const GenerateInvoice = () => {
   };
 
   return (
-    <main className="md:px-6 px-4 max-w-[1200px] mx-auto">
-      <Typography variant="h2" className="text-2xl md:px-0 font-bold">
-        Create your invoice
-      </Typography>
-      <div className="shadow-xl md:my-6 my-4 md:px-8 flex flex-col gap-4 rounded">
+    <main className="max-w-7xl mx-auto mt-10">
+      <div className="shadow-xl md:my-6 my-4 md:px-8 flex flex-col gap-7 rounded">
         <InvoiceHeader headerDetails={headerDetails} setHeaderDetails={setHeaderDetails} />
-        <Separator />
         <BillingInfo billingDetails={billingDetails} setBillingDetails={setBillingDetails} />
         <EntriesTable entries={entries} setEntries={setEntries} totalAmount={totalAmount} />
-        <Separator />
         <TaxDetailsTable taxDetails={taxDetails} setTaxDetails={setTaxDetails} />
         <InvoiceFooter totalWithTax={totalWithTax} onInvoiceGenerate={onInvoiceGenerate} />
       </div>

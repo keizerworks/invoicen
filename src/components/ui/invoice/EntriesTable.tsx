@@ -25,7 +25,7 @@ const EntriesTable = ({ entries, setEntries, totalAmount }: EntriesTableProps) =
   const addEntry = () => setEntries([...entries, { description: "", quantity: 0, amount: 0 }]);
 
   return (
-    <div className="mt-4">
+    <div>
       <Typography variant="h3">Entries</Typography>
       <Table className="mt-2">
         <TableHeader>
@@ -46,12 +46,6 @@ const EntriesTable = ({ entries, setEntries, totalAmount }: EntriesTableProps) =
               updateEntries={setEntries}
             />
           ))}
-          <TableRow className="h-[60px]">
-            <TableCell className="font-semibold text-xl">Subtotal: </TableCell>
-            <TableCell colSpan={3} className="text-right font-semibold text-2xl">
-              {formatToCurrency(totalAmount, activeCurrency)}
-            </TableCell>
-          </TableRow>
         </TableBody>
         <TableFooter>
           <TableRow>
@@ -61,6 +55,14 @@ const EntriesTable = ({ entries, setEntries, totalAmount }: EntriesTableProps) =
           </TableRow>
         </TableFooter>
       </Table>
+      <div className="flex items-center justify-end w-full mt-8">
+        <Typography variant="h3" className="font-semibold">
+          Subtotal:
+        </Typography>
+        <Typography variant="h3" className="ml-[1rem]">
+          {formatToCurrency(totalAmount, activeCurrency)}
+        </Typography>
+      </div>
     </div>
   );
 };

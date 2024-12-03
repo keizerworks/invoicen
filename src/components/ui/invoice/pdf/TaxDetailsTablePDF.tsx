@@ -14,7 +14,7 @@ const TaxDetailsTable = ({ taxDetails }: TaxDetailsTableProps) => {
   ));
 
   return (
-    <View style={styles.container}>
+    <View>
       <Text style={styles.title}>Tax Details</Text>
       <View style={styles.table}>
         <View style={styles.header}>
@@ -28,9 +28,6 @@ const TaxDetailsTable = ({ taxDetails }: TaxDetailsTableProps) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    marginBottom: 20,
-  },
   title: {
     fontSize: 14,
     fontWeight: "bold",

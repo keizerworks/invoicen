@@ -95,6 +95,7 @@ const InvoiceHeader = ({ headerDetails, setHeaderDetails }: InvoiceHeaderProps) 
             value={headerDetails?.invoiceId}
             onChange={(e) => onChangeHandler("invoiceId", e.target.value)}
             className="md:text-lg text-sm ml-[5rem] text-right border-none w-fit mt-2 bg-transparent"
+            placeholder="Add invoice id"
           />
         </div>
 
@@ -107,6 +108,7 @@ const InvoiceHeader = ({ headerDetails, setHeaderDetails }: InvoiceHeaderProps) 
             value={headerDetails?.invoiceDate}
             onChange={(e) => onChangeHandler("invoiceDate", e.target.value)}
             className="md:text-lg text-sm ml-[5rem] text-right border-none w-fit mt-2 bg-transparent"
+            placeholder="Add invoice date"
           />
         </div>
 
@@ -119,6 +121,7 @@ const InvoiceHeader = ({ headerDetails, setHeaderDetails }: InvoiceHeaderProps) 
             value={headerDetails?.dueDate}
             onChange={(e) => onChangeHandler("dueDate", e.target.value)}
             className="md:text-lg text-sm ml-[5rem] text-right border-none w-fit mt-2 bg-transparent"
+            placeholder="Add due date"
           />
         </div>
 
@@ -130,6 +133,7 @@ const InvoiceHeader = ({ headerDetails, setHeaderDetails }: InvoiceHeaderProps) 
             value={headerDetails?.paymentTerms}
             onChange={(e) => onChangeHandler("paymentTerms", e.target.value)}
             className="md:text-lg text-sm ml-[5rem] text-right border-none w-fit mt-2 bg-transparent"
+            placeholder="Add payment terms"
           />
         </div>
       </div>
