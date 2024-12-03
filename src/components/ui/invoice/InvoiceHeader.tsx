@@ -4,13 +4,7 @@ import { Input } from "../input";
 import type React from "react";
 import { FileIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
-
-interface HeaderDetails {
-  invoiceId: string;
-  invoiceDate: string;
-  dueDate: string;
-  paymentTerms: string;
-}
+import { HeaderDetails } from "../../../services/invoiceService";
 
 interface InvoiceHeaderProps {
   headerDetails: HeaderDetails;

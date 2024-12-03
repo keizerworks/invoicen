@@ -12,12 +12,7 @@ import Typography from "@/components/ui/typography";
 import { formatToCurrency } from "../../../lib/utils";
 import { useContext } from "react";
 import { CurrencyContext } from "../../../providers/CurrencyProvider";
-
-interface Entry {
-  description: string;
-  quantity: number;
-  amount: number;
-}
+import { Entry } from "../../../services/invoiceService";
 
 interface EntriesTableProps {
   entries: Entry[];

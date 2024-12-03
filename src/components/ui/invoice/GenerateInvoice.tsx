@@ -9,36 +9,21 @@ import InvoiceFooter from "./InvoiceFooter";
 import Typography from "../typography";
 import { Separator } from "../separator";
 import { useMutation } from "@tanstack/react-query";
-import { postGenerateInvoice } from "../../../services/invoiceService";
-import { extractFileNameFromContentDisposition } from "../../../lib/utils";
-
-interface Entry {
-  description: string;
-  quantity: number;
-  amount: number;
-}
-
-interface TaxDetails {
-  description: string;
-  percentage: number;
-}
-
-interface HeaderDetails {
-  invoiceId: string;
-  invoiceDate: string;
-  dueDate: string;
-  paymentTerms: string;
-}
-
-interface BillingDetails {
-  billedTo: string;
-  payTo: string;
-}
+import {
+  BillingDetails,
+  Entry,
+  HeaderDetails,
+  postGenerateInvoice,
+  TaxDetails,
+} from "../../../services/invoiceService";
+import { extractFileNameFromContentDisposition, formatToCurrency } from "../../../lib/utils";
+import { CurrencyContext } from "../../../providers/CurrencyProvider";
 
 const initialEntries: Entry[] = [{ description: "Logo designing", quantity: 20, amount: 250 }];
 const initialTaxDetails: TaxDetails[] = [{ description: "GST", percentage: 18 }];
 
 const GenerateInvoice = () => {
+  const { activeCurrency } = useContext(CurrencyContext);
   const [entries, setEntries] = useState<Entry[]>(initialEntries);
   const [taxDetails, setTaxDetails] = useState<TaxDetails[]>(initialTaxDetails);
   const [totalAmount, setTotalAmount] = useState<number>(0);
@@ -92,6 +77,8 @@ const GenerateInvoice = () => {
       taxDetails,
       headerDetails,
       billingDetails,
+      totalAmount: formatToCurrency(totalAmount, activeCurrency),
+      totalWithTaxAmount: formatToCurrency(totalWithTax, activeCurrency),
     });
   };
 

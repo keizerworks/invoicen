@@ -1,12 +1,5 @@
 import { View, Text, Image, StyleSheet } from "@react-pdf/renderer";
-
-interface HeaderDetails {
-  invoiceId: string;
-  invoiceDate: string;
-  dueDate: string;
-  paymentTerms: string;
-  logoBase64?: string;
-}
+import { HeaderDetails } from "../../../../services/invoiceService";
 
 interface InvoiceHeaderProps {
   headerDetails: HeaderDetails;

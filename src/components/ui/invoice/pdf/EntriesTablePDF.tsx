@@ -1,14 +1,9 @@
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
-
-interface Entry {
-  description: string;
-  quantity: number;
-  amount: number;
-}
+import { Entry } from "../../../../services/invoiceService";
 
 interface EntriesTableProps {
   entries: Entry[];
-  totalAmount: number;
+  totalAmount: string;
 }
 
 const EntriesTable = ({ entries, totalAmount }: EntriesTableProps) => {
@@ -32,7 +27,7 @@ const EntriesTable = ({ entries, totalAmount }: EntriesTableProps) => {
         {tableRows}
         <View style={styles.totalRow}>
           <Text style={styles.totalLabel}>Subtotal:</Text>
-          <Text style={styles.totalValue}>${totalAmount.toFixed(2)}</Text>
+          <Text style={styles.totalValue}>{totalAmount}</Text>
         </View>
       </View>
     </View>

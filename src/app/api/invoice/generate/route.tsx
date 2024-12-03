@@ -29,8 +29,15 @@ export const POST = async (request: NextRequest) => {
     ],
   });
 
-  const { entries, taxDetails, headerDetails, billingDetails, customMessage } =
-    await request.json();
+  const {
+    entries,
+    taxDetails,
+    headerDetails,
+    billingDetails,
+    customMessage,
+    totalAmount,
+    totalWithTaxAmount,
+  } = await request.json();
 
   const stream = await renderToStream(
     <GenerateInvoicePDF
@@ -39,6 +46,8 @@ export const POST = async (request: NextRequest) => {
       headerDetails={headerDetails}
       billingDetails={billingDetails}
       customMessage={customMessage}
+      totalAmount={totalAmount}
+      totalWithTax={totalWithTaxAmount}
     />,
   );
 

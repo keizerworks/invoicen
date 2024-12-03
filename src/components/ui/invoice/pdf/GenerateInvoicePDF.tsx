@@ -4,30 +4,12 @@ import BillingInfo from "./BillingInfoPDF";
 import EntriesTable from "./EntriesTablePDF";
 import TaxDetailsTable from "./TaxDetailsTablePDF";
 import InvoiceFooter from "./InvoiceFooterPDF";
-
-interface Entry {
-  description: string;
-  quantity: number;
-  amount: number;
-}
-
-interface TaxDetails {
-  description: string;
-  percentage: number;
-}
-
-interface HeaderDetails {
-  invoiceId: string;
-  invoiceDate: string;
-  dueDate: string;
-  paymentTerms: string;
-  logoBase64?: string;
-}
-
-interface BillingDetails {
-  billedTo: string;
-  payTo: string;
-}
+import {
+  BillingDetails,
+  Entry,
+  HeaderDetails,
+  TaxDetails,
+} from "../../../../services/invoiceService";
 
 interface GenerateInvoicePDFProps {
   entries: Entry[];
@@ -35,6 +17,8 @@ interface GenerateInvoicePDFProps {
   headerDetails: HeaderDetails;
   billingDetails: BillingDetails;
   customMessage?: string;
+  totalAmount: string;
+  totalWithTax: string;
 }
 
 const GenerateInvoicePDF = ({
@@ -43,14 +27,9 @@ const GenerateInvoicePDF = ({
   headerDetails,
   billingDetails,
   customMessage,
+  totalAmount,
+  totalWithTax,
 }: GenerateInvoicePDFProps) => {
-  // Calculate total amounts
-  const totalAmount = entries.reduce((sum, entry) => sum + entry.amount * entry.quantity, 0);
-
-  const totalTaxPercentage = taxDetails.reduce((sum, tax) => sum + tax.percentage, 0);
-
-  const totalWithTax = totalAmount + (totalAmount * totalTaxPercentage) / 100;
-
   return (
     <Document>
       <Page style={styles.page}>
