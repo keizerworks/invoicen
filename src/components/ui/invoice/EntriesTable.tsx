@@ -56,7 +56,7 @@ const EntriesTable = ({ entries, setEntries, totalAmount }: EntriesTableProps) =
         </TableFooter>
       </Table>
       <div className="flex items-center justify-end w-full mt-8">
-        <Typography variant="h3" className="font-semibold">
+        <Typography variant="h3" className="font-semibold text-lg md:text-2xl">
           Subtotal:
         </Typography>
         <Typography variant="h3" className="ml-[1rem]">

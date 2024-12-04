@@ -13,7 +13,7 @@ interface InvoiceHeaderProps {
 
 const LogoPlaceholder: React.FC = () => {
   return (
-    <div className="rounded border-2 border-dashed bg-white dark:bg-black w-32 h-32 flex items-center justify-center flex-col cursor-pointer transition-colors hover:bg-muted dark:hover:bg-neutral-950">
+    <div className="border-2 border-dashed bg-white dark:bg-black w-40 h-40 rounded-xl flex items-center justify-center flex-col cursor-pointer transition-colors hover:bg-muted dark:hover:bg-neutral-950">
       <FileIcon className="h-10 w-10 text-muted-foreground" />
       <Typography className="text-muted-foreground">Logo</Typography>
     </div>
@@ -55,7 +55,7 @@ const UploadLogo: React.FC<IUploadLogoProps> = ({ setHeaderDetails }) => {
     <div>
       <label htmlFor="logo-upload" className="cursor-pointer">
         {uploadedLogo ? (
-          <Image src={uploadedLogo} alt="Logo" height={120} width={120} />
+          <Image className="rounded-xl" src={uploadedLogo} alt="Logo" height={120} width={120} />
         ) : (
           <LogoPlaceholder />
         )}
@@ -80,7 +80,7 @@ const InvoiceHeader = ({ headerDetails, setHeaderDetails }: InvoiceHeaderProps) 
   };
 
   return (
-    <div className="flex items-center justify-between">
+    <div className="flex flex-col-reverse md:flex-row gap-4 md:gap-0 md:items-center justify-between">
       {/* Basic details */}
       <div>
         <Typography variant="h2" className="font-semibold">

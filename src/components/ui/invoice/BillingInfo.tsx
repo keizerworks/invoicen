@@ -17,7 +17,7 @@ const BillingInfo: React.FC<BillingInfoProps> = ({ billingDetails, setBillingDet
   };
 
   return (
-    <div className="flex items-center gap-32">
+    <div className="flex my-4 flex-col md:flex-row md:items-center gap-6 md:gap-32">
       <div>
         <Typography variant="h3" className="font-semibold">
           Billed To
@@ -25,7 +25,7 @@ const BillingInfo: React.FC<BillingInfoProps> = ({ billingDetails, setBillingDet
         <Textarea
           value={billingDetails?.billedTo}
           onChange={(e) => onChangeHandler("billedTo", e.target.value)}
-          className="md:text-lg text-sm shadow-none text-left border-none w-fit mt-2"
+          className="md:text-lg text-sm shadow-none text-left border-none w-full md:w-fit mt-2"
           placeholder="Address"
         />
       </div>
@@ -36,7 +36,7 @@ const BillingInfo: React.FC<BillingInfoProps> = ({ billingDetails, setBillingDet
         <Textarea
           value={billingDetails?.payTo}
           onChange={(e) => onChangeHandler("payTo", e.target.value)}
-          className="md:text-lg text-sm shadow-none text-left border-none w-fit mt-2"
+          className="md:text-lg text-sm shadow-none text-left border-none  w-full md:w-fit mt-2"
           placeholder="Address"
         />
       </div>

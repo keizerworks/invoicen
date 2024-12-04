@@ -83,13 +83,15 @@ const GenerateInvoice = () => {
   };
 
   return (
-    <main className="max-w-7xl mx-auto mt-10">
-      <div className="shadow-xl md:my-6 my-4 md:px-8 flex flex-col gap-7 rounded">
-        <InvoiceHeader headerDetails={headerDetails} setHeaderDetails={setHeaderDetails} />
-        <BillingInfo billingDetails={billingDetails} setBillingDetails={setBillingDetails} />
-        <EntriesTable entries={entries} setEntries={setEntries} totalAmount={totalAmount} />
-        <TaxDetailsTable taxDetails={taxDetails} setTaxDetails={setTaxDetails} />
-        <InvoiceFooter totalWithTax={totalWithTax} onInvoiceGenerate={onInvoiceGenerate} />
+    <main className="max-w-7xl px-6 mx-auto mt-10">
+      <div className="border-2 shadow-lg px-4 mb-8 rounded-xl">
+        <div className=" md:my-6 my-4 flex flex-col gap-7 rounded">
+          <InvoiceHeader headerDetails={headerDetails} setHeaderDetails={setHeaderDetails} />
+          <BillingInfo billingDetails={billingDetails} setBillingDetails={setBillingDetails} />
+          <EntriesTable entries={entries} setEntries={setEntries} totalAmount={totalAmount} />
+          <TaxDetailsTable taxDetails={taxDetails} setTaxDetails={setTaxDetails} />
+          <InvoiceFooter totalWithTax={totalWithTax} onInvoiceGenerate={onInvoiceGenerate} />
+        </div>
       </div>
     </main>
   );
