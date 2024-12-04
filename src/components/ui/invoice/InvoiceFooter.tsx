@@ -16,7 +16,7 @@ const InvoiceFooter: FC<InvoiceFooterProps> = ({ totalWithTax, onInvoiceGenerate
   return (
     <div className="my-4 space-y-4 w-full ">
       <div className="flex items-center justify-end w-full">
-        <Typography variant="h3" className="font-semibold">
+        <Typography variant="h3" className="font-semibold text-lg md:text-2xl">
           Total:
         </Typography>
         <Typography variant="h3" className="ml-[1rem]">
@@ -24,7 +24,7 @@ const InvoiceFooter: FC<InvoiceFooterProps> = ({ totalWithTax, onInvoiceGenerate
         </Typography>
       </div>
       <Separator className="mt-4" />
-      <Textarea placeholder="Add a custom message" className="border-none shadow-none mt-4" />
+      <Textarea placeholder="Add a custom message" className="border-none p-4 shadow-none mt-4" />
       <div className="flex justify-end">
         <Button className="text-right" onClick={onInvoiceGenerate}>
           Generate Invoice
