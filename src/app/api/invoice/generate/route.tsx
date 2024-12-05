@@ -29,7 +29,7 @@ export const POST = async (request: NextRequest) => {
     ],
   });
 
-  const { entries, taxDetails, headerDetails, billingDetails, customMessage } =
+  const { entries, taxDetails, headerDetails, billingDetails, customMessage, discount } =
     await request.json();
 
   const stream = await renderToStream(
@@ -39,6 +39,7 @@ export const POST = async (request: NextRequest) => {
       headerDetails={headerDetails}
       billingDetails={billingDetails}
       customMessage={customMessage}
+      discount={discount}
     />,
   );
 

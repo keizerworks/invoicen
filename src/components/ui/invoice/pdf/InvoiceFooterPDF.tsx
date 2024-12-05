@@ -1,55 +1,66 @@
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
 
 interface InvoiceFooterProps {
-  totalWithTax: number;
-  customMessage?: string;
+  totalWithTax: number; // After tax calculation, including discount
+  customMessage?: string; // Optional message
+  discount?: number; // Discount value (optional)
+  totalAmount: number; // Total before any discount and tax
 }
 
-const InvoiceFooter = ({ totalWithTax, customMessage }: InvoiceFooterProps) => {
+const InvoiceFooter = ({ totalWithTax, discount, totalAmount, customMessage }: InvoiceFooterProps) => {
   return (
-    <View style={styles.container}>
-      <View style={styles.totalContainer}>
-        <Text style={styles.totalLabel}>Total:</Text>
-        <Text style={styles.totalValue}>${totalWithTax.toFixed(2)}</Text>
-      </View>
-      {customMessage && (
-        <View style={styles.messageContainer}>
-          <Text style={styles.message}>{customMessage}</Text>
+    <View style={styles.footer}>
+      <View style={styles.summaryContainer}>
+        {/* Total Amount Before Discount */}
+        <View style={styles.row}>
+          <Text style={styles.label}>Total (Before Discount):</Text>
+          <Text style={styles.value}>${totalAmount.toFixed(2)}</Text>
         </View>
-      )}
+
+        {/* Discount (Show only if applicable) */}
+        {discount && (
+          <View style={styles.row}>
+            <Text style={styles.label}>Discount:</Text>
+            <Text style={styles.value}>- ${discount.toFixed(2)}</Text>
+          </View>
+        )}
+
+        {/* Final Total (After Discount and Tax) */}
+        <View style={styles.row}>
+          <Text style={styles.label}>Total (After Discount & Tax):</Text>
+          <Text style={styles.value}>${totalWithTax.toFixed(2)}</Text>
+        </View>
+      </View>
+
+      {/* Custom Message */}
+      {customMessage && <Text style={styles.customMessage}>{customMessage}</Text>}
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  footer: {
     marginTop: 20,
+    paddingTop: 10,
+    borderTop: "1px solid #000",
   },
-  totalContainer: {
+  summaryContainer: {
+    marginBottom: 10,
+  },
+  row: {
     flexDirection: "row",
-    justifyContent: "flex-end",
-    marginBottom: 10,
+    justifyContent: "space-between",
+    marginBottom: 5,
   },
-  totalLabel: {
-    fontSize: 14,
-    fontWeight: "semibold",
-    marginRight: 5,
-  },
-  totalValue: {
+  label: {
     fontWeight: "bold",
-    fontSize: 14,
   },
-  messageContainer: {
-    marginBottom: 10,
+  value: {
+    textAlign: "right",
   },
-  message: {
-    fontSize: 12,
-  },
-  thankYouContainer: {
+  customMessage: {
     marginTop: 10,
-  },
-  thankYou: {
-    fontSize: 12,
+    fontStyle: "italic",
   },
 });
 

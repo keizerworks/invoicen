@@ -11,6 +11,7 @@ import { Separator } from "../separator";
 import { useMutation } from "@tanstack/react-query";
 import { postGenerateInvoice } from "../../../services/invoiceService";
 import { extractFileNameFromContentDisposition } from "../../../lib/utils";
+import DiscountDetailsTable from "./DiscountDetailsTable";
 
 interface Entry {
   description: string;
@@ -53,14 +54,24 @@ const GenerateInvoice = () => {
     billedTo: "John Doe",
     payTo: "Keizer",
   });
+  const [discountDetails, setDiscountDetails] = useState([
+    { description: "New Year Discount", amount: 100 },
+  ]);
+  
+  const [discountedAmount, setDiscountedAmount] = useState<number>(0);
 
   useEffect(() => {
     const subtotal = entries.reduce((sum, entry) => sum + entry.amount * entry.quantity, 0);
     setTotalAmount(subtotal);
-
+  
     const totalTax = taxDetails.reduce((sum, tax) => sum + tax.percentage, 0);
-    setTotalWithTax(subtotal + (subtotal * totalTax) / 100);
-  }, [entries, taxDetails]);
+    const totalWithTaxes = subtotal + (subtotal * totalTax) / 100;
+  
+    const totalDiscount = discountDetails.reduce((sum, discount) => sum + discount.amount, 0);
+    setDiscountedAmount(totalDiscount);
+  
+    setTotalWithTax(totalWithTaxes - totalDiscount);
+  }, [entries, taxDetails, discountDetails]);
 
   const mutation = useMutation({
     mutationKey: ["generateInvoice"],
@@ -103,7 +114,14 @@ const GenerateInvoice = () => {
         <BillingInfo billingDetails={billingDetails} setBillingDetails={setBillingDetails} />
         <EntriesTable entries={entries} setEntries={setEntries} totalAmount={totalAmount} />
         <Separator />
-        <TaxDetailsTable taxDetails={taxDetails} setTaxDetails={setTaxDetails} />
+          <TaxDetailsTable taxDetails={taxDetails} setTaxDetails={setTaxDetails} />
+          <DiscountDetailsTable
+            discountDetails={discountDetails}
+            setDiscountDetails={setDiscountDetails}
+            totalAmount={totalWithTax} // Pass current total with tax
+            setTotalAmount={setTotalWithTax} // Update final amount after applying discount
+          />
+
         <InvoiceFooter totalWithTax={totalWithTax} onInvoiceGenerate={onInvoiceGenerate} />
       </div>
     </main>

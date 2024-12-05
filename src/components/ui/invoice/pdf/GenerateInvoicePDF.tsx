@@ -35,6 +35,7 @@ interface GenerateInvoicePDFProps {
   headerDetails: HeaderDetails;
   billingDetails: BillingDetails;
   customMessage?: string;
+  discount?: number;
 }
 
 const GenerateInvoicePDF = ({
@@ -43,13 +44,16 @@ const GenerateInvoicePDF = ({
   headerDetails,
   billingDetails,
   customMessage,
+  discount = 0,
 }: GenerateInvoicePDFProps) => {
   // Calculate total amounts
   const totalAmount = entries.reduce((sum, entry) => sum + entry.amount * entry.quantity, 0);
 
   const totalTaxPercentage = taxDetails.reduce((sum, tax) => sum + tax.percentage, 0);
 
-  const totalWithTax = totalAmount + (totalAmount * totalTaxPercentage) / 100;
+  // Subtract the discount and calculate the tax on the remaining amount
+  const discountedTotal = totalAmount - discount;
+  const totalWithTax = discountedTotal + (discountedTotal * totalTaxPercentage) / 100;
 
   return (
     <Document>
@@ -58,7 +62,12 @@ const GenerateInvoicePDF = ({
         <BillingInfo billingDetails={billingDetails} />
         <EntriesTable entries={entries} totalAmount={totalAmount} />
         <TaxDetailsTable taxDetails={taxDetails} />
-        <InvoiceFooter totalWithTax={totalWithTax} customMessage={customMessage} />
+        <InvoiceFooter
+          totalWithTax={totalWithTax}
+          customMessage={customMessage}
+          discount={discount}
+          totalAmount={totalAmount}
+        />
       </Page>
     </Document>
   );
