@@ -22,7 +22,11 @@ export default function Footer() {
               {mounted ? (
                 <Link href={"/"}>
                   <Image
-                    src={theme === "light" ? "/assets/logos/logo-icon-light.svg" : "/assets/logos/logo-icon-dark.svg"}
+                    src={
+                      theme === "light"
+                        ? "/assets/logos/logo-light.svg"
+                        : "/assets/logos/logo-dark.svg"
+                    }
                     height={50}
                     width={100}
                     alt="logo"

@@ -4,30 +4,12 @@ import BillingInfo from "./BillingInfoPDF";
 import EntriesTable from "./EntriesTablePDF";
 import TaxDetailsTable from "./TaxDetailsTablePDF";
 import InvoiceFooter from "./InvoiceFooterPDF";
-
-interface Entry {
-  description: string;
-  quantity: number;
-  amount: number;
-}
-
-interface TaxDetails {
-  description: string;
-  percentage: number;
-}
-
-interface HeaderDetails {
-  invoiceId: string;
-  invoiceDate: string;
-  dueDate: string;
-  paymentTerms: string;
-  logoBase64: string;
-}
-
-interface BillingDetails {
-  billedTo: string;
-  payTo: string;
-}
+import {
+  BillingDetails,
+  Entry,
+  HeaderDetails,
+  TaxDetails,
+} from "../../../../services/invoiceService";
 
 interface GenerateInvoicePDFProps {
   entries: Entry[];
@@ -36,6 +18,7 @@ interface GenerateInvoicePDFProps {
   billingDetails: BillingDetails;
   customMessage?: string;
   discount?: number;
+
 }
 
 const GenerateInvoicePDF = ({
@@ -54,6 +37,7 @@ const GenerateInvoicePDF = ({
   // Subtract the discount and calculate the tax on the remaining amount
   const discountedTotal = totalAmount - discount;
   const totalWithTax = discountedTotal + (discountedTotal * totalTaxPercentage) / 100;
+
 
   return (
     <Document>
@@ -78,6 +62,7 @@ const styles = StyleSheet.create({
     fontFamily: "Manrope",
     padding: 30,
     fontSize: 12,
+    gap: 28,
   },
 });
 

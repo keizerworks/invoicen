@@ -9,12 +9,10 @@ import {
 } from "@/components/ui/table";
 import EntryRow from "@/components/ui/invoice/EntryRow";
 import Typography from "@/components/ui/typography";
-
-interface Entry {
-  description: string;
-  quantity: number;
-  amount: number;
-}
+import { formatToCurrency } from "../../../lib/utils";
+import { useContext } from "react";
+import { CurrencyContext } from "../../../providers/CurrencyProvider";
+import { Entry } from "../../../services/invoiceService";
 
 interface EntriesTableProps {
   entries: Entry[];
@@ -22,16 +20,12 @@ interface EntriesTableProps {
   totalAmount: number;
 }
 
-const EntriesTable = ({
-  entries,
-  setEntries,
-  totalAmount,
-}: EntriesTableProps) => {
-  const addEntry = () =>
-    setEntries([...entries, { description: "", quantity: 0, amount: 0 }]);
+const EntriesTable = ({ entries, setEntries, totalAmount }: EntriesTableProps) => {
+  const { activeCurrency } = useContext(CurrencyContext);
+  const addEntry = () => setEntries([...entries, { description: "", quantity: 0, amount: 0 }]);
 
   return (
-    <div className="mt-4">
+    <div>
       <Typography variant="h3">Entries</Typography>
       <Table className="mt-2">
         <TableHeader>
@@ -52,28 +46,23 @@ const EntriesTable = ({
               updateEntries={setEntries}
             />
           ))}
-          <TableRow className="h-[60px]">
-            <TableCell className="font-semibold text-xl">Subtotal: </TableCell>
-            <TableCell
-              colSpan={3}
-              className="text-right font-semibold text-2xl"
-            >
-              ${totalAmount}
-            </TableCell>
-          </TableRow>
         </TableBody>
         <TableFooter>
           <TableRow>
-            <TableCell
-              colSpan={4}
-              className="cursor-pointer text-center"
-              onClick={addEntry}
-            >
+            <TableCell colSpan={4} className="cursor-pointer text-center" onClick={addEntry}>
               Add another entry
             </TableCell>
           </TableRow>
         </TableFooter>
       </Table>
+      <div className="flex items-center justify-end w-full mt-8">
+        <Typography variant="h3" className="font-semibold text-lg md:text-2xl">
+          Subtotal:
+        </Typography>
+        <Typography variant="h3" className="ml-[1rem]">
+          {formatToCurrency(totalAmount, activeCurrency)}
+        </Typography>
+      </div>
     </div>
   );
 };

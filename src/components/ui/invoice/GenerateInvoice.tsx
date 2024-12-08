@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import InvoiceHeader from "./InvoiceHeader";
 import BillingInfo from "./BillingInfo";
 import EntriesTable from "./EntriesTable";
@@ -13,46 +13,25 @@ import { postGenerateInvoice } from "../../../services/invoiceService";
 import { extractFileNameFromContentDisposition } from "../../../lib/utils";
 import DiscountDetailsTable from "./DiscountDetailsTable";
 
-interface Entry {
-  description: string;
-  quantity: number;
-  amount: number;
-}
 
-interface TaxDetails {
-  description: string;
-  percentage: number;
-}
-
-interface HeaderDetails {
-  invoiceId: string;
-  invoiceDate: string;
-  dueDate: string;
-  paymentTerms: string;
-}
-
-interface BillingDetails {
-  billedTo: string;
-  payTo: string;
-}
-
-const initialEntries: Entry[] = [{ description: "Logo designing", quantity: 20, amount: 250 }];
-const initialTaxDetails: TaxDetails[] = [{ description: "GST", percentage: 18 }];
+const initialEntries: Entry[] = [];
+const initialTaxDetails: TaxDetails[] = [];
 
 const GenerateInvoice = () => {
+  const { activeCurrency } = useContext(CurrencyContext);
   const [entries, setEntries] = useState<Entry[]>(initialEntries);
   const [taxDetails, setTaxDetails] = useState<TaxDetails[]>(initialTaxDetails);
   const [totalAmount, setTotalAmount] = useState<number>(0);
   const [totalWithTax, setTotalWithTax] = useState<number>(0);
   const [headerDetails, setHeaderDetails] = useState<HeaderDetails>({
-    invoiceId: "Keizer-00-01", // Default value for demo purposes
-    invoiceDate: "11/12/2006", // Default value for demo purposes
-    dueDate: "11/12/2006", // Default value for demo purposes
-    paymentTerms: "30 days", // Default value for demo purposes
+    invoiceId: "",
+    invoiceDate: new Date().toLocaleDateString("en-IN"),
+    dueDate: new Date().toLocaleDateString("en-IN"),
+    paymentTerms: "",
   });
   const [billingDetails, setBillingDetails] = useState<BillingDetails>({
-    billedTo: "John Doe",
-    payTo: "Keizer",
+    billedTo: "",
+    payTo: "",
   });
   const [discountDetails, setDiscountDetails] = useState([
     { description: "New Year Discount", amount: 100 },
@@ -72,6 +51,7 @@ const GenerateInvoice = () => {
   
     setTotalWithTax(totalWithTaxes - totalDiscount);
   }, [entries, taxDetails, discountDetails]);
+
 
   const mutation = useMutation({
     mutationKey: ["generateInvoice"],
@@ -100,6 +80,8 @@ const GenerateInvoice = () => {
       taxDetails,
       headerDetails,
       billingDetails,
+      totalAmount: formatToCurrency(totalAmount, activeCurrency),
+      totalWithTaxAmount: formatToCurrency(totalWithTax, activeCurrency),
     });
   };
 

@@ -3,6 +3,7 @@ import { ArrowRight, DollarSign, Euro, Heart, IndianRupee } from "lucide-react";
 import InvoiceIllustration from "./invoice-illustration";
 import { Badge } from "./ui/badge";
 import { MagneticWrapper } from "@/components/ui/magnetic-wrapper";
+import Link from "next/link";
 
 export default function Hero() {
   return (
@@ -36,15 +37,20 @@ export default function Hero() {
             </div>
           </div>
           <div className="flex items-center gap-4 mt-4">
-            <Button className="w-32 h-10 font-bold" Icon={ArrowRight} iconPlacement="right">
-              Get Started
-            </Button>
-            <Button
-              variant={"linkHover2"}
-              className="hover:rounded-xl font-bold transition-all hover:-translate-y-1 duration-500"
-            >
-              Try for free
-            </Button>
+            <Link href={"/generate"}>
+              <Button className="w-32 h-10 font-bold" Icon={ArrowRight} iconPlacement="right">
+                Get Started
+              </Button>
+            </Link>
+
+            <Link href={"/generate"}>
+              <Button
+                variant={"linkHover2"}
+                className="hover:rounded-xl font-bold transition-all hover:-translate-y-1 duration-500"
+              >
+                Try for free
+              </Button>
+            </Link>
           </div>
         </div>
         <section className="flex justify-center items-center my-20">

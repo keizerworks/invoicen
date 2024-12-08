@@ -1,12 +1,5 @@
 import { View, Text, Image, StyleSheet } from "@react-pdf/renderer";
-
-interface HeaderDetails {
-  invoiceId: string;
-  invoiceDate: string;
-  dueDate: string;
-  paymentTerms: string;
-  logoBase64: string;
-}
+import { HeaderDetails } from "../../../../services/invoiceService";
 
 interface InvoiceHeaderProps {
   headerDetails: HeaderDetails;
@@ -34,9 +27,11 @@ const InvoiceHeader = ({ headerDetails }: InvoiceHeaderProps) => {
           <Text style={styles.value}>{headerDetails.paymentTerms}</Text>
         </View>
       </View>
-      <View>
-        <Image style={styles.logo} src={headerDetails.logoBase64} />
-      </View>
+      {headerDetails?.logoBase64 && (
+        <View>
+          <Image style={styles.logo} src={headerDetails.logoBase64} />
+        </View>
+      )}
     </View>
   );
 };

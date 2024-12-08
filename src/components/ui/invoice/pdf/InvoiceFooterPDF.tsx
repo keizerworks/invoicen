@@ -5,6 +5,7 @@ interface InvoiceFooterProps {
   customMessage?: string; // Optional message
   discount?: number; // Discount value (optional)
   totalAmount: number; // Total before any discount and tax
+
 }
 
 const InvoiceFooter = ({ totalWithTax, discount, totalAmount, customMessage }: InvoiceFooterProps) => {
@@ -29,6 +30,7 @@ const InvoiceFooter = ({ totalWithTax, discount, totalAmount, customMessage }: I
         <View style={styles.row}>
           <Text style={styles.label}>Total (After Discount & Tax):</Text>
           <Text style={styles.value}>${totalWithTax.toFixed(2)}</Text>
+
         </View>
       </View>
 

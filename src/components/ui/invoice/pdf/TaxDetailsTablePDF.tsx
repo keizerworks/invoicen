@@ -1,9 +1,5 @@
 import { View, Text, StyleSheet } from "@react-pdf/renderer";
-
-interface TaxDetails {
-  description: string;
-  percentage: number;
-}
+import { TaxDetails } from "../../../../services/invoiceService";
 
 interface TaxDetailsTableProps {
   taxDetails: TaxDetails[];
@@ -18,7 +14,7 @@ const TaxDetailsTable = ({ taxDetails }: TaxDetailsTableProps) => {
   ));
 
   return (
-    <View style={styles.container}>
+    <View>
       <Text style={styles.title}>Tax Details</Text>
       <View style={styles.table}>
         <View style={styles.header}>
@@ -32,9 +28,6 @@ const TaxDetailsTable = ({ taxDetails }: TaxDetailsTableProps) => {
 };
 
 const styles = StyleSheet.create({
-  container: {
-    marginBottom: 20,
-  },
   title: {
     fontSize: 14,
     fontWeight: "bold",

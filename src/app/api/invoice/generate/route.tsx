@@ -29,8 +29,10 @@ export const POST = async (request: NextRequest) => {
     ],
   });
 
+
   const { entries, taxDetails, headerDetails, billingDetails, customMessage, discount } =
     await request.json();
+
 
   const stream = await renderToStream(
     <GenerateInvoicePDF
@@ -40,6 +42,7 @@ export const POST = async (request: NextRequest) => {
       billingDetails={billingDetails}
       customMessage={customMessage}
       discount={discount}
+
     />,
   );
 
