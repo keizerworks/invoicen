@@ -9,15 +9,10 @@ import InvoiceFooter from "./InvoiceFooter";
 import Typography from "../typography";
 import { Separator } from "../separator";
 import { useMutation } from "@tanstack/react-query";
-import {
-  BillingDetails,
-  Entry,
-  HeaderDetails,
-  postGenerateInvoice,
-  TaxDetails,
-} from "../../../services/invoiceService";
-import { extractFileNameFromContentDisposition, formatToCurrency } from "../../../lib/utils";
-import { CurrencyContext } from "../../../providers/CurrencyProvider";
+import { postGenerateInvoice } from "../../../services/invoiceService";
+import { extractFileNameFromContentDisposition } from "../../../lib/utils";
+import DiscountDetailsTable from "./DiscountDetailsTable";
+
 
 const initialEntries: Entry[] = [];
 const initialTaxDetails: TaxDetails[] = [];
@@ -38,17 +33,25 @@ const GenerateInvoice = () => {
     billedTo: "",
     payTo: "",
   });
+  const [discountDetails, setDiscountDetails] = useState([
+    { description: "New Year Discount", amount: 100 },
+  ]);
+  
+  const [discountedAmount, setDiscountedAmount] = useState<number>(0);
 
   useEffect(() => {
     const subtotal = entries.reduce((sum, entry) => sum + entry.amount * entry.quantity, 0);
     setTotalAmount(subtotal);
-
+  
     const totalTax = taxDetails.reduce((sum, tax) => sum + tax.percentage, 0);
-    // Calculation of Total amount with taxes
-    const TotalWithTaxAmount = subtotal + (subtotal * totalTax) / 100;
-    // setting the hook and coverting the calculated num to USD Currency format
-    setTotalWithTax(TotalWithTaxAmount);
-  }, [entries, taxDetails]);
+    const totalWithTaxes = subtotal + (subtotal * totalTax) / 100;
+  
+    const totalDiscount = discountDetails.reduce((sum, discount) => sum + discount.amount, 0);
+    setDiscountedAmount(totalDiscount);
+  
+    setTotalWithTax(totalWithTaxes - totalDiscount);
+  }, [entries, taxDetails, discountDetails]);
+
 
   const mutation = useMutation({
     mutationKey: ["generateInvoice"],
@@ -83,15 +86,25 @@ const GenerateInvoice = () => {
   };
 
   return (
-    <main className="max-w-7xl px-6 mx-auto mt-10">
-      <div className="border-2 shadow-lg px-4 mb-8 rounded-xl">
-        <div className=" md:my-6 my-4 flex flex-col gap-7 rounded">
-          <InvoiceHeader headerDetails={headerDetails} setHeaderDetails={setHeaderDetails} />
-          <BillingInfo billingDetails={billingDetails} setBillingDetails={setBillingDetails} />
-          <EntriesTable entries={entries} setEntries={setEntries} totalAmount={totalAmount} />
+    <main className="md:px-6 px-4 max-w-[1200px] mx-auto">
+      <Typography variant="h2" className="text-2xl md:px-0 font-bold">
+        Create your invoice
+      </Typography>
+      <div className="shadow-xl md:my-6 my-4 md:px-8 flex flex-col gap-4 rounded">
+        <InvoiceHeader headerDetails={headerDetails} setHeaderDetails={setHeaderDetails} />
+        <Separator />
+        <BillingInfo billingDetails={billingDetails} setBillingDetails={setBillingDetails} />
+        <EntriesTable entries={entries} setEntries={setEntries} totalAmount={totalAmount} />
+        <Separator />
           <TaxDetailsTable taxDetails={taxDetails} setTaxDetails={setTaxDetails} />
-          <InvoiceFooter totalWithTax={totalWithTax} onInvoiceGenerate={onInvoiceGenerate} />
-        </div>
+          <DiscountDetailsTable
+            discountDetails={discountDetails}
+            setDiscountDetails={setDiscountDetails}
+            totalAmount={totalWithTax} // Pass current total with tax
+            setTotalAmount={setTotalWithTax} // Update final amount after applying discount
+          />
+
+        <InvoiceFooter totalWithTax={totalWithTax} onInvoiceGenerate={onInvoiceGenerate} />
       </div>
     </main>
   );
