@@ -30,12 +30,13 @@ const GenerateInvoicePDF = ({
   totalAmount,
   totalWithTax,
 }: GenerateInvoicePDFProps) => {
+  const activeCurrency = totalAmount.substring(0, 1);
   return (
     <Document>
       <Page style={styles.page}>
         <InvoiceHeader headerDetails={headerDetails} />
         <BillingInfo billingDetails={billingDetails} />
-        <EntriesTable entries={entries} totalAmount={totalAmount} />
+        <EntriesTable entries={entries} totalAmount={totalAmount} activeCurrency={activeCurrency}/>
         <TaxDetailsTable taxDetails={taxDetails} />
         <InvoiceFooter totalWithTax={totalWithTax} customMessage={customMessage} />
       </Page>
