@@ -1,0 +1,30 @@
+{
+  "name": "@repo/email",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "clean": "rm -rf .turbo node_modules",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "dev": "email dev -p 3003",
+    "build": "email build",
+    "start": "email start"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@react-email/components": "^0.0.31",
+    "@react-email/tailwind": "^1.0.4"
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/tsconfig": "workspace:*",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:react19",
+    "react-email": "^3.0.4"
+  },
+  "prettier": "@repo/prettier-config"
+}

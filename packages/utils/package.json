@@ -1,0 +1,27 @@
+{
+  "name": "@repo/utils",
+  "type": "module",
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc",
+    "lint": "eslint ."
+  },
+  "exports": {
+    "./rate-limiter/*": {
+      "types": "./dist/rate-limiter/*.d.ts",
+      "default": "./src/rate-limiter/*.ts"
+    }
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/tsconfig": "workspace:*",
+    "typescript": "catalog:",
+    "eslint": "catalog:",
+    "@types/node": "catalog:"
+  },
+  "peerDependencies": {
+    "next": "catalog:"
+  },
+  "dependencies": {},
+  "prettier": "@repo/prettier-config"
+}

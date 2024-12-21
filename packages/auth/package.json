@@ -1,0 +1,41 @@
+{
+  "name": "@repo/auth",
+  "type": "module",
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc",
+    "lint": "eslint ."
+  },
+  "exports": {
+    "./session": {
+      "types": "./src/session.ts",
+      "default": "./dist/session.js"
+    },
+    "./password": {
+      "types": "./src/password.ts",
+      "default": "./dist/session.js"
+    },
+    "./utils/*": {
+      "types": "./src/utils/*.ts",
+      "default": "./src/utils/*.ts"
+    },
+    "./user": {
+      "types": "./dist/user.d.ts",
+      "default": "./dist/user.js"
+    }
+  },
+  "devDependencies": {
+    "@repo/eslint-config": "workspace:*",
+    "@repo/tsconfig": "workspace:*",
+    "@types/node": "catalog:",
+    "eslint": "catalog:",
+    "typescript": "catalog:"
+  },
+  "dependencies": {
+    "@node-rs/argon2": "^2.0.2",
+    "@oslojs/crypto": "^1.0.1",
+    "@oslojs/encoding": "^1.1.0",
+    "@repo/db": "workspace:*"
+  },
+  "prettier": "@repo/prettier-config"
+}
