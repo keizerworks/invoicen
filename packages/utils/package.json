@@ -14,14 +14,14 @@
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
+    "@repo/prettier-config": "workspace:^",
     "@repo/tsconfig": "workspace:*",
-    "typescript": "catalog:",
+    "@types/node": "catalog:",
     "eslint": "catalog:",
-    "@types/node": "catalog:"
+    "typescript": "catalog:"
   },
   "peerDependencies": {
     "next": "catalog:"
   },
-  "dependencies": {},
   "prettier": "@repo/prettier-config"
 }

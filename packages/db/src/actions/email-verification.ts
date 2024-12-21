@@ -1,5 +1,5 @@
-import { db } from "../client";
 import type { CreateEmailVerificationRequestInterface } from "../schema/user";
+import { db } from "../client";
 import { emailVerificationRequestTable } from "../schema/user";
 
 export const createEmailVerificationRequest = async (

@@ -1,3 +1,5 @@
+import type { NextRequest } from "next/server";
+
 import { hashPassword } from "@repo/auth/password";
 import { generateRandomOTP } from "@repo/auth/utils/code";
 import { createEmailVerificationRequest } from "@repo/db/actions/email-verification";
@@ -5,7 +7,6 @@ import { createUser, getUserByEmail } from "@repo/db/actions/user";
 import { globalPOSTRateLimit } from "@repo/utils/rate-limiter/next";
 import { RefillingTokenBucket } from "@repo/utils/rate-limiter/refill-token-bucket";
 import { signUpSchema } from "@repo/validators/auth";
-import type { NextRequest } from "next/server";
 
 const ipBucket = new RefillingTokenBucket<string>(3, 10);
 
