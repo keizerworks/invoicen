@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm";
 
-import { db } from "../client";
 import type { CreateUserInterface } from "../schema/user";
+import { db } from "../client";
 import { userTable } from "../schema/user";
 
 export const getUserByEmail = async (email: string) => {

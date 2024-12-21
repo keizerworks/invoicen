@@ -1,7 +1,7 @@
 import { eq } from "drizzle-orm";
 
-import { db } from "../client";
 import type { InsertSessionInterface } from "../schema/session";
+import { db } from "../client";
 import { sessionTable } from "../schema/session";
 import { userTable } from "../schema/user";
 
