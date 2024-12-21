@@ -29,6 +29,7 @@
     "@types/eslint-config-prettier": "^6.11.3",
     "@types/eslint__js": "8.42.3",
     "eslint": "catalog:",
+    "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-unicorn": "^56.0.1",
     "eslint-plugin-unused-imports": "^4.1.4",
