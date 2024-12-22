@@ -1,22 +1,24 @@
 {
-	"name": "monorepo-nextjs-scaffold",
-	"private": true,
-	"scripts": {
-		"build": "turbo build",
-		"dev": "turbo dev",
-		"lint": "turbo lint",
-		"lint:fix": "turbo lint -- --fix",
-		"format": "prettier --write \"**/*.{ts,tsx,md}\"",
-		"ui": "pnpm --filter @repo/ui ui"
-	},
-	"devDependencies": {
-		"prettier": "catalog:",
-		"turbo": "^2.3.3",
-		"typescript": "catalog:"
-	},
-	"packageManager": "pnpm@9.0.0",
-	"engines": {
-		"node": ">=18"
-	},
-	"dependencies": {}
+  "name": "monorepo-nextjs-scaffold",
+  "private": true,
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "lint:fix": "turbo lint -- --fix",
+    "format": "prettier --write \"**/*.{ts,tsx,md}\"",
+    "ui": "pnpm --filter @repo/ui ui",
+    "db:generate": "pnpm --filter @repo/db db:generate",
+    "db:migrate": "pnpm --filter @repo/db db:migrate"
+  },
+  "devDependencies": {
+    "prettier": "catalog:",
+    "turbo": "^2.3.3",
+    "typescript": "catalog:"
+  },
+  "packageManager": "pnpm@9.0.0",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {}
 }
