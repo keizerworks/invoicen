@@ -9,7 +9,7 @@ export default {
     password: process.env.DB_PASSWORD,
     user: process.env.DB_USERNAME,
     port: Number(process.env.DB_PORT),
-    ssl: { rejectUnauthorized: false },
+    ssl: false,
   },
   casing: "snake_case",
 } satisfies Config;
