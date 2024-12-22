@@ -1,14 +1,25 @@
+![image](https://github.com/user-attachments/assets/7f601c52-a079-46a4-a3c1-81f692e8c589)
+
+---
+
 # Invoicen
 
-Invoicen is a simple invoice generator for freelancers and small businesses. It is a self hostable web application that can be used to generate invoices and download PDFs. It is built using [Next.js](https://nextjs.org/).
+**Invoicen** is an open-source, self-hostable web application designed to simplify invoice generation for freelancers and small businesses. With Invoicen, you can create, manage, and share professional invoices effortlessly. Built with the open-source community and designed to simplify invoice management.
+
+---
 
 ## Features
 
-1. Create and manage invoice
-1. Download invoice as PDF
-1. Send invoice as email
+- **Invoice Generation**: Create invoices with customizable logos and designs.
+- **PDF Downloads**: Download invoices as PDFs or share them via a self-hosted URL.
+- **Email Integration**: Send invoices directly through email.
+- **Dashboard**: View and manage Invoice History, Payment History, and Client Data (with CSV upload support).
+- **Payment Integration**: Seamlessly connect with Razorpay, Stripe, or other gateways. Enable wallet features for clients.
+- **Automated Reminders**: Notify clients about recurring invoices and overdue payments.
 
-## System overview
+---
+
+## System Overview
 
 ```mermaid
 flowchart TD
@@ -32,53 +43,81 @@ flowchart TD
   end
 ```
 
-There will be 2 types of users:
+### Guest Users
 
-1. As a guest user
-1. As a registered user
+- Create invoices without signing up.
+- Download invoices as PDFs.
+- Invoices are temporarily stored in the browser's local storage.
 
-### Guest User
+### Registered Users
 
-1. Guest users can create invoices without signing up.
-1. They can download the invoice as PDF.
-1. The invoice will be stored in the browser's local storage.
+- Save invoices securely in the database.
+- Download and email invoices.
+- Access and manage past invoices via the dashboard.
+- Save company and payment details for future use.
+- Upload custom logos for branding.
 
-### Registered User
-
-1. Registered users can create invoices and save them.
-1. They can download the invoice as PDF.
-1. The invoice will be stored in the database.
-1. They can save their payment details, company details, etc for future use.
-1. They can also send the invoice as an email.
-1. They can access all the invoices they have created in the past.
-1. They can upload their logo which will be displayed in the invoice.
+---
 
 ## Types of Invoices
 
-Currently the application supports 2 types of invoices:
+1. **Time-Based Invoice**
+   - Bill clients based on hours worked.
+   - Add multiple time entries and calculate totals using an hourly rate.
 
-1. Time based invoice
-1. Product based invoice
+2. **Product-Based Invoice**
+   - Charge clients for products or services provided.
+   - Add multiple items and calculate totals based on unit prices.
 
-### Time based invoice
-
-This type of invoice is used when the user wants to charge the client based on the time spent on the project. The user can add multiple time entries and the application will calculate the total amount based on the hourly rate.
-
-### Product based invoice
-
-This type of invoice is used when the user wants to charge the client based on the products/services provided. The user can add multiple products/services and the application will calculate the total amount based on the price of the product/service.
+---
 
 ## Tech Stack
 
-1. [Next.js](https://nextjs.org/)
-1. [Tailwind CSS](https://tailwindcss.com/)
-1. [Shadcn](https://shadcn.com/)
-1. [PostgreSQL](https://www.postgresql.org/)
+- [Next.js](https://nextjs.org/): A React-based framework for server-rendered applications.
+- [Tailwind CSS](https://tailwindcss.com/): A utility-first CSS framework.
+- [Shadcn](https://shadcn.com/): UI components built on Tailwind CSS.
+- [PostgreSQL](https://www.postgresql.org/): A robust relational database system.
 
-## Docs
+---
 
-For detailed documentation, please refer to the [wiki](https://github.com/keizerworks/invoicen/wiki).
+## Getting Started
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/keizerworks/invoicen.git
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Set up environment variables:
+   Create a `.env` file and configure your database and email service.
+
+4. Run the development server:
+   ```bash
+   npm run dev
+   ```
+
+5. Access the app at `http://localhost:3000`.
+
+---
 
 ## Contributing
 
-Take a look at the [contributing guidelines](CONTRIBUTING.md) for this project.
+All code contributions, including those from committers, must go through a pull request and be approved by a core developer. This ensures proper review and code quality.
+
+We ❤️ pull requests! Check out our [Contributing guide](CONTRIBUTING.md) to learn how you can help.
+
+---
+
+## License
+
+Invoicen is licensed under: [MIT](https://opensource.org/licenses/MIT)
+
+---
+
+Start creating professional invoices today with **Invoicen**!
