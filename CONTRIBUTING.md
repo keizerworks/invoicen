@@ -11,6 +11,7 @@ Please note that by contributing, you agree to abide by our [Code of Conduct](./
 To get started with contributing, please follow the steps below:
 
 1. **Fork and Clone the Repository**
+
    - Fork the repository by clicking the "Fork" button at the top right of this page.
    - Clone the repository locally:
      ```bash
@@ -19,6 +20,7 @@ To get started with contributing, please follow the steps below:
      ```
 
 2. **Set Up the Project**
+
    - Ensure you have the following installed:
      - Node.js (v16 or higher)
      - pnpm (v8 or higher)
@@ -52,12 +54,14 @@ To get started with contributing, please follow the steps below:
 To contribute effectively, follow these steps:
 
 1. **Create a Branch**
+
    - Use a descriptive branch name:
      ```bash
      git checkout -b feature/your-feature-name
      ```
 
 2. **Implement Your Changes**
+
    - Follow coding standards and ensure proper documentation.
    - If you're working on APIs, update the Swagger configuration.
    - Run tests to ensure your changes don't break existing functionality:
@@ -66,6 +70,7 @@ To contribute effectively, follow these steps:
      ```
 
 3. **Commit Your Changes**
+
    - Use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) for commit messages. Example:
      ```
      feat(auth): add user login endpoint

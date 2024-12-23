@@ -62,6 +62,7 @@ flowchart TD
 ## Types of Invoices
 
 1. **Time-Based Invoice**
+
    - Bill clients based on hours worked.
    - Add multiple time entries and calculate totals using an hourly rate.
 
@@ -85,11 +86,13 @@ flowchart TD
 ### Installation
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/keizerworks/invoicen.git
    ```
 
 2. Install dependencies:
+
    ```bash
    npm install
    ```
@@ -98,6 +101,7 @@ flowchart TD
    Create a `.env` file and configure your database and email service.
 
 4. Run the development server:
+
    ```bash
    npm run dev
    ```

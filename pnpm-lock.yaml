@@ -64,7 +64,7 @@ importers:
   .:
     devDependencies:
       prettier:
-        specifier: ^3.2.5
+        specifier: 'catalog:'
         version: 3.3.3
       turbo:
         specifier: ^2.3.3
@@ -103,6 +103,9 @@ importers:
       '@repo/eslint-config':
         specifier: workspace:*
         version: link:../../tooling/eslint
+      '@repo/prettier-config':
+        specifier: workspace:^
+        version: link:../../tooling/prettier
       '@repo/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript

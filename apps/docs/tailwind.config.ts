@@ -6,9 +6,7 @@ export default {
   presets: [createPreset()],
   content: [
     "./node_modules/fumadocs-ui/dist/**/*.js",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "./content/**/*.mdx",
-    "./mdx-components.tsx",
+    "../../node_modules/fumadocs-ui/dist/**/*.js",
+    "./src/**/*.{ts,tsx}",
   ],
 };
