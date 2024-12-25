@@ -6,6 +6,9 @@ const withMDX = createMDX();
 const config = {
   transpilePackages: ["@repo/ui"],
   reactStrictMode: true,
+  images: {
+    domains: ["github.com"],
+  },
 };
 
 export default withMDX(config);

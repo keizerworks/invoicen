@@ -1,0 +1,4 @@
+{
+  "pages": ["index", "local-setup", "environment-variables"],
+  "defaultOpen": true
+}
