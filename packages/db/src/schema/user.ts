@@ -12,7 +12,7 @@ import { baseTable } from "./base-table";
 
 export const userTable = pgTable("user", {
   ...baseTable,
-  email: varchar("email").notNull(),
+  email: varchar("email").notNull().unique(),
   name: varchar("name").notNull(),
   emailVerified: boolean("email_verified").notNull().default(false),
   recoveryCode: varchar("recovery_code"),
@@ -39,5 +39,3 @@ export type CreateUserInterface = InferInsertModel<typeof userTable>;
 export type CreateEmailVerificationRequestInterface = InferInsertModel<
   typeof emailVerificationRequestTable
 >;
-
-export * from "drizzle-orm";

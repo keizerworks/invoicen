@@ -2,6 +2,7 @@
 
 import type { HTMLAttributes } from "react";
 import type { z } from "zod";
+import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { Button } from "ui/components/button";
@@ -12,13 +13,15 @@ import { cn } from "ui/lib/utils";
 import { signUpSchema } from "validators/auth";
 
 import { api } from "~/trpc/react";
+import { VerifyEmail } from "./verify-email";
 
 type EmailSignUpSchema = z.infer<typeof signUpSchema>;
 
 type Props = HTMLAttributes<HTMLDivElement>;
 
 export const SignUpForm = ({ className, ...props }: Props) => {
-  // const router = useRouter();
+  const [isOtpRequested, setOtpRequestStatus] = useState(false);
+
   const form = useForm<EmailSignUpSchema>({
     resolver: zodResolver(signUpSchema),
   });
@@ -26,7 +29,7 @@ export const SignUpForm = ({ className, ...props }: Props) => {
   const { mutate, isPending } = api.auth.signUp.useMutation({
     onSuccess: (res) => {
       toast.success(res.message);
-      // router.replace("/verify-otp/$id");
+      setOtpRequestStatus(true);
     },
     onError: (err) => toast.error(err.message),
   });
@@ -35,36 +38,49 @@ export const SignUpForm = ({ className, ...props }: Props) => {
     mutate(data);
   }
 
+  function handleEmailVerificationSuccess() {
+    setOtpRequestStatus(false);
+  }
+
   return (
-    <div className={cn("grid gap-6", className)} {...props}>
-      <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-y-4">
-          <FormField
-            control={form.control}
-            name="name"
-            label="Name"
-            render={({ field }) => <Input {...field} />}
-          />
+    <>
+      <div className={cn("grid gap-6", className)} {...props}>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-y-4">
+            <FormField
+              control={form.control}
+              name="name"
+              label="Name"
+              render={({ field }) => <Input {...field} />}
+            />
 
-          <FormField
-            control={form.control}
-            name="email"
-            label="Email"
-            render={({ field }) => <Input {...field} />}
-          />
+            <FormField
+              control={form.control}
+              name="email"
+              label="Email"
+              render={({ field }) => <Input {...field} />}
+            />
 
-          <FormField
-            control={form.control}
-            name="password"
-            label="Passowrd"
-            render={({ field }) => <PasswordInput {...field} />}
-          />
+            <FormField
+              control={form.control}
+              name="password"
+              label="Passowrd"
+              render={({ field }) => <PasswordInput {...field} />}
+            />
 
-          <Button loading={isPending} type="submit" className="mt-4 w-full">
-            Sign Up
-          </Button>
-        </form>
-      </Form>
-    </div>
+            <Button loading={isPending} type="submit" className="mt-4 w-full">
+              Sign Up
+            </Button>
+          </form>
+        </Form>
+      </div>
+
+      {isOtpRequested ? (
+        <VerifyEmail
+          email={form.getValues("email")}
+          onSuccess={handleEmailVerificationSuccess}
+        />
+      ) : null}
+    </>
   );
 };

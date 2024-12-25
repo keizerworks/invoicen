@@ -2,10 +2,19 @@ import type { TRPCRouterRecord } from "@trpc/server";
 import { TRPCError } from "@trpc/server";
 import { hashPassword } from "auth/password";
 import { generateRandomOTP } from "auth/utils/code";
-import { createEmailVerificationRequest } from "db/actions/email-verification";
-import { createUser, getUserByEmail } from "db/actions/user";
+import {
+  createEmailVerificationRequest,
+  deletedEmailVerificationRequestByEmail,
+  getEmailVerificationRequestByEmail,
+} from "db/actions/email-verification";
+import {
+  createUser,
+  deleteUser,
+  getUserByEmail,
+  updateUser,
+} from "db/actions/user";
 import { getVerifyOtpHtml } from "transactional-email/emails/auth/verify-otp";
-import { signUpSchema } from "validators/auth";
+import { signUpSchema, verifyEmailSchema } from "validators/auth";
 
 import mailer from "../mailer";
 import { publicProcedure } from "../trpc";
@@ -14,25 +23,23 @@ export const authRouter = {
   signUp: publicProcedure
     .input(signUpSchema)
     .mutation(async ({ input: body }) => {
-      console.log({
-        host: process.env.SMTP_HOST ?? "",
-        port: parseInt(process.env.SMTP_PORT ?? "587"),
-        secure: process.env.SMTP_SECURE === "true",
-        user: process.env.SMTP_USER ?? "",
-        password: process.env.SMTP_PASSWORD ?? "",
-      });
       let user = await getUserByEmail(body.email);
+      console.log(user);
       if (user?.emailVerified)
         throw new TRPCError({
           code: "BAD_REQUEST",
-          message: "User with email addres already exists",
+          message:
+            "A user with this email address is already registered and verified. Please sign in instead.",
         });
 
       body.password = await hashPassword(body.password);
+      if (user && user.id) await deleteUser(user.id);
       user = await createUser(body);
 
       const otp = generateRandomOTP();
       const expiresAt = new Date(Date.now() + 1000 * 60 * 10);
+
+      await deletedEmailVerificationRequestByEmail(body.email);
       await createEmailVerificationRequest({
         email: body.email,
         expiresAt,
@@ -48,7 +55,39 @@ export const authRouter = {
         .catch(console.error);
 
       return {
-        message: "verify email OTP have been to your email address",
+        message:
+          "A verification OTP has been sent to your email address. Please verify your email to complete the signup process.",
+      };
+    }),
+
+  verifyEmail: publicProcedure
+    .input(verifyEmailSchema)
+    .mutation(async ({ input: body }) => {
+      const verificationRequest = await getEmailVerificationRequestByEmail(
+        body.email,
+      );
+
+      if (!verificationRequest)
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message:
+            "No verification request found for this email. Please sign up again.",
+        });
+
+      if (Date.now() > verificationRequest.expiresAt.getTime())
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message:
+            "The OTP has expired. Please request a new verification code.",
+        });
+
+      const updateUserPayload = { emailVerified: true };
+      await updateUser(verificationRequest.userId, updateUserPayload);
+      await deletedEmailVerificationRequestByEmail(body.email);
+
+      return {
+        message:
+          "Your email has been successfully verified. You can now sign in.",
       };
     }),
 } satisfies TRPCRouterRecord;

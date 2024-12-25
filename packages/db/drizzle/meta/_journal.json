@@ -8,6 +8,13 @@
       "when": 1734877654625,
       "tag": "0000_faulty_franklin_storm",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1735158968809,
+      "tag": "0001_nosy_deadpool",
+      "breakpoints": true
     }
   ]
 }

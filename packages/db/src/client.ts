@@ -3,6 +3,8 @@ import { drizzle } from "drizzle-orm/node-postgres";
 
 config({ path: ["../.env", "../../../.env"] });
 
+export * from "drizzle-orm";
+
 export const db = drizzle({
   connection: {
     database: process.env.DB_DATABASE,
