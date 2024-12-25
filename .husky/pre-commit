@@ -1,0 +1,1 @@
+pnpm lint && prettier --write '**/*.{js,ts,json,mdx,css,html}'
