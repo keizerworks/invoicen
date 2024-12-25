@@ -1,0 +1,104 @@
+---
+title: Local Setup
+description: Let's setup invoicen on your local machine
+---
+
+## Prerequisites
+
+Before starting, ensure you have the following installed:
+
+- [Docker](https://www.docker.com) (and Docker Compose)
+- [pnpm](https://pnpm.io)
+- [Git](https://git-scm.com)
+
+---
+
+## Step 1: Clone the Repository
+1. [Fork](https://github.com/keizerworks/invoicen/fork) the repository by clicking on the fork button on the top right corner of the repository page.
+2. Clone the repository to your local machine using the following command:
+
+```bash
+git clone https://github.com/<username>/invoicen.git
+```
+> Replace `<username>` with your GitHub username.
+
+3. Copy the `.env.example` file to `.env`:
+
+```bash
+cp .env.example .env
+```
+
+Check the [Environment Variables](/getting-started/environment-variables) page for more information about the environment variables.
+
+---
+
+
+## Step 2: Setup the Environment
+You can set up the environment using one of the following methods:
+
+### Using Docker Compose
+
+This option simplifies the setup process by using pre-configured Docker services for PostgreSQL, Redis, MinIO, and Mailhog.
+
+Once you have `.env` setup and Docker installed, you can run the following command to start the services:
+
+```bash
+docker compose up -d
+```
+
+If you want to stop the services, you can run the following command:
+
+```bash
+docker compose down
+```
+
+This command will start following services in background:
+- [PostgreSQL](https://www.postgresql.org) (Database)
+- [Redis](https://redis.io) (Cache)
+- [MinIO](https://min.io) (Object Storage)
+- [Mailhog](https://github.com/mailhog/MailHog) (Email Testing)
+
+#### Troubleshooting Docker Compose
+If you are facing issues with Docker Compose, you can try the following:
+
+1. Ensure Docker is running.
+1. Check the `.env` file for any missing or incorrect values.
+1. Check the logs using the following command:
+
+```bash
+docker logs <container_name>
+```
+
+---
+
+
+### Using Local Services
+
+If you prefer to use local services, you can set up [PostgreSQL](https://www.postgresql.org), [Redis](https://redis.io), [MinIO](https://min.io), and [Mailhog](https://github.com/mailhog/MailHog) manually.
+Please refer to their documentation to set them up locally.
+
+#### Troubleshooting Local Services
+If you are facing issues with local services, you can try the following:
+1. Ensure the services are running.
+1. Check the `.env` file for any missing or incorrect values.
+1. Check the logs of the services for any errors.
+
+---
+
+
+## Step 3: Install Dependencies
+
+Install the project dependencies using the following command:
+
+```bash
+pnpm install
+```
+
+---
+
+### Step 4: Start the Development Server
+To start the development server, run the following command:
+
+```bash
+pnpm dev
+```

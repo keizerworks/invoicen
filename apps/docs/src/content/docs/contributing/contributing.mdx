@@ -1,0 +1,57 @@
+---
+title: Contributing to Invoicen
+# description: If you want to contribute to Invoicen, this guide will help you get started.
+---
+
+Thank you for considering contributing to Invoicen! We welcome all contributions and are excited to have you on board.
+This document will guide you through the process of contributing to our project.
+
+Please note that by contributing, you agree to abide by our [Code of Conduct](https://github.com/keizerworks/invoicen/blob/v2/CODE_OF_CONDUCT.md).
+
+## Getting Started
+
+Follow this [guide](/getting-started/local-setup) to set up the project on your local machine and start contributing.
+
+---
+
+## Monorepo Structure
+
+This project follows a monorepo structure.
+
+- **/apps**: Contains the main application and services.
+- **/packages**: Contains shared packages and utilities.
+- **/tooling**: Contains scripts and tools for development.
+
+> We are using [TRPC](https://trpc.io) for API communication..
+
+---
+
+## Contributing Guidelines
+
+To ensure a smooth contribution process:
+
+- **Focus Your Changes**: Keep PRs small and focused on a single feature or fix.
+- **Write Tests**: Add tests for new functionality or bug fixes.
+- **Maintain Documentation**: Update relevant documentation in the codebase.
+- **Follow Linting and Formatting Rules**:
+  ```bash
+  pnpm lint
+  pnpm format
+  ```
+- **Check for Breaking Changes**: Ensure your changes are backward-compatible unless a major version update is planned.
+- **Use Conventional Commits**: Follow the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) specification for commit messages.
+
+---
+
+## Useful Resources
+
+- [How to Contribute to Open Source](https://opensource.guide/how-to-contribute/)
+- [About Pull Requests](https://help.github.com/articles/about-pull-requests/)
+- [GitHub Help](https://help.github.com)
+- [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/)
+- [Conventional Commits VSCode Extension](https://marketplace.visualstudio.com/items?itemName=vivaxy.vscode-conventional-commits)
+- [GitHub Issues and Pull Requests VSCode Extension](https://marketplace.visualstudio.com/items?itemName=GitHub.vscode-pull-request-github)
+
+---
+
+Thank you for your interest in contributing to **Invoicen**! If you have any questions, feel free to open an issue or reach out to the team. We're excited to collaborate with you.
