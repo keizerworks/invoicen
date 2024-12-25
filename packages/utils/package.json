@@ -1,9 +1,7 @@
 {
-  "name": "@repo/utils",
+  "name": "utils",
   "type": "module",
   "scripts": {
-    "dev": "tsc --watch",
-    "build": "tsc",
     "lint": "eslint ."
   },
   "exports": {

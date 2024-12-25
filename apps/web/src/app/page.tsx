@@ -1,6 +1,4 @@
-import React from "react";
-
-import { Button } from "@repo/ui/components/ui/button";
+import { Button } from "ui/components/button";
 
 export default function Home() {
   return (

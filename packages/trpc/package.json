@@ -1,5 +1,5 @@
 {
-  "name": "@repo/trpc",
+  "name": "trpc",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -11,25 +11,30 @@
   },
   "license": "MIT",
   "scripts": {
-    "build": "tsc",
+    "build": "pnpm with-env tsc",
     "clean": "git clean -xdf .cache .turbo dist node_modules",
-    "dev": "tsc --watch",
+    "dev": "pnpm with-env tsc --watch",
     "format": "prettier --check . --ignore-path ../../.gitignore",
     "lint": "eslint",
+    "with-env": "dotenv -e ../../.env --",
     "typecheck": "tsc --noEmit --emitDeclarationOnly false"
   },
   "dependencies": {
-    "@repo/auth": "workspace:*",
-    "@repo/db": "workspace:*",
-    "@repo/validators": "workspace:*",
     "@trpc/server": "catalog:",
+    "auth": "workspace:*",
+    "db": "workspace:*",
+    "dotenv": "^16.4.7",
+    "nodemailer": "^6.9.16",
     "superjson": "2.2.1",
+    "transactional-email": "workspace:*",
+    "validators": "workspace:*",
     "zod": "catalog:"
   },
   "devDependencies": {
     "@repo/eslint-config": "workspace:*",
     "@repo/prettier-config": "workspace:^",
     "@repo/tsconfig": "workspace:*",
+    "@types/nodemailer": "^6.4.17",
     "eslint": "catalog:",
     "prettier": "catalog:",
     "typescript": "catalog:"

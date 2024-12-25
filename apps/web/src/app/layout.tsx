@@ -1,7 +1,10 @@
-import "@repo/ui/globals.css";
+import "ui/globals.css";
 
 import type { Metadata } from "next";
 import React from "react";
+import { Toaster } from "ui/components/sonner";
+
+import { TRPCReactProvider } from "~/trpc/react";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,7 +18,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <div vaul-drawer-wrapper="">
+          <TRPCReactProvider>{children}</TRPCReactProvider>
+        </div>
+        <Toaster />
+      </body>
     </html>
   );
 }

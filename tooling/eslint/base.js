@@ -1,14 +1,13 @@
 /// <reference types="./types.d.ts" />
-
 import * as path from "node:path";
 import { includeIgnoreFile } from "@eslint/compat";
 import eslint from "@eslint/js";
+import eslintConfigPrettier from "eslint-config-prettier";
 import importPlugin from "eslint-plugin-import";
 import turboPlugin from "eslint-plugin-turbo";
-import tseslint from "typescript-eslint";
-import eslintConfigPrettier from "eslint-config-prettier";
-import unusedImports from "eslint-plugin-unused-imports";
 import eslintPluginUnicorn from "eslint-plugin-unicorn";
+import unusedImports from "eslint-plugin-unused-imports";
+import tseslint from "typescript-eslint";
 
 /**
  * All packages that leverage t3-env should use this rule

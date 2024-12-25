@@ -4,7 +4,7 @@ const withMDX = createMDX();
 
 /** @type {import('next').NextConfig} */
 const config = {
-  transpilePackages: ["@repo/ui"],
+  transpilePackages: ["ui"],
   reactStrictMode: true,
   images: {
     domains: ["github.com"],

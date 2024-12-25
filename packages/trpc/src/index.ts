@@ -1,8 +1,11 @@
 import type { inferRouterInputs, inferRouterOutputs } from "@trpc/server";
+import dotenv from "dotenv";
 
 import type { AppRouter } from "./root";
 import { appRouter } from "./root";
 import { createCallerFactory, createTRPCContext } from "./trpc";
+
+dotenv.config({ path: ["../.env", "../../../.env"] });
 
 /**
  * Create a server-side caller for the tRPC API

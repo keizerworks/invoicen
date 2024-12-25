@@ -1,5 +1,5 @@
 {
-  "extends": "@repo/tsconfig/base.json",
+  "extends": "@repo/tsconfig/internal-package.json",
   "compilerOptions": {
     "outDir": "dist",
     "rootDir": "src"

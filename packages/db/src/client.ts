@@ -1,8 +1,17 @@
+import { config } from "dotenv";
 import { drizzle } from "drizzle-orm/node-postgres";
+
+config({ path: ["../.env", "../../../.env"] });
+
+export * from "drizzle-orm";
 
 export const db = drizzle({
   connection: {
-    connectionString: process.env.DATABASE_URL,
-    ssl: true,
+    database: process.env.DB_DATABASE,
+    host: process.env.DB_HOST,
+    password: process.env.DB_PASSWORD,
+    user: process.env.DB_USERNAME,
+    port: Number(process.env.DB_PORT),
+    ssl: false,
   },
 });

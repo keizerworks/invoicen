@@ -1,27 +1,28 @@
 {
-  "name": "@repo/auth",
+  "name": "auth",
   "type": "module",
   "scripts": {
-    "dev": "tsc --watch",
-    "build": "tsc",
+    "dev": "pnpm with-env tsc --watch",
+    "build": "pnpm with-env tsc",
+    "with-env": "dotenv -e ../../.env --",
     "lint": "eslint ."
   },
   "exports": {
     "./session": {
-      "types": "./src/session.ts",
-      "default": "./dist/session.js"
+      "types": "./dist/session.d.ts",
+      "default": "./src/session.ts"
     },
     "./password": {
-      "types": "./src/password.ts",
-      "default": "./dist/session.js"
+      "types": "./dist/password.d.ts",
+      "default": "./src/password.ts"
     },
     "./utils/*": {
-      "types": "./src/utils/*.ts",
+      "types": "./dist/utils/*.ts",
       "default": "./src/utils/*.ts"
     },
     "./user": {
       "types": "./dist/user.d.ts",
-      "default": "./dist/user.js"
+      "default": "./src/user.ts"
     }
   },
   "devDependencies": {
@@ -36,7 +37,7 @@
     "@node-rs/argon2": "^2.0.2",
     "@oslojs/crypto": "^1.0.1",
     "@oslojs/encoding": "^1.1.0",
-    "@repo/db": "workspace:*"
+    "db": "workspace:*"
   },
   "prettier": "@repo/prettier-config"
 }

@@ -18,3 +18,14 @@ export const createUser = async (values: CreateUserInterface) => {
   if (!users[0]) throw new Error();
   return users[0];
 };
+
+export const updateUser = async (
+  id: string,
+  values: Partial<CreateUserInterface>,
+) => {
+  await db.update(userTable).set(values).where(eq(userTable.id, id)).execute();
+};
+
+export const deleteUser = async (id: string) => {
+  await db.delete(userTable).where(eq(userTable.id, id)).execute();
+};
