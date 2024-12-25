@@ -23,10 +23,13 @@ const BillingInfo: React.FC<BillingInfoProps> = ({ billingDetails, setBillingDet
           Billed To
         </Typography>
         <Textarea
-          value={billingDetails?.billedTo}
-          onChange={(e) => onChangeHandler("billedTo", e.target.value)}
-          className="md:text-lg text-sm shadow-none text-left border-none w-full md:w-fit mt-2"
-          placeholder="Address"
+            value={billingDetails?.billedTo}
+            onChange={(e) => onChangeHandler("billedTo", e.target.value)}
+            className="md:text-lg text-sm shadow-none text-left border-none w-full md:w-fit mt-2"
+            placeholder="Address"
+            style={{
+              scrollbarWidth: 'none', 
+            }}
         />
       </div>
       <div>
@@ -38,6 +41,9 @@ const BillingInfo: React.FC<BillingInfoProps> = ({ billingDetails, setBillingDet
           onChange={(e) => onChangeHandler("payTo", e.target.value)}
           className="md:text-lg text-sm shadow-none text-left border-none  w-full md:w-fit mt-2"
           placeholder="Address"
+          style={{
+            scrollbarWidth: 'none', 
+          }}
         />
       </div>
     </div>
