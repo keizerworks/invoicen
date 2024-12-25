@@ -1,12 +1,17 @@
 "use client";
 
-import * as React from "react";
 import type * as LabelPrimitive from "@radix-ui/react-label";
-import { Slot } from "@radix-ui/react-slot";
 import type { ControllerProps, FieldPath, FieldValues } from "react-hook-form";
-import { Controller, FormProvider, useFormContext } from "react-hook-form";
+import * as React from "react";
+import { Slot } from "@radix-ui/react-slot";
+import {
+  Controller,
+  FormProvider,
+  useForm,
+  useFormContext,
+} from "react-hook-form";
 
-import { cn } from "../../lib/utils";
+import { cn } from "../lib/utils";
 import { Label } from "./label";
 
 const Form = FormProvider;
@@ -95,7 +100,7 @@ const FormItem = React.forwardRef<
 
   return (
     <FormItemContext.Provider value={{ id }}>
-      <div ref={ref} className={cn("space-y-2", className)} {...props} />
+      <div ref={ref} className={cn("space-y-1", className)} {...props} />
     </FormItemContext.Provider>
   );
 });
@@ -191,6 +196,5 @@ export {
   FormDescription,
   FormMessage,
   FormField,
+  useForm,
 };
-
-export * from "react-hook-form";

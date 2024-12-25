@@ -1,7 +1,9 @@
-import "@repo/ui/globals.css";
-import { Toaster } from "@repo/ui/components/ui/sonner";
+import "ui/globals.css";
+
 import type { Metadata } from "next";
 import React from "react";
+import { Toaster } from "ui/components/sonner";
+
 import { TRPCReactProvider } from "~/trpc/react";
 
 export const metadata: Metadata = {

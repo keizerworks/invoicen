@@ -15,9 +15,15 @@
     },
     "dev": {
       "cache": false,
+      "persistent": true,
+      "inputs": [".env"]
+    },
+    "clean": {
+      "cache": false,
       "persistent": true
     },
     "db:generate": {
+      "inputs": [".env"],
       "env": [
         "DB_HOST",
         "DB_PORT",
@@ -28,6 +34,7 @@
       "outputs": []
     },
     "db:migrate": {
+      "inputs": [".env"],
       "env": [
         "DB_HOST",
         "DB_PORT",
@@ -48,7 +55,13 @@
     "DB_USERNAME",
     "DB_PASSWORD",
     "PORT",
-    "BASE_URL"
+    "BASE_URL",
+    "SMTP_SECURE",
+    "SMTP_HOST",
+    "SMTP_PORT",
+    "SMTP_USER",
+    "SMTP_PASSWORD",
+    "EMAIL_FROM"
   ],
   "globalPassThroughEnv": ["NODE_ENV", "CI", "npm_lifecycle_event"]
 }

@@ -1,18 +1,28 @@
-import { TRPCError } from "@trpc/server";
 import type { TRPCRouterRecord } from "@trpc/server";
+import { TRPCError } from "@trpc/server";
+import { hashPassword } from "auth/password";
+import { generateRandomOTP } from "auth/utils/code";
+import { createEmailVerificationRequest } from "db/actions/email-verification";
+import { createUser, getUserByEmail } from "db/actions/user";
+import { getVerifyOtpHtml } from "transactional-email/emails/auth/verify-otp";
+import { signUpSchema } from "validators/auth";
+
+import mailer from "../mailer";
 import { publicProcedure } from "../trpc";
-import { signUpSchema } from "@repo/validators/auth";
-import { createUser, getUserByEmail } from "@repo/db/actions/user";
-import { hashPassword } from "@repo/auth/password";
-import { generateRandomOTP } from "@repo/auth/utils/code";
-import { createEmailVerificationRequest } from "@repo/db/actions/email-verification";
 
 export const authRouter = {
   signUp: publicProcedure
     .input(signUpSchema)
     .mutation(async ({ input: body }) => {
+      console.log({
+        host: process.env.SMTP_HOST ?? "",
+        port: parseInt(process.env.SMTP_PORT ?? "587"),
+        secure: process.env.SMTP_SECURE === "true",
+        user: process.env.SMTP_USER ?? "",
+        password: process.env.SMTP_PASSWORD ?? "",
+      });
       let user = await getUserByEmail(body.email);
-      if (user)
+      if (user?.emailVerified)
         throw new TRPCError({
           code: "BAD_REQUEST",
           message: "User with email addres already exists",
@@ -30,7 +40,12 @@ export const authRouter = {
         otp,
       });
 
-      // TODO: send verification token to user via mail (setup node mailer in email package)
+      mailer
+        .sendEmail({
+          to: body.email,
+          html: await getVerifyOtpHtml({ validationCode: otp }),
+        })
+        .catch(console.error);
 
       return {
         message: "verify email OTP have been to your email address",

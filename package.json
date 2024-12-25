@@ -2,14 +2,15 @@
   "name": "monorepo-nextjs-scaffold",
   "private": true,
   "scripts": {
-    "build": "turbo build",
-    "dev": "turbo dev",
+    "build": "turbo build --env-mode=loose",
+    "dev": "turbo dev --env-mode=loose",
+    "clean": "turbo clean",
     "lint": "turbo lint",
     "lint:fix": "turbo lint -- --fix",
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
-    "ui": "pnpm --filter @repo/ui ui",
-    "db:generate": "pnpm --filter @repo/db db:generate",
-    "db:migrate": "pnpm --filter @repo/db db:migrate"
+    "ui": "pnpm --filter ui ui",
+    "db:generate": "pnpm --filter db db:generate",
+    "db:migrate": "pnpm --filter db db:migrate"
   },
   "devDependencies": {
     "prettier": "catalog:",

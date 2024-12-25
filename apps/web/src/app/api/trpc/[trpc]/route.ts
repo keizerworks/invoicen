@@ -1,7 +1,7 @@
 import type { NextRequest } from "next/server";
 import { fetchRequestHandler } from "@trpc/server/adapters/fetch";
 
-import { appRouter, createTRPCContext } from "@repo/trpc";
+import { appRouter, createTRPCContext } from "trpc";
 
 /**
  * Configure basic CORS headers

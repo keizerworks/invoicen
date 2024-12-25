@@ -4,15 +4,14 @@ import {
   encodeBase32LowerCaseNoPadding,
   encodeHexLowerCase,
 } from "@oslojs/encoding";
-
 import {
   deleteSession,
   getSessionWithUser,
   insertSession,
   updateSession,
-} from "@repo/db/actions/session";
+} from "db/actions/session";
 
-import { SESSION_EXPIRE_TIME, SESSION_EXPIRING_SOON } from "./constants.js";
+import { SESSION_EXPIRE_TIME, SESSION_EXPIRING_SOON } from "./constants";
 
 export function generateSessionToken(): string {
   const bytes = new Uint8Array(20);

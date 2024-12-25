@@ -1,14 +1,17 @@
-import { Button } from "@repo/ui/components/ui/button";
-import { Input } from "@repo/ui/components/ui/input";
-import { Form, FormField, useForm } from "@repo/ui/components/ui/form";
-import { PasswordInput } from "@repo/ui/components/ui/password-input";
-import { cn } from "@repo/ui/lib/utils";
-import { signUpSchema } from "@repo/validators/auth";
+"use client";
+
+import type { HTMLAttributes } from "react";
 import type { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { api } from "~/trpc/react";
-import type { HTMLAttributes } from "react";
 import { toast } from "sonner";
+import { Button } from "ui/components/button";
+import { Form, FormField, useForm } from "ui/components/form";
+import { Input } from "ui/components/input";
+import { PasswordInput } from "ui/components/password-input";
+import { cn } from "ui/lib/utils";
+import { signUpSchema } from "validators/auth";
+
+import { api } from "~/trpc/react";
 
 type EmailSignUpSchema = z.infer<typeof signUpSchema>;
 

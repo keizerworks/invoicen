@@ -1,16 +1,18 @@
+import Link from "next/link";
 import {
   Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
-  CardDescription,
-  CardContent,
-  CardFooter,
-} from "@repo/ui/components/ui/card";
-import Link from "next/link";
+} from "ui/components/card";
+
+import { SignUpForm } from "~/components/auth/signup/form";
 
 export default function SignInPage() {
   return (
-    <Card className="mx-auto shadow-none border-0 w-full sm:w-[350px]">
+    <Card className="mx-auto w-full border-0 shadow-none sm:w-[350px]">
       <CardHeader className="text-center">
         <CardTitle>Create an account</CardTitle>
         <CardDescription>
@@ -18,7 +20,9 @@ export default function SignInPage() {
         </CardDescription>
       </CardHeader>
 
-      <CardContent>{/* <SignUpForm /> */}</CardContent>
+      <CardContent>
+        <SignUpForm />
+      </CardContent>
 
       <CardFooter className="text-center">
         <CardDescription>

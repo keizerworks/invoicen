@@ -81,9 +81,6 @@ importers:
 
   apps/docs:
     dependencies:
-      '@repo/ui':
-        specifier: workspace:*
-        version: link:../../packages/ui
       fumadocs-core:
         specifier: 14.6.1
         version: 14.6.1(@types/react@18.3.1)(next@15.1.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0))(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
@@ -102,6 +99,9 @@ importers:
       react-dom:
         specifier: catalog:react19
         version: 19.0.0(react@19.0.0)
+      ui:
+        specifier: workspace:*
+        version: link:../../packages/ui
       zod:
         specifier: 'catalog:'
         version: 3.24.1
@@ -151,27 +151,6 @@ importers:
       '@radix-ui/react-icons':
         specifier: ^1.3.2
         version: 1.3.2(react@19.0.0)
-      '@repo/auth':
-        specifier: workspace:*
-        version: link:../../packages/auth
-      '@repo/db':
-        specifier: workspace:*
-        version: link:../../packages/db
-      '@repo/email':
-        specifier: workspace:*
-        version: link:../../packages/email
-      '@repo/trpc':
-        specifier: workspace:*
-        version: link:../../packages/trpc
-      '@repo/ui':
-        specifier: workspace:*
-        version: link:../../packages/ui
-      '@repo/utils':
-        specifier: workspace:*
-        version: link:../../packages/utils
-      '@repo/validators':
-        specifier: workspace:*
-        version: link:../../packages/validators
       '@tanstack/react-query':
         specifier: 'catalog:'
         version: 5.62.8(react@19.0.0)
@@ -184,6 +163,12 @@ importers:
       '@trpc/server':
         specifier: 'catalog:'
         version: 11.0.0-rc.666(typescript@5.7.2)
+      auth:
+        specifier: workspace:*
+        version: link:../../packages/auth
+      db:
+        specifier: workspace:*
+        version: link:../../packages/db
       lucide-react:
         specifier: ^0.469.0
         version: 0.469.0(react@19.0.0)
@@ -202,6 +187,18 @@ importers:
       superjson:
         specifier: 2.2.1
         version: 2.2.1
+      trpc:
+        specifier: workspace:*
+        version: link:../../packages/trpc
+      ui:
+        specifier: workspace:*
+        version: link:../../packages/ui
+      utils:
+        specifier: workspace:*
+        version: link:../../packages/utils
+      validators:
+        specifier: workspace:*
+        version: link:../../packages/validators
       zod:
         specifier: 'catalog:'
         version: 3.24.1
@@ -251,7 +248,7 @@ importers:
       '@oslojs/encoding':
         specifier: ^1.1.0
         version: 1.1.0
-      '@repo/db':
+      db:
         specifier: workspace:*
         version: link:../db
     devDependencies:
@@ -276,6 +273,9 @@ importers:
 
   packages/db:
     dependencies:
+      dotenv:
+        specifier: ^16.4.7
+        version: 16.4.7
       drizzle-orm:
         specifier: 'catalog:'
         version: 0.38.2(@types/pg@8.11.10)(@types/react@19.0.1)(pg@8.13.1)(react@19.0.0)
@@ -317,7 +317,7 @@ importers:
         specifier: 'catalog:'
         version: 5.7.2
 
-  packages/email:
+  packages/transactional-email:
     dependencies:
       '@react-email/components':
         specifier: ^0.0.31
@@ -325,6 +325,9 @@ importers:
       '@react-email/tailwind':
         specifier: ^1.0.4
         version: 1.0.4(react@19.0.0)
+      react:
+        specifier: catalog:react19
+        version: 19.0.0
     devDependencies:
       '@repo/eslint-config':
         specifier: workspace:*
@@ -338,30 +341,36 @@ importers:
       '@types/node':
         specifier: 'catalog:'
         version: 20.17.6
-      '@types/react':
-        specifier: catalog:react19
-        version: 19.0.1
       react-email:
         specifier: ^3.0.4
         version: 3.0.4(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
 
   packages/trpc:
     dependencies:
-      '@repo/auth':
-        specifier: workspace:*
-        version: link:../auth
-      '@repo/db':
-        specifier: workspace:*
-        version: link:../db
-      '@repo/validators':
-        specifier: workspace:*
-        version: link:../validators
       '@trpc/server':
         specifier: 'catalog:'
         version: 11.0.0-rc.666(typescript@5.7.2)
+      auth:
+        specifier: workspace:*
+        version: link:../auth
+      db:
+        specifier: workspace:*
+        version: link:../db
+      dotenv:
+        specifier: ^16.4.7
+        version: 16.4.7
+      nodemailer:
+        specifier: ^6.9.16
+        version: 6.9.16
       superjson:
         specifier: 2.2.1
         version: 2.2.1
+      transactional-email:
+        specifier: workspace:*
+        version: link:../transactional-email
+      validators:
+        specifier: workspace:*
+        version: link:../validators
       zod:
         specifier: 'catalog:'
         version: 3.24.1
@@ -375,6 +384,9 @@ importers:
       '@repo/tsconfig':
         specifier: workspace:*
         version: link:../../tooling/typescript
+      '@types/nodemailer':
+        specifier: ^6.4.17
+        version: 6.4.17
       eslint:
         specifier: 'catalog:'
         version: 9.15.0(jiti@1.21.6)
@@ -2343,6 +2355,9 @@ packages:
   '@types/node@20.17.6':
     resolution: {integrity: sha512-VEI7OdvK2wP7XHnsuXbAJnEpEkF6NjSN45QJlL4VGqZSXsnicpesdTWsg9RISeSdYd3yeRj/y3k5KGjUXYnFwQ==}
 
+  '@types/nodemailer@6.4.17':
+    resolution: {integrity: sha512-I9CCaIp6DTldEg7vyUTZi8+9Vo0hi1/T8gv3C89yk1rSAAzoKQ8H8ki/jBYJSFoH/BisgLP8tkZMlQ91CIquww==}
+
   '@types/normalize-package-data@2.4.4':
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
 
@@ -4075,6 +4090,10 @@ packages:
 
   node-releases@2.0.19:
     resolution: {integrity: sha512-xxOWJsBKtzAq7DY0J+DTzuz58K8e7sJbdgwkbMWQe8UYB6ekmsQ45q0M/tJDsGaZmbC+l7n57UV8Hl5tHxO9uw==}
+
+  nodemailer@6.9.16:
+    resolution: {integrity: sha512-psAuZdTIRN08HKVd/E8ObdV6NO7NTBY3KsC30F7M4H1OnmLCUNaS56FpYxyb26zWLSyYF9Ozch9KYHhHegsiOQ==}
+    engines: {node: '>=6.0.0'}
 
   normalize-package-data@2.5.0:
     resolution: {integrity: sha512-/5CMN3T0R4XTj4DcGaexo+roZSdSFW/0AOOTROrjxzCG1wrWXEsGbRKevjlIL+ZDE4sZlJr5ED4YW0yqmkK+eA==}
@@ -6571,6 +6590,10 @@ snapshots:
     dependencies:
       undici-types: 6.19.8
 
+  '@types/nodemailer@6.4.17':
+    dependencies:
+      '@types/node': 20.17.6
+
   '@types/normalize-package-data@2.4.4': {}
 
   '@types/pg@8.11.10':
@@ -8794,6 +8817,8 @@ snapshots:
       - babel-plugin-macros
 
   node-releases@2.0.19: {}
+
+  nodemailer@6.9.16: {}
 
   normalize-package-data@2.5.0:
     dependencies:

@@ -1,11 +1,10 @@
-import { EyeClosedIcon, EyeOpenIcon } from "@radix-ui/react-icons";
 import * as React from "react";
+import { EyeClosedIcon, EyeOpenIcon } from "@radix-ui/react-icons";
 
-import { cn } from "../../lib/utils";
-
+import type { InputProps } from "./input";
+import { cn } from "../lib/utils";
 import { Button } from "./button";
 import { Input } from "./input";
-import type { InputProps } from "./input";
 
 const PasswordInput = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, ...props }, ref) => {

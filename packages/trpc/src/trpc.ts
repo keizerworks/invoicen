@@ -6,12 +6,11 @@
  * tl;dr - this is where all the tRPC server stuff is created and plugged in.
  * The pieces you will need to use are documented accordingly near the end
  */
+import { validateSessionToken } from "auth/session";
 import { initTRPC, TRPCError } from "@trpc/server";
+import { db } from "db/client";
 import superjson from "superjson";
 import { ZodError } from "zod";
-
-import { validateSessionToken } from "@repo/auth/session";
-import { db } from "@repo/db/client";
 
 /**
  * Isomorphic Session getter for API requests
@@ -20,7 +19,7 @@ import { db } from "@repo/db/client";
  */
 const isomorphicGetSession = async (headers: Headers) => {
   const authToken = headers.get("session") ?? null;
-  if (authToken) return validateSessionToken(authToken);
+  if (authToken) return await validateSessionToken(authToken);
   return { session: null, user: null };
 };
 

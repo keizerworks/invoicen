@@ -13,9 +13,6 @@ const WelcomeEmail = () => {
   );
 };
 
-const getWelcomeEmailHtml = async () => {
-  return await render(<WelcomeEmail />);
-};
-
-export { getWelcomeEmailHtml, WelcomeEmail };
+const getWelcomeEmailHtml = async () => await render(<WelcomeEmail />);
+export { getWelcomeEmailHtml };
 export default WelcomeEmail;
