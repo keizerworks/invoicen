@@ -26,7 +26,7 @@ We will not tolerate:
 5. **Illegal activities**: Violating laws or encouraging unlawful behavior.
 
 ## Reporting Issues
-If you experience or witness unacceptable behavior, please report it to the **Invoicen** team at [keizerworks@gmail.com](mailto:keizerworks@gmail.com). Your report will be handled with discretion and confidentiality.
+If you experience or witness unacceptable behavior, please report it to the **Invoicen** team at [biz@keizerworks.com](mailto:biz@keizerworks.com). Your report will be handled with discretion and confidentiality.
 
 When reporting an issue, please include:
 1. Description of the behavior or issue
@@ -44,4 +44,4 @@ The maintainers of **Invoicen** are responsible for enforcing this Code of Condu
 This Code of Conduct is inspired by and adapted from guidelines in the open-source community, including the [Contributor Covenant](https://www.contributor-covenant.org).
 
 ## Contact
-For questions or concerns about this Code of Conduct, email us at [keizerworks@gmail.com](mailto:keizerworks@gmail.com).
+For questions or concerns about this Code of Conduct, email us at [biz@keizerworks.com](mailto:biz@keizerworks.com).
