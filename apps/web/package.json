@@ -4,10 +4,11 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "next dev --port 3000",
-    "build": "next build",
-    "start": "next start",
+    "dev": "pnpm with-env next dev --port 3000",
+    "build": "pnpm with-env next build",
+    "start": "pnpm with-env next start",
     "lint": "next lint --max-warnings 0",
+    "with-env": "dotenv -e ../../.env --",
     "check-types": "tsc --noEmit"
   },
   "dependencies": {
