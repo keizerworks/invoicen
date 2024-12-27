@@ -29,3 +29,27 @@ export const signInWithEmailSchema = z.object({
   email: z.string().email(),
   password: z.string().min(8),
 });
+
+export const requestPasswordResetSchema = z.object({
+  email: z.string().email(),
+});
+
+export const resetPasswordSchema = z.object({
+  email: z.string().email(),
+  otp: z.string().length(6),
+  newPassword: z
+    .string()
+    .min(8)
+    .refine((password) => /[A-Z]/.test(password), {
+      message: "At least one uppercase letter is required",
+    })
+    .refine((password) => /[a-z]/.test(password), {
+      message: "At least one lowercase letter is required",
+    })
+    .refine((password) => /[0-9]/.test(password), {
+      message: "At least one digit is required",
+    })
+    .refine((password) => /[!@#$%^&*]/.test(password), {
+      message: "At least one special character is required",
+    }),
+});

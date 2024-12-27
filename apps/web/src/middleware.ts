@@ -9,9 +9,11 @@ export function middleware(request: NextRequest) {
     (pathname.startsWith("/signup") || pathname.startsWith("/signin")) &&
     authToken
   )
-    return NextResponse.rewrite(new URL("/", request.url));
+    return NextResponse.redirect(new URL("/", request.url));
 
-  if (!authToken) return NextResponse.rewrite(new URL("/signin", request.url));
+  if (!authToken && pathname !== "/signin" && pathname !== "/signup" && pathname !== "/forgot-password") {
+    return NextResponse.redirect(new URL("/signin", request.url));
+  }
   return NextResponse.next();
 }
 

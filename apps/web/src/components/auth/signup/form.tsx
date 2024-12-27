@@ -14,6 +14,7 @@ import { signUpSchema } from "validators/auth";
 
 import { api } from "~/trpc/react";
 import { VerifyEmail } from "./verify-email";
+import Link from "next/link";
 
 type EmailSignUpInterface = z.infer<typeof signUpSchema>;
 
@@ -67,6 +68,10 @@ export const SignUpForm = ({ className, ...props }: Props) => {
               label="Passowrd"
               render={({ field }) => <PasswordInput {...field} />}
             />
+  
+            <Link href="/signin" className="text-sm text-primary">
+              Sign In
+            </Link>
 
             <Button loading={isPending} type="submit" className="mt-4 w-full">
               Sign Up

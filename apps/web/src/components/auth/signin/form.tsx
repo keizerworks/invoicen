@@ -2,6 +2,7 @@
 
 import type { HTMLAttributes } from "react";
 import type { z } from "zod";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
@@ -49,6 +50,15 @@ export const SignInForm = ({ className, ...props }: Props) => {
             label="Passowrd"
             render={({ field }) => <PasswordInput {...field} />}
           />
+          <div className="flex justify-between">
+            <Link href="/signup" className="text-sm text-primary">
+              Sign Up
+            </Link>
+            
+            <Link href="/forgot-password" className="text-sm text-primary">
+              Forgot Password
+            </Link>
+          </div>
 
           <Button loading={isPending} type="submit" className="mt-4 w-full">
             Sign In
