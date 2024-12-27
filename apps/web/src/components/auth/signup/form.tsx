@@ -15,14 +15,14 @@ import { signUpSchema } from "validators/auth";
 import { api } from "~/trpc/react";
 import { VerifyEmail } from "./verify-email";
 
-type EmailSignUpSchema = z.infer<typeof signUpSchema>;
+type EmailSignUpInterface = z.infer<typeof signUpSchema>;
 
 type Props = HTMLAttributes<HTMLDivElement>;
 
 export const SignUpForm = ({ className, ...props }: Props) => {
   const [isOtpRequested, setOtpRequestStatus] = useState(false);
 
-  const form = useForm<EmailSignUpSchema>({
+  const form = useForm<EmailSignUpInterface>({
     resolver: zodResolver(signUpSchema),
   });
 
@@ -34,7 +34,7 @@ export const SignUpForm = ({ className, ...props }: Props) => {
     onError: (err) => toast.error(err.message),
   });
 
-  function onSubmit(data: EmailSignUpSchema) {
+  function onSubmit(data: EmailSignUpInterface) {
     mutate(data);
   }
 

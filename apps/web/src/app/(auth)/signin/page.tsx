@@ -8,20 +8,20 @@ import {
   CardTitle,
 } from "ui/components/card";
 
-import { SignUpForm } from "~/components/auth/signup/form";
+import { SignInForm } from "~/components/auth/signin/form";
 
-export default function SignUpPage() {
+export default function SignInPage() {
   return (
     <Card className="mx-auto w-full border-0 shadow-none sm:w-[350px]">
       <CardHeader className="text-center">
-        <CardTitle>Create an account</CardTitle>
+        <CardTitle>Signin to Invoicen</CardTitle>
         <CardDescription>
-          Enter your email below to create your account
+          Please enter your email and password to access your dashboard
         </CardDescription>
       </CardHeader>
 
       <CardContent>
-        <SignUpForm />
+        <SignInForm />
       </CardContent>
 
       <CardFooter className="text-center">

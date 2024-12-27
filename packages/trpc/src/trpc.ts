@@ -6,8 +6,9 @@
  * tl;dr - this is where all the tRPC server stuff is created and plugged in.
  * The pieces you will need to use are documented accordingly near the end
  */
-import { validateSessionToken } from "auth/session";
+import type { NextRequest } from "next/server";
 import { initTRPC, TRPCError } from "@trpc/server";
+import { validateSessionToken } from "auth/session";
 import { db } from "db/client";
 import superjson from "superjson";
 import { ZodError } from "zod";
@@ -17,8 +18,8 @@ import { ZodError } from "zod";
  * - Expo requests will have a session token in the Authorization header
  * - Next.js requests will have a session token in cookies
  */
-const isomorphicGetSession = async (headers: Headers) => {
-  const authToken = headers.get("session") ?? null;
+const isomorphicGetSession = async (cookies: NextRequest["cookies"]) => {
+  const authToken = cookies.get("session")?.value ?? null;
   if (authToken) return await validateSessionToken(authToken);
   return { session: null, user: null };
 };
@@ -35,18 +36,11 @@ const isomorphicGetSession = async (headers: Headers) => {
  *
  * @see https://trpc.io/docs/server/context
  */
-export const createTRPCContext = async (opts: { headers: Headers }) => {
-  const authToken = opts.headers.get("Authorization") ?? null;
-  const { user } = await isomorphicGetSession(opts.headers);
-
+export const createTRPCContext = async (opts: NextRequest) => {
+  const { user } = await isomorphicGetSession(opts.cookies);
   const source = opts.headers.get("x-trpc-source") ?? "unknown";
   console.log(">>> tRPC Request from", source, "by", user);
-
-  return {
-    user,
-    db,
-    token: authToken,
-  };
+  return { user, db, request: opts };
 };
 
 /**

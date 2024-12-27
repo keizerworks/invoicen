@@ -7,7 +7,7 @@ import { userTable } from "../schema/user";
 
 export const insertSession = async (values: InsertSessionInterface) => {
   const sessions = await db.insert(sessionTable).values(values).returning();
-  if (sessions[0]) throw new Error();
+  if (!sessions[0]) throw new Error();
   return sessions[0];
 };
 

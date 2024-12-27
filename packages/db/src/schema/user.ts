@@ -3,6 +3,7 @@ import {
   boolean,
   pgTable,
   serial,
+  text,
   timestamp,
   uuid,
   varchar,
@@ -16,6 +17,7 @@ export const userTable = pgTable("user", {
   name: varchar("name").notNull(),
   emailVerified: boolean("email_verified").notNull().default(false),
   recoveryCode: varchar("recovery_code"),
+  passwordHash: text("password_hash"),
 });
 
 export const emailVerificationRequestTable = pgTable(
