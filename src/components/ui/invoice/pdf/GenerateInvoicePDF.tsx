@@ -37,7 +37,9 @@ const GenerateInvoicePDF = ({
         <InvoiceHeader headerDetails={headerDetails} />
         <BillingInfo billingDetails={billingDetails} />
         <EntriesTable entries={entries} totalAmount={totalAmount} activeCurrency={activeCurrency}/>
-        <TaxDetailsTable taxDetails={taxDetails} />
+        {taxDetails.length > 0 && (
+            <TaxDetailsTable taxDetails={taxDetails} />
+        )}
         <InvoiceFooter totalWithTax={totalWithTax} customMessage={customMessage} />
       </Page>
     </Document>
