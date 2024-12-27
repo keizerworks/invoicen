@@ -17,7 +17,7 @@ import {
 } from "db/actions/user";
 import { getVerifyOtpHtml } from "transactional-email/emails/auth/verify-otp";
 import {
-  signinWithEmailSchema,
+  signInWithEmailSchema,
   signUpSchema,
   verifyEmailSchema,
 } from "validators/auth";
@@ -38,7 +38,7 @@ export const authRouter = {
         });
 
       const passwordHash = await hashPassword(body.password);
-      if (user && user.id) await deleteUser(user.id);
+      if (user?.id) await deleteUser(user.id);
       user = await createUser({
         email: body.email,
         name: body.name,
@@ -100,8 +100,8 @@ export const authRouter = {
       };
     }),
 
-  signinWithEmail: publicProcedure
-    .input(signinWithEmailSchema)
+  signInWithEmail: publicProcedure
+    .input(signInWithEmailSchema)
     .mutation(async ({ input: body }) => {
       const user = await getUserByEmail(body.email);
       if (!user)

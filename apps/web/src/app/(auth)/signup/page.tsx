@@ -10,7 +10,7 @@ import {
 
 import { SignUpForm } from "~/components/auth/signup/form";
 
-export default function SignInPage() {
+export default function SignUpPage() {
   return (
     <Card className="mx-auto w-full border-0 shadow-none sm:w-[350px]">
       <CardHeader className="text-center">
