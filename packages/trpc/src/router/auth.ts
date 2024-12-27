@@ -138,19 +138,11 @@ export const authRouter = {
       const sessionToken = generateSessionToken();
       const session = await createSession(sessionToken, user.id);
 
-      if (!session)
-        throw new TRPCError({
-          code: "INTERNAL_SERVER_ERROR",
-
-          message: "Failed to create a session. Please try again later.",
-        });
-
-      const cookieStore = await cookies();
+      const cookieStore = (await cookies()).set("session", sessionToken);
       cookieStore.set("session", sessionToken, {
-        httpOnly: true,
+        httpOnly: process.env.NODE_ENV === "production",
         path: "/",
         secure: process.env.NODE_ENV === "production",
-        sameSite: "lax",
         expires: session.expiresAt,
       });
     }),

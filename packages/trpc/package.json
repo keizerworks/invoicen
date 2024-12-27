@@ -24,6 +24,7 @@
     "auth": "workspace:*",
     "db": "workspace:*",
     "dotenv": "^16.4.7",
+    "next": "catalog:",
     "nodemailer": "^6.9.16",
     "superjson": "2.2.1",
     "transactional-email": "workspace:*",

@@ -15,6 +15,13 @@
       "when": 1735158968809,
       "tag": "0001_nosy_deadpool",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1735308277216,
+      "tag": "0002_bouncy_stick",
+      "breakpoints": true
     }
   ]
 }

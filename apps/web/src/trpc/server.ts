@@ -1,8 +1,7 @@
+import type { AppRouter } from "trpc";
 import { cache } from "react";
 import { headers } from "next/headers";
 import { createHydrationHelpers } from "@trpc/react-query/rsc";
-
-import type { AppRouter } from "trpc";
 import { createCaller, createTRPCContext } from "trpc";
 
 import { createQueryClient } from "./query-client";

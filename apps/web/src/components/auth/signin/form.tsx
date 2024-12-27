@@ -1,6 +1,8 @@
+"use client";
+
 import type { HTMLAttributes } from "react";
 import type { z } from "zod";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { Button } from "ui/components/button";
@@ -16,12 +18,13 @@ type EmailSignInInterface = z.infer<typeof signInWithEmailSchema>;
 type Props = HTMLAttributes<HTMLDivElement>;
 
 export const SignInForm = ({ className, ...props }: Props) => {
+  const router = useRouter();
   const form = useForm<EmailSignInInterface>({
     resolver: zodResolver(signInWithEmailSchema),
   });
 
   const { mutate, isPending } = api.auth.signInWithEmail.useMutation({
-    onSuccess: () => redirect("/"),
+    onSuccess: () => router.replace("/"),
     onError: (err) => toast.error(err.message),
   });
 

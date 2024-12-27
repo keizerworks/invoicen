@@ -359,6 +359,9 @@ importers:
       dotenv:
         specifier: ^16.4.7
         version: 16.4.7
+      next:
+        specifier: 'catalog:'
+        version: 15.1.0(react-dom@19.0.0(react@19.0.0))(react@19.0.0)
       nodemailer:
         specifier: ^6.9.16
         version: 6.9.16
