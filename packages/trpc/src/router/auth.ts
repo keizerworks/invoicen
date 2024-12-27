@@ -1,6 +1,8 @@
 import type { TRPCRouterRecord } from "@trpc/server";
+import { cookies } from "next/headers";
 import { TRPCError } from "@trpc/server";
-import { hashPassword } from "auth/password";
+import { hashPassword, verifyPasswordHash } from "auth/password";
+import { createSession, generateSessionToken } from "auth/session";
 import { generateRandomOTP } from "auth/utils/code";
 import {
   createEmailVerificationRequest,
@@ -14,7 +16,11 @@ import {
   updateUser,
 } from "db/actions/user";
 import { getVerifyOtpHtml } from "transactional-email/emails/auth/verify-otp";
-import { signUpSchema, verifyEmailSchema } from "validators/auth";
+import {
+  signinWithEmailSchema,
+  signUpSchema,
+  verifyEmailSchema,
+} from "validators/auth";
 
 import mailer from "../mailer";
 import { publicProcedure } from "../trpc";
@@ -24,7 +30,6 @@ export const authRouter = {
     .input(signUpSchema)
     .mutation(async ({ input: body }) => {
       let user = await getUserByEmail(body.email);
-      console.log(user);
       if (user?.emailVerified)
         throw new TRPCError({
           code: "BAD_REQUEST",
@@ -32,13 +37,17 @@ export const authRouter = {
             "A user with this email address is already registered and verified. Please sign in instead.",
         });
 
-      body.password = await hashPassword(body.password);
+      const passwordHash = await hashPassword(body.password);
       if (user && user.id) await deleteUser(user.id);
-      user = await createUser(body);
+      user = await createUser({
+        email: body.email,
+        name: body.name,
+        emailVerified: false,
+        passwordHash,
+      });
 
       const otp = generateRandomOTP();
       const expiresAt = new Date(Date.now() + 1000 * 60 * 10);
-
       await deletedEmailVerificationRequestByEmail(body.email);
       await createEmailVerificationRequest({
         email: body.email,
@@ -89,5 +98,60 @@ export const authRouter = {
         message:
           "Your email has been successfully verified. You can now sign in.",
       };
+    }),
+
+  signinWithEmail: publicProcedure
+    .input(signinWithEmailSchema)
+    .mutation(async ({ input: body }) => {
+      const user = await getUserByEmail(body.email);
+      if (!user)
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "No user found with the provided email address.",
+        });
+
+      if (!user.emailVerified)
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message:
+            "Email address is not verified. Please verify your email to proceed.",
+        });
+
+      if (!user.passwordHash)
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message:
+            "Password is not set for this account. Please reset your password.",
+        });
+
+      const validPassword = await verifyPasswordHash(
+        user.passwordHash,
+        body.password,
+      );
+
+      if (!validPassword)
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "Invalid email or password. Please try again.",
+        });
+
+      const sessionToken = generateSessionToken();
+      const session = await createSession(sessionToken, user.id);
+
+      if (!session)
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+
+          message: "Failed to create a session. Please try again later.",
+        });
+
+      const cookieStore = await cookies();
+      cookieStore.set("session", sessionToken, {
+        httpOnly: true,
+        path: "/",
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax",
+        expires: session.expiresAt,
+      });
     }),
 } satisfies TRPCRouterRecord;

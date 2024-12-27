@@ -1,4 +1,3 @@
-import type { UUID } from "crypto";
 import { sha256 } from "@oslojs/crypto/sha2";
 import {
   encodeBase32LowerCaseNoPadding,
@@ -25,17 +24,14 @@ export const getCurrentSession = (token: string) => {
   return result;
 };
 
-export async function createSession(
-  token: string,
-  userId: UUID,
-): Promise<string> {
+export async function createSession(token: string, userId: string) {
   const sessionId = encodeHexLowerCase(sha256(new TextEncoder().encode(token)));
-  await insertSession({
+  const session = await insertSession({
     id: sessionId,
     userId,
     expiresAt: new Date(Date.now() + SESSION_EXPIRE_TIME),
   });
-  return sessionId;
+  return session;
 }
 
 export async function validateSessionToken(token: string) {

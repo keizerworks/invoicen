@@ -24,3 +24,8 @@ export const verifyEmailSchema = z.object({
   email: z.string().email(),
   otp: z.string().length(6),
 });
+
+export const signinWithEmailSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(8),
+});
