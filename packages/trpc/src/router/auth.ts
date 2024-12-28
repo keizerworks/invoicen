@@ -15,8 +15,8 @@ import {
   getUserByEmail,
   updateUser,
 } from "db/actions/user";
-import { getSendRestPasswordOTPHtml } from "transactional-email/emails/auth/reset_password/send_reset_password_otp";
-import { getPasswordResetSuccessHtml } from "transactional-email/emails/auth/reset_password/password_reset_success";
+import { getSendRestPasswordOTPHtml } from "transactional-email/emails/auth/reset-password/send-reset-password-otp";
+import { getPasswordResetSuccessHtml } from "transactional-email/emails/auth/reset-password/password-reset-success";
 import { getVerifyOtpHtml } from "transactional-email/emails/auth/verify-otp";
 import {
   requestPasswordResetSchema,
