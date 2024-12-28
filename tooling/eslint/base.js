@@ -8,7 +8,7 @@ import turboPlugin from "eslint-plugin-turbo";
 import eslintPluginUnicorn from "eslint-plugin-unicorn";
 import unusedImports from "eslint-plugin-unused-imports";
 import tseslint from "typescript-eslint";
-
+import { fileURLToPath } from 'url';
 /**
  * All packages that leverage t3-env should use this rule
  */
@@ -40,10 +40,12 @@ export const restrictEnvAccess = tseslint.config(
     },
   },
 );
+const __filename = fileURLToPath(import.meta.url); // Convert `import.meta.url` to a file path
+const __dirname = path.dirname(__filename); // Get the directory of the current file
 
 export default tseslint.config(
   // Ignore files not tracked by VCS and any config files
-  includeIgnoreFile(path.join(import.meta.dirname, "../../.gitignore")),
+  includeIgnoreFile(path.join(__dirname, "../../.gitignore")),
   { ignores: ["**/*.config.*"] },
   {
     files: ["**/*.js", "**/*.ts", "**/*.tsx"],

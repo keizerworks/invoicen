@@ -54,7 +54,7 @@ export const SignInForm = ({ className, ...props }: Props) => {
             <Link href="/signup" className="text-sm text-primary">
               Sign Up
             </Link>
-            
+
             <Link href="/forgot-password" className="text-sm text-primary">
               Forgot Password
             </Link>

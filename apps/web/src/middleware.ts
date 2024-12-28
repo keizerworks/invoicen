@@ -11,7 +11,12 @@ export function middleware(request: NextRequest) {
   )
     return NextResponse.redirect(new URL("/", request.url));
 
-  if (!authToken && pathname !== "/signin" && pathname !== "/signup" && pathname !== "/forgot-password") {
+  if (
+    !authToken &&
+    pathname !== "/signin" &&
+    pathname !== "/signup" &&
+    pathname !== "/forgot-password"
+  ) {
     return NextResponse.redirect(new URL("/signin", request.url));
   }
   return NextResponse.next();

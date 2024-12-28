@@ -1,6 +1,9 @@
 "use client";
 
-import React, { HTMLAttributes, useState } from "react";
+import type { HTMLAttributes } from "react";
+import type { z } from "zod";
+import React, { useState } from "react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
@@ -10,11 +13,12 @@ import { Input } from "ui/components/input";
 import { InputOTP, InputOTPGroup, InputOTPSlot } from "ui/components/input-otp";
 import { PasswordInput } from "ui/components/password-input";
 import { cn } from "ui/lib/utils";
-import { z } from "zod";
+import {
+  requestPasswordResetSchema,
+  resetPasswordSchema,
+} from "validators/auth";
 
 import { api } from "~/trpc/react";
-import Link from "next/link";
-import { requestPasswordResetSchema, resetPasswordSchema } from "validators/auth";
 
 type Props = HTMLAttributes<HTMLDivElement>;
 type ForgotPasswordFormData = z.infer<typeof resetPasswordSchema>;
@@ -96,7 +100,7 @@ export const ForgotPasswordForm = ({ className, ...props }: Props) => {
             render={({ field }) => (
               <InputOTP maxLength={6} {...field}>
                 <InputOTPGroup>
-                  {[...Array(6)].map((_, index) => (
+                  {Array.from({ length: 6 }, (_, index) => (
                     <InputOTPSlot key={index} index={index} />
                   ))}
                 </InputOTPGroup>

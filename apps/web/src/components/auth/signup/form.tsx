@@ -3,6 +3,7 @@
 import type { HTMLAttributes } from "react";
 import type { z } from "zod";
 import { useState } from "react";
+import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { Button } from "ui/components/button";
@@ -14,7 +15,6 @@ import { signUpSchema } from "validators/auth";
 
 import { api } from "~/trpc/react";
 import { VerifyEmail } from "./verify-email";
-import Link from "next/link";
 
 type EmailSignUpInterface = z.infer<typeof signUpSchema>;
 
@@ -68,7 +68,7 @@ export const SignUpForm = ({ className, ...props }: Props) => {
               label="Passowrd"
               render={({ field }) => <PasswordInput {...field} />}
             />
-  
+
             <Link href="/signin" className="text-sm text-primary">
               Sign In
             </Link>
