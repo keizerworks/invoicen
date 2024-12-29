@@ -3,6 +3,7 @@
 import type { HTMLAttributes } from "react";
 import type { z } from "zod";
 import { useState } from "react";
+import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
 import { Button } from "ui/components/button";
@@ -67,6 +68,10 @@ export const SignUpForm = ({ className, ...props }: Props) => {
               label="Passowrd"
               render={({ field }) => <PasswordInput {...field} />}
             />
+
+            <Link href="/signin" className="text-sm text-primary">
+              Sign In
+            </Link>
 
             <Button loading={isPending} type="submit" className="mt-4 w-full">
               Sign Up

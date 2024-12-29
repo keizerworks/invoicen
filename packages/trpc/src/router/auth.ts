@@ -15,8 +15,12 @@ import {
   getUserByEmail,
   updateUser,
 } from "db/actions/user";
+import { getPasswordResetSuccessHtml } from "transactional-email/emails/auth/reset-password/password-reset-success";
+import { getSendRestPasswordOTPHtml } from "transactional-email/emails/auth/reset-password/send-reset-password-otp";
 import { getVerifyOtpHtml } from "transactional-email/emails/auth/verify-otp";
 import {
+  requestPasswordResetSchema,
+  resetPasswordSchema,
   signInWithEmailSchema,
   signUpSchema,
   verifyEmailSchema,
@@ -145,5 +149,81 @@ export const authRouter = {
         secure: process.env.NODE_ENV === "production",
         expires: session.expiresAt,
       });
+    }),
+
+  requestPasswordReset: publicProcedure
+    .input(requestPasswordResetSchema)
+    .mutation(async ({ input: body }) => {
+      const user = await getUserByEmail(body.email);
+      if (!user)
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "No user found with the provided email address.",
+        });
+
+      const otp = generateRandomOTP();
+      const expiresAt = new Date(Date.now() + 1000 * 60 * 10);
+      await deletedEmailVerificationRequestByEmail(body.email);
+      await createEmailVerificationRequest({
+        email: body.email,
+        expiresAt,
+        userId: user.id,
+        otp,
+      });
+
+      mailer
+        .sendEmail({
+          to: body.email,
+          html: await getSendRestPasswordOTPHtml({ validationCode: otp }),
+        })
+        .catch(console.error);
+
+      return {
+        message:
+          "A password reset OTP has been sent to your email address. Please use it to reset your password.",
+      };
+    }),
+
+  resetPassword: publicProcedure
+    .input(resetPasswordSchema)
+    .mutation(async ({ input: body }) => {
+      const verificationRequest = await getEmailVerificationRequestByEmail(
+        body.email,
+      );
+
+      if (!verificationRequest)
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message:
+            "No verification request found for this email. Please request a new password reset.",
+        });
+
+      if (Date.now() > verificationRequest.expiresAt.getTime())
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "The OTP has expired. Please request a new password reset.",
+        });
+
+      if (verificationRequest.otp !== body.otp)
+        throw new TRPCError({
+          code: "BAD_REQUEST",
+          message: "Invalid OTP. Please try again.",
+        });
+
+      const passwordHash = await hashPassword(body.newPassword);
+      await updateUser(verificationRequest.userId, { passwordHash });
+      await deletedEmailVerificationRequestByEmail(body.email);
+
+      mailer
+        .sendEmail({
+          to: body.email,
+          html: await getPasswordResetSuccessHtml(),
+        })
+        .catch(console.error);
+
+      return {
+        message:
+          "Your password has been successfully reset. You can now sign in.",
+      };
     }),
 } satisfies TRPCRouterRecord;
