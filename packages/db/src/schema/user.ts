@@ -11,7 +11,7 @@ import {
 
 import { baseTable } from "./base-table";
 
-export const userTable = pgTable("user", {
+export const UsersTable = pgTable("users", {
   ...baseTable,
   email: varchar("email").notNull().unique(),
   name: varchar("name").notNull(),
@@ -20,13 +20,13 @@ export const userTable = pgTable("user", {
   passwordHash: text("password_hash"),
 });
 
-export const emailVerificationRequestTable = pgTable(
-  "email_verification_request",
+export const EmailVerificationRequestsTable = pgTable(
+  "email_verification_requests",
   {
     id: serial("id").primaryKey(),
     userId: uuid("user_id")
       .notNull()
-      .references(() => userTable.id),
+      .references(() => UsersTable.id),
     email: varchar("email").notNull(),
     otp: varchar("otp").notNull(),
     expiresAt: timestamp("expires_at", {
@@ -36,8 +36,8 @@ export const emailVerificationRequestTable = pgTable(
   },
 );
 
-export type UserInterface = InferSelectModel<typeof userTable>;
-export type CreateUserInterface = InferInsertModel<typeof userTable>;
+export type UserInterface = InferSelectModel<typeof UsersTable>;
+export type CreateUserInterface = InferInsertModel<typeof UsersTable>;
 export type CreateEmailVerificationRequestInterface = InferInsertModel<
-  typeof emailVerificationRequestTable
+  typeof EmailVerificationRequestsTable
 >;
