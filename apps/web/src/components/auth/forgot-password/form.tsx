@@ -73,7 +73,7 @@ export const ForgotPasswordForm = ({ className, ...props }: Props) => {
           onSubmit={form.handleSubmit(handleFormSubmit)}
           className="grid gap-y-4"
         >
-          <div className="flex items-center gap-x-2">
+          <div className="flex items-end gap-x-2">
             <FormField
               control={form.control}
               name="email"
@@ -122,6 +122,7 @@ export const ForgotPasswordForm = ({ className, ...props }: Props) => {
 
           <Button
             type="submit"
+            disabled={!otpSent}
             loading={isResettingPassword}
             className="mt-4 w-full"
           >

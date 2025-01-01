@@ -1,12 +1,12 @@
 import type { CreateEmailVerificationRequestInterface } from "../schema/user";
 import { db, desc, eq } from "../client";
-import { emailVerificationRequestTable } from "../schema/user";
+import { EmailVerificationRequestsTable } from "../schema/user";
 
 export const createEmailVerificationRequest = async (
   values: CreateEmailVerificationRequestInterface,
 ) => {
   const res = await db
-    .insert(emailVerificationRequestTable)
+    .insert(EmailVerificationRequestsTable)
     .values(values)
     .returning();
   return res[0];
@@ -14,16 +14,16 @@ export const createEmailVerificationRequest = async (
 
 export const deletedEmailVerificationRequestByEmail = async (email: string) => {
   await db
-    .delete(emailVerificationRequestTable)
-    .where(eq(emailVerificationRequestTable.email, email));
+    .delete(EmailVerificationRequestsTable)
+    .where(eq(EmailVerificationRequestsTable.email, email));
 };
 
 export const getEmailVerificationRequestByEmail = async (email: string) => {
   const res = await db
     .select()
-    .from(emailVerificationRequestTable)
-    .where(eq(emailVerificationRequestTable.email, email))
+    .from(EmailVerificationRequestsTable)
+    .where(eq(EmailVerificationRequestsTable.email, email))
     .limit(1)
-    .orderBy(desc(emailVerificationRequestTable.id));
+    .orderBy(desc(EmailVerificationRequestsTable.id));
   return res[0];
 };
