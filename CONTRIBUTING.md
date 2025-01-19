@@ -14,6 +14,7 @@ To get started with contributing, please follow the steps below:
 
    - Fork the repository by clicking the "Fork" button at the top right of this page.
    - Clone the repository locally:
+
      ```bash
      git clone https://github.com/<your-username>/invoicen.git
      cd invoicen
@@ -28,14 +29,19 @@ To get started with contributing, please follow the steps below:
      - Redis
      - MinIO
    - Install dependencies:
+
      ```bash
      pnpm install
      ```
+
    - Set up the environment variables by copying `.env.example` to `.env` and updating the values as per your setup:
+
      ```bash
      cp .env.example .env
      ```
+
    - Run the development environment:
+
      ```bash
      pnpm dev
      ```
@@ -56,6 +62,7 @@ To contribute effectively, follow these steps:
 1. **Create a Branch**
 
    - Use a descriptive branch name:
+
      ```bash
      git checkout -b feature/your-feature-name
      ```
@@ -65,6 +72,7 @@ To contribute effectively, follow these steps:
    - Follow coding standards and ensure proper documentation.
    - If you're working on APIs, update the Swagger configuration.
    - Run tests to ensure your changes don't break existing functionality:
+
      ```bash
      pnpm test
      ```
@@ -72,16 +80,20 @@ To contribute effectively, follow these steps:
 3. **Commit Your Changes**
 
    - Use [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) for commit messages. Example:
+
      ```
      feat(auth): add user login endpoint
      fix(storage): resolve bucket creation error
      ```
 
 4. **Push and Open a Pull Request**
+
    - Push your branch to your fork:
+
      ```bash
      git push origin feature/your-feature-name
      ```
+
    - Open a pull request (PR) against the `main` branch.
    - Provide a detailed description of your changes in the PR.
 
@@ -95,10 +107,12 @@ To ensure a smooth contribution process:
 - **Write Tests**: Add tests for new functionality or bug fixes.
 - **Maintain Documentation**: Update relevant documentation in the codebase.
 - **Follow Linting and Formatting Rules**:
+
   ```bash
   pnpm lint
   pnpm format
   ```
+
 - **Check for Breaking Changes**: Ensure your changes are backward-compatible unless a major version update is planned.
 
 ---
@@ -113,9 +127,9 @@ PORT=8080
 # PostgreSQL
 DB_HOST=localhost
 DB_PORT=5432
-DB_DATABASE=keizer-auth
+DB_DATABASE=postgres
 DB_USERNAME=postgres
-DB_PASSWORD=password
+DB_PASSWORD=postgres
 DB_SCHEMA=public
 
 # MinIO
@@ -140,14 +154,18 @@ MAIL_FROM=auth@keizer.com
 ## Testing and Validation
 
 - Run all unit tests:
+
   ```bash
   pnpm test
   ```
+
 - Run linting and formatting checks:
+
   ```bash
   pnpm lint
   pnpm format
   ```
+
 - Use the staging environment for testing end-to-end functionality before merging.
 
 ---
