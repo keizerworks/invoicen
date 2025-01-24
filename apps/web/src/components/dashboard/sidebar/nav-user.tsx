@@ -25,7 +25,9 @@ export function NavUser() {
     profile_picture: "/path/to/profile-picture.png",
   };
 
-  const isMobile = false;
+
+  // TODO: Implement mobile detection (commented to prevent eslint errors)
+  //const isMobile = false;
 
   return (
     <SidebarMenu>
@@ -56,7 +58,8 @@ export function NavUser() {
 
           <DropdownMenuContent
             className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
-            side={isMobile ? "bottom" : "right"}
+            //side={isMobile ? "bottom" : "right"}
+            side="right"
             align="end"
             sideOffset={4}
           >

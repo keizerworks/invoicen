@@ -2,7 +2,7 @@ import { Separator } from "ui/components/separator";
 import {
   SidebarInset,
   SidebarProvider,
-  SidebarTrigger,
+  //SidebarTrigger,
 } from "ui/components/sidebar";
 
 import { AppSidebar } from "~/components/dashboard/sidebar/app-sidebar";

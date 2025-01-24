@@ -3,7 +3,7 @@ import { cache } from "react";
 import { headers } from "next/headers";
 import { createHydrationHelpers } from "@trpc/react-query/rsc";
 import { createCaller, createTRPCContext } from "trpc";
-
+import type { NextRequest } from "next/server";
 import { createQueryClient } from "./query-client";
 
 /**
@@ -15,7 +15,7 @@ const createContext = cache(async () => {
   heads.set("x-trpc-source", "rsc");
   return createTRPCContext({
     headers: heads,
-  });
+  } as NextRequest);
 });
 
 const getQueryClient = cache(createQueryClient);
