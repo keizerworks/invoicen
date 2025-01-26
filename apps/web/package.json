@@ -9,7 +9,12 @@
     "start": "pnpm with-env next start",
     "lint": "next lint --max-warnings 0",
     "with-env": "dotenv -e ../../.env --",
-    "check-types": "tsc --noEmit"
+    "check-types": "tsc --noEmit",
+    "build:worker": "opennextjs-cloudflare",
+    "dev:worker": "wrangler dev --port 8771",
+    "preview:worker": "npm run build:worker && npm run dev:worker",
+    "deploy:worker": "npm run build:worker && wrangler deploy",
+    "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
   },
   "dependencies": {
     "@hookform/resolvers": "catalog:",
@@ -19,9 +24,13 @@
     "@trpc/react-query": "catalog:",
     "@trpc/server": "catalog:",
     "auth": "workspace:*",
+    "aws-sdk": "^2.1692.0",
     "db": "workspace:*",
     "lucide-react": "^0.469.0",
+    "mock-aws-s3": "^4.0.2",
     "next": "catalog:",
+    "nock": "^14.0.0",
+    "pg-cloudflare": "^1.1.1",
     "react": "catalog:react19",
     "react-dom": "catalog:react19",
     "sonner": "catalog:",
@@ -33,6 +42,7 @@
     "zod": "catalog:"
   },
   "devDependencies": {
+    "@opennextjs/cloudflare": "^0.3.9",
     "@repo/eslint-config": "workspace:*",
     "@repo/prettier-config": "workspace:^",
     "@repo/tsconfig": "workspace:*",
@@ -43,7 +53,8 @@
     "eslint": "catalog:",
     "postcss": "^8",
     "tailwindcss": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "wrangler": "^3.105.0"
   },
   "prettier": "@repo/prettier-config"
 }
