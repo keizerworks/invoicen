@@ -29,7 +29,8 @@
     "typecheck": "tsc --noEmit --emitDeclarationOnly false",
     "with-env": "dotenv -e ../../.env --",
     "db:migrate": "pnpm with-env drizzle-kit migrate",
-    "db:generate": "pnpm with-env drizzle-kit generate"
+    "db:generate": "pnpm with-env drizzle-kit generate",
+    "db:studio": "pnpm with-env drizzle-kit studio"
   },
   "dependencies": {
     "dotenv": "^16.4.7",

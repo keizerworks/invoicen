@@ -10,7 +10,8 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\"",
     "ui": "pnpm --filter ui ui",
     "db:generate": "pnpm --filter db db:generate",
-    "db:migrate": "pnpm --filter db db:migrate"
+    "db:migrate": "pnpm --filter db db:migrate",
+    "db:studio": "pnpm --filter db db:studio"
   },
   "devDependencies": {
     "prettier": "catalog:",
