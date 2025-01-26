@@ -13,7 +13,13 @@
   "kv_namespaces": [
     {
       "binding": "NEXT_CACHE_WORKERS_KV",
-      "id": "<BINDING_ID>"
+      "id": "a87f09130bec4737b1842c5747082872"
     }
-  ]
+  ],
+  "build": {
+    "command": "pnpm build",
+    "external": [
+      "pg-cloudflare"
+    ]
+  }
 }

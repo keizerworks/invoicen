@@ -4,14 +4,22 @@ const nextConfig = {
   transpilePackages: ["trpc", "auth", "db", "ui", "validators"],
   eslint: { ignoreDuringBuilds: true },
   typescript: { ignoreBuildErrors: true },
-  //webpack: (config) => {
-  //  config.externals = config.externals || [];
-  //  config.externals.push(
-  //    'C:/Users/Pranshu/Desktop/KZR/invoicen/apps/web/.next/server/edge-runtime-webpack.js',
-  //    'C:/Users/Pranshu/Desktop/KZR/invoicen/apps/web/.next/server/src/middleware.js'
-  //  );
-  //  return config;
-  //},
+  webpack: (config, {isServer, dev}) => {
+    config.output.webassemblyModuleFilename =
+      isServer && !dev
+        ? "../static/wasm/[modulehash].wasm"
+        : "static/wasm/[modulehash].wasm";
+    config.experiments = {
+      ...config.experiments,
+      asyncWebAssembly: true, // Enable async WebAssembly
+      layers: true,
+    };
+    config.module.rules.push({
+      test: /\.wasm$/,
+      type: 'webassembly/async',
+    });
+    return config;
+  },
 };
 
 export default nextConfig;
