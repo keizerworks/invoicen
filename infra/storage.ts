@@ -3,7 +3,7 @@ import { vpc } from "./vpc";
 export const bucket = new sst.aws.Bucket("invoicen-s3", {
   access: "public",
 });
-export const postgres = new sst.aws.Postgres("invoice-pg", {
+export const postgres = new sst.aws.Postgres("invoicen-pg", {
   vpc,
   dev: {
     // FIXME: move to .env and use sst secret to access (needed for local dev instead of creating postgres rds in aws)

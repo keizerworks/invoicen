@@ -1,26 +1,31 @@
-import type { Destination } from "@aws-sdk/client-sesv2";
 import { SendEmailCommand, SESv2Client } from "@aws-sdk/client-sesv2";
 import { Resource } from "sst/resource";
 
-const client = new SESv2Client();
+namespace Email {
+  export const Client = new SESv2Client({});
 
-interface Props {
-  destination: Destination;
-  template: string;
-  subject?: string;
+  export async function send(to: string, subject: string, body: string) {
+    await Client.send(
+      new SendEmailCommand({
+        Destination: {
+          ToAddresses: [to],
+        },
+        Content: {
+          Simple: {
+            Body: {
+              Text: {
+                Data: body,
+              },
+            },
+            Subject: {
+              Data: subject,
+            },
+          },
+        },
+        FromEmailAddress: `Invoicen <no-reply@${Resource["invoicen-email"].sender}>`,
+      }),
+    );
+  }
 }
 
-export const sendMail = async (props: Props) => {
-  await client.send(
-    new SendEmailCommand({
-      FromEmailAddress: Resource.Email.sender,
-      Destination: props.destination,
-      Content: {
-        Simple: {
-          Subject: { Data: props.subject },
-          Body: { Html: { Data: props.template } },
-        },
-      },
-    }),
-  );
-};
+export default Email;

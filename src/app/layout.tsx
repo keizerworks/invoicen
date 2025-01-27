@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import { Geist } from "next/font/google";
+
 import "../styles/globals.css";
+
+import { Toaster } from "~/components/ui/sonner";
+import { ReactQueryProvider } from "~/provider/react-query";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,7 +23,12 @@ type Props = Readonly<{
 export default function RootLayout({ children }: Props) {
   return (
     <html lang="en" className={`${geistSans.variable}`}>
-      <body className={`antialiased`}>{children}</body>
+      <body className={`antialiased`}>
+        <ReactQueryProvider>
+          <div vaul-drawer-wrapper="">{children}</div>
+          <Toaster closeButton richColors />
+        </ReactQueryProvider>
+      </body>
     </html>
   );
 }

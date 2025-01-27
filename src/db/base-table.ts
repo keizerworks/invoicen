@@ -1,9 +1,10 @@
-import { timestamp, uuid } from "drizzle-orm/pg-core";
-import { uuidv7 } from "uuidv7";
+import type { type as idType } from "~/lib/id";
+import { createId } from "~/lib/id";
+import { timestamp, varchar } from "drizzle-orm/pg-core";
 
-export const baseTable = {
-  id: uuid("id")
-    .$defaultFn(() => uuidv7())
+export const baseTable = (type: keyof typeof idType) => ({
+  id: varchar("id", { length: 34 })
+    .$defaultFn(() => createId(type))
     .primaryKey(),
 
   createdAt: timestamp("created_at", {
@@ -17,4 +18,4 @@ export const baseTable = {
   })
     .defaultNow()
     .$onUpdateFn(() => new Date()),
-};
+});

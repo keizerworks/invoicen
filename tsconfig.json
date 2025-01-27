@@ -25,9 +25,13 @@
   "include": [
     "sst.config.ts",
     "next-env.d.ts",
+    "eslint.config.mjs",
+    "drizzle.config.ts",
+    "prettier.config.mjs",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    "src/env.js"
   ],
   "exclude": ["node_modules"]
 }
