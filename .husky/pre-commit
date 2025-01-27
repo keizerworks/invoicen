@@ -1,1 +1,1 @@
-pnpm lint && prettier --write '**/*.{js,ts,json,mdx,css,html}'
+pnpm typecheck && pnpm format:write && pnpm lint:fix
