@@ -22,7 +22,7 @@ namespace Email {
             },
           },
         },
-        FromEmailAddress: `Invoicen <no-reply@${Resource["invoicen-email"].sender}>`,
+        FromEmailAddress: `Invoicen <${Resource["invoicen-email"].sender}>`,
       }),
     );
   }
