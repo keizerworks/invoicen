@@ -19,6 +19,7 @@ export const auth = new sst.aws.Auth("invoicen-auth", {
     },
     vpc,
   },
+  forceUpgrade: "v2",
   domain: {
     name: "auth." + domain,
     dns: sst.cloudflare.dns(),
