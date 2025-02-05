@@ -3,7 +3,8 @@ import { vpc } from "./vpc";
 export const bucket = new sst.aws.Bucket("invoicen-s3", {
   access: "public",
 });
-export const postgres = new sst.aws.Postgres("invoicen-pg", {
+
+export const postgres = new sst.aws.Postgres("invoicen-postgres", {
   vpc,
   dev: {
     // FIXME: move to .env and use sst secret to access (needed for local dev instead of creating postgres rds in aws)
@@ -16,5 +17,4 @@ export const postgres = new sst.aws.Postgres("invoicen-pg", {
 });
 
 export const NEXT_PUBLIC_S3_DOMAIN = $interpolate`https://${bucket.domain}`;
-
 export const DATABASE_URL = $interpolate`postgresql://${postgres.username}:${postgres.password}@${postgres.host}:${postgres.port}/${postgres.database}`;

@@ -9,12 +9,7 @@ declare module "sst" {
       "type": "sst.aws.Auth"
       "url": string
     }
-    "invoicen-email": {
-      "configSet": string
-      "sender": string
-      "type": "sst.aws.Email"
-    }
-    "invoicen-pg": {
+    "invoicen-postgres": {
       "database": string
       "host": string
       "password": string
@@ -26,7 +21,12 @@ declare module "sst" {
       "name": string
       "type": "sst.aws.Bucket"
     }
-    "invoicen-vpc": {
+    "invoicen-ses": {
+      "configSet": string
+      "sender": string
+      "type": "sst.aws.Email"
+    }
+    "invoicen-vpc-ec2": {
       "type": "sst.aws.Vpc"
     }
     "invoicen-web": {

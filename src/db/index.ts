@@ -10,11 +10,11 @@ const globalForDb = globalThis as unknown as {
 const pool =
   globalForDb.pool ??
   new Pool({
-    host: Resource["invoicen-pg"].host,
-    port: Resource["invoicen-pg"].port,
-    user: Resource["invoicen-pg"].username,
-    password: Resource["invoicen-pg"].password,
-    database: Resource["invoicen-pg"].database,
+    host: Resource["invoicen-postgres"].host,
+    port: Resource["invoicen-postgres"].port,
+    user: Resource["invoicen-postgres"].username,
+    password: Resource["invoicen-postgres"].password,
+    database: Resource["invoicen-postgres"].database,
   });
 
 if (env.NODE_ENV !== "production") {

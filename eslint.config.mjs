@@ -1,8 +1,5 @@
 /// <reference types="./types.d.ts" />
 
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
 import eslint from "@eslint/js";
 import nextPlugin from "@next/eslint-plugin-next";
 import eslintConfigPrettier from "eslint-config-prettier";
@@ -11,15 +8,7 @@ import eslintPluginUnicorn from "eslint-plugin-unicorn";
 import unusedImports from "eslint-plugin-unused-imports";
 import tseslint from "typescript-eslint";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
-
 export default tseslint.config(
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
   {
     ignores: ["./src/db/types.ts", "./src/db/enums.ts"],
     files: ["src/**/*.js", "src/**/*.ts", "src/**/*.tsx"],

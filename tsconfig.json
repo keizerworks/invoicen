@@ -24,10 +24,12 @@
   },
   "include": [
     "sst.config.ts",
+    "sst-env.d.ts",
     "next-env.d.ts",
     "eslint.config.mjs",
     "drizzle.config.ts",
     "prettier.config.mjs",
+    "infra/**/*.ts",
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",

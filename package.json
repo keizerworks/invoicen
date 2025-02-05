@@ -4,8 +4,7 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "dev": "next dev --turbopack",
-    "sst:dev": "sst dev",
+    "dev": "sst dev",
     "db": "sst shell drizzle-kit",
     "lint": "next lint",
     "start": "next start"
@@ -41,7 +40,7 @@
     "react-dom": "^19.0.0",
     "react-hook-form": "^7.54.2",
     "sonner": "^1.7.2",
-    "sst": "3.6.17",
+    "sst": "3.7.9",
     "superjson": "^2.2.2",
     "tailwind-merge": "^2.6.0",
     "tailwindcss-animate": "^1.0.7",
@@ -73,5 +72,5 @@
     "typescript": "^5",
     "typescript-eslint": "^8.21.0"
   },
-  "packageManager": "pnpm@9.15.4"
+  "packageManager": "pnpm@10.0.0"
 }

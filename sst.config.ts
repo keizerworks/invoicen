@@ -15,7 +15,8 @@ export default $config({
   },
   async run() {
     await import("./infra/vpc");
-    await Promise.all([import("./infra/email"), import("./infra/storage")]);
+    await import("./infra/email");
+    await import("./infra/storage");
     await import("./infra/app");
     await import("./infra/command");
   },
