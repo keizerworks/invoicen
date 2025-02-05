@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "dev": "sst dev",
+    "dev": "next dev --turbopack",
+    "sst:dev": "sst dev",
     "db": "sst shell drizzle-kit",
     "lint": "next lint",
     "start": "next start"
