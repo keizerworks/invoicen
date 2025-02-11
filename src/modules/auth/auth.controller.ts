@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import {
+  PostLoginBody,
   PostResendOtpEmailBody,
   PostSignupBody,
   PostVerifyOtpBody,
@@ -8,9 +9,11 @@ import {
 import db from '@/db';
 import { userTable } from '@/db/schema/user';
 import { and, eq } from 'drizzle-orm';
-import { genSalt, hash } from 'bcrypt';
+import { compare, genSalt, hash } from 'bcrypt';
 import { sendMail } from '@/libs/mailer';
 import logger from '@/libs/logger';
+import jwt from 'jsonwebtoken';
+import env from '@/libs/env';
 
 export async function postSignupHandler(
   req: Request<{}, {}, PostSignupBody>,
@@ -96,7 +99,7 @@ export async function postVerifyOtpHandler(
     // update the user as verified
     await db
       .update(userTable)
-      .set({ is_verified: true })
+      .set({ is_verified: true, otp: null })
       .where(eq(userTable.email, email));
 
     logger.info(`User ${email} verified`, 'AUTH');
@@ -155,6 +158,84 @@ export async function postResendOtpEmail(
 
     res.status(StatusCodes.OK).json({
       message: 'otp sent to your email',
+    });
+
+    return;
+  } catch (err) {
+    console.error(err);
+
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      message: 'Internal server error',
+    });
+
+    return;
+  }
+}
+
+export async function postLoginHandler(
+  req: Request<{}, {}, PostLoginBody>,
+  res: Response
+) {
+  try {
+    const { email, password } = req.body;
+
+    const [user] = await db
+      .select()
+      .from(userTable)
+      .where(and(eq(userTable.email, email)));
+
+    if (!user) {
+      res.status(StatusCodes.NOT_FOUND).json({
+        message: 'account not found',
+      });
+
+      return;
+    }
+
+    if (!user.is_verified) {
+      res.status(StatusCodes.UNAUTHORIZED).json({
+        message: 'account not verified',
+      });
+
+      return;
+    }
+
+    // compare the password
+    const isMatch = await compare(password, user.password);
+
+    if (!isMatch) {
+      res.status(StatusCodes.UNAUTHORIZED).json({
+        message: 'invalid credentials',
+      });
+
+      return;
+    }
+
+    // generate jwt token with an object payload
+    const accessToken = jwt.sign(
+      { id: user.id.toString() },
+      env.ACCESS_TOKEN_PRIVATE_KEY,
+      {
+        algorithm: 'RS512',
+        expiresIn: '15m',
+      }
+    );
+
+    const refreshToken = jwt.sign(
+      { id: user.id.toString() },
+      env.REFRESH_TOKEN_PRIVATE_KEY,
+      {
+        algorithm: 'RS512',
+        expiresIn: '7d',
+      }
+    );
+
+    res.status(StatusCodes.OK).json({
+      message: 'login successful',
+      payload: {
+        access_token: accessToken,
+        refresh_token: refreshToken,
+      },
     });
 
     return;

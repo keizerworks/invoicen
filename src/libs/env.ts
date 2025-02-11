@@ -60,6 +60,30 @@ if (!SMTP_SECURE) {
 
 const PORT = process.env.PORT;
 
+const ACCESS_TOKEN_PRIVATE_KEY = process.env.ACCESS_TOKEN_PRIVATE_KEY;
+
+if (!ACCESS_TOKEN_PRIVATE_KEY) {
+  throw new Error('ACCESS_TOKEN_PRIVATE_KEY is not set');
+}
+
+const ACCESS_TOKEN_PUBLIC_KEY = process.env.ACCESS_TOKEN_PUBLIC_KEY;
+
+if (!ACCESS_TOKEN_PUBLIC_KEY) {
+  throw new Error('ACCESS_TOKEN_PUBLIC_KEY is not set');
+}
+
+const REFRESH_TOKEN_PRIVATE_KEY = process.env.REFRESH_TOKEN_PRIVATE_KEY;
+
+if (!REFRESH_TOKEN_PRIVATE_KEY) {
+  throw new Error('REFRESH_TOKEN_PRIVATE_KEY is not set');
+}
+
+const REFRESH_TOKEN_PUBLIC_KEY = process.env.REFRESH_TOKEN_PUBLIC_KEY;
+
+if (!REFRESH_TOKEN_PUBLIC_KEY) {
+  throw new Error('REFRESH_TOKEN_PUBLIC_KEY is not set');
+}
+
 const env = {
   POSTGRES_USER,
   POSTGRES_PASSWORD,
@@ -72,6 +96,10 @@ const env = {
   SMTP_PASSWORD,
   SMTP_SECURE,
   PORT,
+  ACCESS_TOKEN_PRIVATE_KEY,
+  ACCESS_TOKEN_PUBLIC_KEY,
+  REFRESH_TOKEN_PRIVATE_KEY,
+  REFRESH_TOKEN_PUBLIC_KEY,
 };
 
 export default env;

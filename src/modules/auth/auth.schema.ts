@@ -35,3 +35,12 @@ export const postResendOtpEmailBodySchema = z.object({
 export type PostResendOtpEmailBody = z.infer<
   typeof postResendOtpEmailBodySchema
 >;
+
+export const postLoginBodySchema = z.object({
+  email: z
+    .string({ required_error: 'email is required' })
+    .email({ message: 'please enter a valid email' }),
+  password: z.string({ required_error: 'password is required' }),
+});
+
+export type PostLoginBody = z.infer<typeof postLoginBodySchema>;

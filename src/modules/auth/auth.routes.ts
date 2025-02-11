@@ -1,11 +1,13 @@
 import { Router } from 'express';
 import { validateRequestBody } from '../../middleware/validate-request.middleware';
 import {
+  postLoginBodySchema,
   postResendOtpEmailBodySchema,
   postSignupBodySchema,
   postVerifyOtpBodySchema,
 } from './auth.schema';
 import {
+  postLoginHandler,
   postResendOtpEmail as postResendOtpEmailHandler,
   postSignupHandler,
   postVerifyOtpHandler,
@@ -29,6 +31,12 @@ authRouter.post(
   '/otp/resend',
   validateRequestBody(postResendOtpEmailBodySchema),
   postResendOtpEmailHandler
+);
+
+authRouter.post(
+  '/login',
+  validateRequestBody(postLoginBodySchema),
+  postLoginHandler
 );
 
 export default authRouter;
