@@ -8,6 +8,13 @@
       "when": 1739289959467,
       "tag": "0000_thick_stephen_strange",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1739291134007,
+      "tag": "0001_panoramic_nitro",
+      "breakpoints": true
     }
   ]
 }

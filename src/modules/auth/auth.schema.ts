@@ -13,3 +13,15 @@ export const postSignupBodySchema = z.object({
 });
 
 export type PostSignupBody = z.infer<typeof postSignupBodySchema>;
+
+export const postVerifyOtpBodySchema = z.object({
+  email: z
+    .string({ required_error: 'email is required' })
+    .email({ message: 'please enter a valid email' }),
+  otp: z
+    .number({ required_error: 'otp is required' })
+    .min(1000, { message: 'otp must be a 4 digit number' })
+    .max(9999, { message: 'otp must be a 4 digit number' }),
+});
+
+export type PostVerifyOtpBody = z.infer<typeof postVerifyOtpBodySchema>;

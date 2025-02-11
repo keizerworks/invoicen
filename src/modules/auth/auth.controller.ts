@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { PostSignupBody } from './auth.schema';
+import { PostSignupBody, PostVerifyOtpBody } from './auth.schema';
 import db from '@/db';
 import { userTable } from '@/db/schema/user';
-import { eq } from 'drizzle-orm';
+import { and, eq } from 'drizzle-orm';
 import { genSalt, hash } from 'bcrypt';
 import { sendMail } from '@/libs/mailer';
 
@@ -40,6 +40,7 @@ export async function postSignupHandler(
       email,
       password: hashedPassword,
       otp,
+      is_verified: false,
     });
 
     // send otp to the user
@@ -51,6 +52,48 @@ export async function postSignupHandler(
 
     res.status(StatusCodes.CREATED).json({
       message: 'otp sent to your email',
+    });
+
+    return;
+  } catch (err) {
+    console.error(err);
+
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      message: 'Internal server error',
+    });
+
+    return;
+  }
+}
+
+export async function postVerifyOtpHandler(
+  req: Request<{}, {}, PostVerifyOtpBody>,
+  res: Response
+) {
+  try {
+    const { email, otp } = req.body;
+
+    const user = await db
+      .select()
+      .from(userTable)
+      .where(and(eq(userTable.email, email), eq(userTable.otp, otp)));
+
+    if (!user.length) {
+      res.status(StatusCodes.UNAUTHORIZED).json({
+        message: 'invalid otp',
+      });
+
+      return;
+    }
+
+    // update the user as verified
+    await db
+      .update(userTable)
+      .set({ is_verified: true })
+      .where(eq(userTable.email, email));
+
+    res.status(StatusCodes.OK).json({
+      message: 'account verified',
     });
 
     return;
