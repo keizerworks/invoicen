@@ -25,3 +25,13 @@ export const postVerifyOtpBodySchema = z.object({
 });
 
 export type PostVerifyOtpBody = z.infer<typeof postVerifyOtpBodySchema>;
+
+export const postResendOtpEmailBodySchema = z.object({
+  email: z
+    .string({ required_error: 'email is required' })
+    .email({ message: 'please enter a valid email' }),
+});
+
+export type PostResendOtpEmailBody = z.infer<
+  typeof postResendOtpEmailBodySchema
+>;

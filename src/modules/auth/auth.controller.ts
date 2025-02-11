@@ -1,11 +1,16 @@
 import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
-import { PostSignupBody, PostVerifyOtpBody } from './auth.schema';
+import {
+  PostResendOtpEmailBody,
+  PostSignupBody,
+  PostVerifyOtpBody,
+} from './auth.schema';
 import db from '@/db';
 import { userTable } from '@/db/schema/user';
 import { and, eq } from 'drizzle-orm';
 import { genSalt, hash } from 'bcrypt';
 import { sendMail } from '@/libs/mailer';
+import logger from '@/libs/logger';
 
 export async function postSignupHandler(
   req: Request<{}, {}, PostSignupBody>,
@@ -42,6 +47,8 @@ export async function postSignupHandler(
       otp,
       is_verified: false,
     });
+
+    logger.info(`User ${email} signed up`, 'AUTH');
 
     // send otp to the user
     sendMail({
@@ -92,8 +99,62 @@ export async function postVerifyOtpHandler(
       .set({ is_verified: true })
       .where(eq(userTable.email, email));
 
+    logger.info(`User ${email} verified`, 'AUTH');
+
     res.status(StatusCodes.OK).json({
       message: 'account verified',
+    });
+
+    return;
+  } catch (err) {
+    console.error(err);
+
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      message: 'Internal server error',
+    });
+
+    return;
+  }
+}
+
+export async function postResendOtpEmail(
+  req: Request<{}, {}, PostResendOtpEmailBody>,
+  res: Response
+) {
+  try {
+    const { email } = req.body;
+
+    // check if account is already verified
+    const users = await db
+      .select()
+      .from(userTable)
+      .where(and(eq(userTable.email, email)));
+
+    if (!users.length) {
+      res.status(StatusCodes.NOT_FOUND).json({
+        message: 'account not found',
+      });
+
+      return;
+    }
+
+    if (users[0].is_verified) {
+      res.status(StatusCodes.BAD_REQUEST).json({
+        message: 'account already verified',
+      });
+
+      return;
+    }
+
+    // send otp to the user
+    sendMail({
+      to: email,
+      subject: 'OTP for account verification',
+      html: `Your OTP is ${users[0].otp}`,
+    });
+
+    res.status(StatusCodes.OK).json({
+      message: 'otp sent to your email',
     });
 
     return;
