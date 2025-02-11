@@ -1,39 +1,27 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
-    "skipLibCheck": true,
-    "strict": true,
-    "noEmit": true,
-    "esModuleInterop": true,
-    "module": "esnext",
-    "moduleResolution": "bundler",
-    "resolveJsonModule": true,
-    "isolatedModules": true,
-    "jsx": "preserve",
-    "incremental": true,
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ],
+    /* Language and environment */
+    "target": "ES2020",
+    "lib": ["ES2020"],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "baseUrl": "src",
     "paths": {
-      "~/*": ["./src/*"]
-    }
+      "@/*": ["./*"]
+    },
+
+    /* Directories */
+    "rootDir": "src",
+    "outDir": "dist",
+
+    /* Strictness and checks */
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+
+    /* Interop */
+    "esModuleInterop": true
   },
-  "include": [
-    "sst.config.ts",
-    "sst-env.d.ts",
-    "next-env.d.ts",
-    "eslint.config.mjs",
-    "drizzle.config.ts",
-    "prettier.config.mjs",
-    "infra/**/*.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    ".next/types/**/*.ts",
-    "src/env.js"
-  ],
-  "exclude": ["node_modules"]
+  "include": ["src"],
+  "exclude": ["node_modules", "**/*.test.ts", "**/*.spec.ts"]
 }
