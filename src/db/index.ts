@@ -1,12 +1,13 @@
 import { drizzle } from 'drizzle-orm/node-postgres';
+import env from '@/libs/env';
 
 const db = drizzle({
   connection: {
-    user: process.env.POSTGRES_USER!,
-    password: process.env.POSTGRES_PASSWORD!,
-    database: process.env.POSTGRES_DB!,
-    host: process.env.POSTGRES_HOST!,
-    port: Number(process.env.POSTGRES_PORT!),
+    user: env.POSTGRES_USER!,
+    password: env.POSTGRES_PASSWORD!,
+    database: env.POSTGRES_DB!,
+    host: env.POSTGRES_HOST!,
+    port: Number(env.POSTGRES_PORT!),
     ssl: false,
   },
 });
