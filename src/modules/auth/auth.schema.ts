@@ -44,3 +44,13 @@ export const postLoginBodySchema = z.object({
 });
 
 export type PostLoginBody = z.infer<typeof postLoginBodySchema>;
+
+export const postSendForgotPasswordOTPBodySchema = z.object({
+  email: z
+    .string({ required_error: 'email is required' })
+    .email({ message: 'please enter a valid email' }),
+});
+
+export type PostSendForgotPasswordOTPBody = z.infer<
+  typeof postSendForgotPasswordOTPBodySchema
+>;

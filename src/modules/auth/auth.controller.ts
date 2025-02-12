@@ -3,6 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 import {
   PostLoginBody,
   PostResendOtpEmailBody,
+  PostSendForgotPasswordOTPBody,
   PostSignupBody,
   PostVerifyOtpBody,
 } from './auth.schema';
@@ -239,6 +240,54 @@ export async function postLoginHandler(
     });
 
     return;
+  } catch (err) {
+    console.error(err);
+
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      message: 'Internal server error',
+    });
+
+    return;
+  }
+}
+
+export async function postSendForgotPasswordOTPHandler(
+  req: Request<{}, {}, PostSendForgotPasswordOTPBody>,
+  res: Response
+) {
+  try {
+    const { email } = req.body;
+
+    // find the user
+    const [user] = await db
+      .select()
+      .from(userTable)
+      .where(eq(userTable.email, email));
+
+    if (!user) {
+      res.status(StatusCodes.NOT_FOUND).json({
+        message: 'account not found',
+      });
+
+      return;
+    }
+
+    // generate random otp of 4 digits
+    const otp = Math.floor(1000 + Math.random() * 9000);
+
+    // update the user with the new otp
+    await db.update(userTable).set({ otp }).where(eq(userTable.email, email));
+
+    // send otp to the user
+    sendMail({
+      to: email,
+      subject: 'OTP for password reset',
+      html: `Your OTP is ${otp}`,
+    });
+
+    res.status(StatusCodes.OK).json({
+      message: 'otp sent to your email',
+    });
   } catch (err) {
     console.error(err);
 

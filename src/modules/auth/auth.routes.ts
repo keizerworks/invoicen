@@ -3,12 +3,14 @@ import { validateRequestBody } from '../../middleware/validate-request.middlewar
 import {
   postLoginBodySchema,
   postResendOtpEmailBodySchema,
+  postSendForgotPasswordOTPBodySchema,
   postSignupBodySchema,
   postVerifyOtpBodySchema,
 } from './auth.schema';
 import {
   postLoginHandler,
   postResendOtpEmail as postResendOtpEmailHandler,
+  postSendForgotPasswordOTPHandler,
   postSignupHandler,
   postVerifyOtpHandler,
 } from './auth.controller';
@@ -37,6 +39,12 @@ authRouter.post(
   '/login',
   validateRequestBody(postLoginBodySchema),
   postLoginHandler
+);
+
+authRouter.post(
+  '/forgot-password/otp',
+  validateRequestBody(postSendForgotPasswordOTPBodySchema),
+  postSendForgotPasswordOTPHandler
 );
 
 export default authRouter;
