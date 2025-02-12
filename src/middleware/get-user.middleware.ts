@@ -7,7 +7,6 @@ import 'express';
 import { User, userTable } from '@/db/schema/user';
 import db from '../db';
 import { eq } from 'drizzle-orm';
-import lodash from 'lodash';
 
 declare global {
   namespace Express {
