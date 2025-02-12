@@ -1,11 +1,11 @@
 import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
-import logger from '@/libs/logger.js';
-import healthRouter from '@/modules/health/health.routes.js';
-import { requestLoggerMiddleware } from './middleware/request-logger.middleware.js';
-import authRouter from './modules/auth/auth.routes.js';
-import env from './libs/env.js';
+import logger from '@/libs/logger';
+import healthRouter from './modules/health/health.routes';
+import { requestLoggerMiddleware } from './middleware/request-logger.middleware';
+import authRouter from './modules/auth/auth.routes';
+import env from './libs/env';
 
 const app = express();
 
