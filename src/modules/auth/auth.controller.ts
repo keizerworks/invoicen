@@ -352,3 +352,28 @@ export async function postVerifyForgotPasswordOTPHandler(
     return;
   }
 }
+
+export function getMeHandler(req: Request, res: Response) {
+  const user = req.user;
+
+  if (!user) {
+    res.status(StatusCodes.UNAUTHORIZED).json({
+      message: 'Unauthorized',
+    });
+
+    return;
+  }
+
+  res.status(StatusCodes.OK).json({
+    message: 'success',
+    payload: {
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+      },
+    },
+  });
+
+  return;
+}

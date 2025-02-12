@@ -8,6 +8,7 @@ import {
   postVerifyOtpBodySchema,
 } from './auth.schema';
 import {
+  getMeHandler,
   postLoginHandler,
   postResendOtpEmail as postResendOtpEmailHandler,
   postSendForgotPasswordOTPHandler,
@@ -53,5 +54,7 @@ authRouter.post(
   validateRequestBody(postVerifyOtpBodySchema),
   postVerifyForgotPasswordOTPHandler
 );
+
+authRouter.get('/me', getMeHandler);
 
 export default authRouter;
