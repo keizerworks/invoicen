@@ -3,7 +3,9 @@ import { StatusCodes } from 'http-status-codes';
 import {
   PostLoginBody,
   PostResendOtpEmailBody,
+  PostSendForgotPasswordOTPBody,
   PostSignupBody,
+  PostVerifyForgotPasswordOTPBody,
   PostVerifyOtpBody,
 } from './auth.schema';
 import db from '@/db';
@@ -248,4 +250,130 @@ export async function postLoginHandler(
 
     return;
   }
+}
+
+export async function postSendForgotPasswordOTPHandler(
+  req: Request<{}, {}, PostSendForgotPasswordOTPBody>,
+  res: Response
+) {
+  try {
+    const { email } = req.body;
+
+    // find the user
+    const [user] = await db
+      .select()
+      .from(userTable)
+      .where(eq(userTable.email, email));
+
+    if (!user) {
+      res.status(StatusCodes.NOT_FOUND).json({
+        message: 'account not found',
+      });
+
+      return;
+    }
+
+    // generate random otp of 4 digits
+    const otp = Math.floor(1000 + Math.random() * 9000);
+
+    // update the user with the new otp
+    await db.update(userTable).set({ otp }).where(eq(userTable.email, email));
+
+    // send otp to the user
+    sendMail({
+      to: email,
+      subject: 'OTP for password reset',
+      html: `Your OTP is ${otp}`,
+    });
+
+    res.status(StatusCodes.OK).json({
+      message: 'otp sent to your email',
+    });
+  } catch (err) {
+    console.error(err);
+
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      message: 'Internal server error',
+    });
+
+    return;
+  }
+}
+
+export async function postVerifyForgotPasswordOTPHandler(
+  req: Request<{}, {}, PostVerifyForgotPasswordOTPBody>,
+  res: Response
+) {
+  try {
+    const { email, otp, password } = req.body;
+
+    // find the user
+    const [user] = await db
+      .select()
+      .from(userTable)
+      .where(eq(userTable.email, email));
+
+    if (!user) {
+      res.status(StatusCodes.NOT_FOUND).json({
+        message: 'account not found',
+      });
+
+      return;
+    }
+
+    if (user.otp !== otp) {
+      res.status(StatusCodes.UNAUTHORIZED).json({
+        message: 'invalid otp',
+      });
+
+      return;
+    }
+
+    // generate a hash of the password
+    const salt = await genSalt(10);
+    const hashedPassword = await hash(password, salt);
+
+    // update the user with the new password
+    await db
+      .update(userTable)
+      .set({ password: hashedPassword, otp: null })
+      .where(eq(userTable.email, email));
+
+    res.status(StatusCodes.OK).json({
+      message: 'password reset successful',
+    });
+  } catch (err) {
+    console.error(err);
+
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      message: 'Internal server error',
+    });
+
+    return;
+  }
+}
+
+export function getMeHandler(req: Request, res: Response) {
+  const user = req.user;
+
+  if (!user) {
+    res.status(StatusCodes.UNAUTHORIZED).json({
+      message: 'Unauthorized',
+    });
+
+    return;
+  }
+
+  res.status(StatusCodes.OK).json({
+    message: 'success',
+    payload: {
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+      },
+    },
+  });
+
+  return;
 }

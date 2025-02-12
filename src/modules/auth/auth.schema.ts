@@ -44,3 +44,30 @@ export const postLoginBodySchema = z.object({
 });
 
 export type PostLoginBody = z.infer<typeof postLoginBodySchema>;
+
+export const postSendForgotPasswordOTPBodySchema = z.object({
+  email: z
+    .string({ required_error: 'email is required' })
+    .email({ message: 'please enter a valid email' }),
+});
+
+export type PostSendForgotPasswordOTPBody = z.infer<
+  typeof postSendForgotPasswordOTPBodySchema
+>;
+
+export const postVerifyForgotPasswordOTPBodySchema = z.object({
+  email: z
+    .string({ required_error: 'email is required' })
+    .email({ message: 'please enter a valid email' }),
+  otp: z
+    .number({ required_error: 'otp is required' })
+    .min(1000, { message: 'OTP should be 4 digits long' })
+    .max(9999, { message: 'OTP should be 4 digits long' }),
+  password: z
+    .string({ required_error: 'password is required' })
+    .min(6, { message: 'password must be at least 6 characters long' }),
+});
+
+export type PostVerifyForgotPasswordOTPBody = z.infer<
+  typeof postVerifyForgotPasswordOTPBodySchema
+>;
