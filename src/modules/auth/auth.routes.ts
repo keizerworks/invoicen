@@ -12,6 +12,7 @@ import {
   postResendOtpEmail as postResendOtpEmailHandler,
   postSendForgotPasswordOTPHandler,
   postSignupHandler,
+  postVerifyForgotPasswordOTPHandler,
   postVerifyOtpHandler,
 } from './auth.controller';
 
@@ -45,6 +46,12 @@ authRouter.post(
   '/forgot-password/otp',
   validateRequestBody(postSendForgotPasswordOTPBodySchema),
   postSendForgotPasswordOTPHandler
+);
+
+authRouter.post(
+  '/forgot-password/otp/verify',
+  validateRequestBody(postVerifyOtpBodySchema),
+  postVerifyForgotPasswordOTPHandler
 );
 
 export default authRouter;

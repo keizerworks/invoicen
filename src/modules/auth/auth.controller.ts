@@ -5,6 +5,7 @@ import {
   PostResendOtpEmailBody,
   PostSendForgotPasswordOTPBody,
   PostSignupBody,
+  PostVerifyForgotPasswordOTPBody,
   PostVerifyOtpBody,
 } from './auth.schema';
 import db from '@/db';
@@ -287,6 +288,59 @@ export async function postSendForgotPasswordOTPHandler(
 
     res.status(StatusCodes.OK).json({
       message: 'otp sent to your email',
+    });
+  } catch (err) {
+    console.error(err);
+
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      message: 'Internal server error',
+    });
+
+    return;
+  }
+}
+
+export async function postVerifyForgotPasswordOTPHandler(
+  req: Request<{}, {}, PostVerifyForgotPasswordOTPBody>,
+  res: Response
+) {
+  try {
+    const { email, otp, password } = req.body;
+
+    // find the user
+    const [user] = await db
+      .select()
+      .from(userTable)
+      .where(eq(userTable.email, email));
+
+    if (!user) {
+      res.status(StatusCodes.NOT_FOUND).json({
+        message: 'account not found',
+      });
+
+      return;
+    }
+
+    if (user.otp !== otp) {
+      res.status(StatusCodes.UNAUTHORIZED).json({
+        message: 'invalid otp',
+      });
+
+      return;
+    }
+
+    // generate a hash of the password
+    const salt = await genSalt(10);
+    const hashedPassword = await hash(password, salt);
+
+    // update the user with the new password
+    await db
+      .update(userTable)
+      .set({ password: hashedPassword, otp: null })
+      .where(eq(userTable.email, email));
+
+    res.status(StatusCodes.OK).json({
+      message: 'password reset successful',
     });
   } catch (err) {
     console.error(err);
