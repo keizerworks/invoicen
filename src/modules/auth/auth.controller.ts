@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { StatusCodes } from 'http-status-codes';
 import {
   PostLoginBody,
+  PostRefreshAccessTokenBody,
   PostResendOtpEmailBody,
   PostSendForgotPasswordOTPBody,
   PostSignupBody,
@@ -377,4 +378,63 @@ export function getMeHandler(req: Request, res: Response) {
   });
 
   return;
+}
+
+export async function postRefreshAccessTokenHandler(
+  req: Request<{}, {}, PostRefreshAccessTokenBody>,
+  res: Response
+) {
+  try {
+    const { refresh_token } = req.body;
+    const { id } = jwt.verify(refresh_token, env.REFRESH_TOKEN_PUBLIC_KEY) as {
+      id: number;
+    };
+
+    if (!id) {
+      res.status(StatusCodes.UNAUTHORIZED).json({
+        message: 'invalid token',
+      });
+
+      return;
+    }
+
+    const [user] = await db
+      .select()
+      .from(userTable)
+      .where(eq(userTable.id, id));
+
+    if (!user) {
+      res.status(StatusCodes.UNAUTHORIZED).json({
+        message: 'user not found',
+      });
+
+      return;
+    }
+
+    const accessToken = jwt.sign(
+      { id: user.id.toString() },
+      env.ACCESS_TOKEN_PRIVATE_KEY,
+      {
+        algorithm: 'RS512',
+        expiresIn: '15m',
+      }
+    );
+
+    res.status(StatusCodes.OK).json({
+      message: 'token refreshed',
+      payload: {
+        access_token: accessToken,
+      },
+    });
+
+    return;
+  } catch (err) {
+    console.error(err);
+
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      message: 'Internal server error',
+    });
+
+    return;
+  }
 }

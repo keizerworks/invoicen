@@ -71,3 +71,11 @@ export const postVerifyForgotPasswordOTPBodySchema = z.object({
 export type PostVerifyForgotPasswordOTPBody = z.infer<
   typeof postVerifyForgotPasswordOTPBodySchema
 >;
+
+export const postRefreshAccessTokenBodySchema = z.object({
+  refresh_token: z.string({ required_error: 'refresh token is required' }),
+});
+
+export type PostRefreshAccessTokenBody = z.infer<
+  typeof postRefreshAccessTokenBodySchema
+>;
