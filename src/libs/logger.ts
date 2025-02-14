@@ -34,7 +34,15 @@ const loggerService = winston.createLogger({
   ],
 });
 
-export type LoggerServices = 'SYSTEM' | 'AUTH' | 'HEALTH' | 'HTTP';
+export type LoggerServices =
+  | 'SYSTEM'
+  | 'AUTH'
+  | 'HEALTH'
+  | 'HTTP'
+  | 'USER'
+  | 'ONBOARD'
+  | 'ORGANIZATION'
+  | 'INVOICE';
 
 namespace logger {
   export function info(

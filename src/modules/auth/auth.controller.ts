@@ -50,6 +50,7 @@ export async function postSignupHandler(
       email,
       password: hashedPassword,
       otp,
+      onboarded: false,
       is_verified: false,
     });
 

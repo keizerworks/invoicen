@@ -29,7 +29,9 @@ async function getUserMiddleware(
 
     if (!token) {
       req.user = null;
-      next();
+      res.status(StatusCodes.UNAUTHORIZED).json({
+        message: 'please login to access this route',
+      });
       return;
     }
 
@@ -37,11 +39,12 @@ async function getUserMiddleware(
     const { id } = jwt.verify(token, env.ACCESS_TOKEN_PUBLIC_KEY) as {
       id: number;
     };
-    console.log(id);
 
     if (!id) {
       req.user = null;
-      next();
+      res.status(StatusCodes.UNAUTHORIZED).json({
+        message: 'please login to access this route',
+      });
       return;
     }
 
@@ -49,6 +52,14 @@ async function getUserMiddleware(
       .select()
       .from(userTable)
       .where(eq(userTable.id, id));
+
+    if (!user) {
+      req.user = null;
+      res.status(StatusCodes.UNAUTHORIZED).json({
+        message: 'please login to access this route',
+      });
+      return;
+    }
 
     req.user = user ?? null;
 
