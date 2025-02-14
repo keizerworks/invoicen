@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { validateRequestBody } from '../../middleware/validate-request.middleware';
 import {
   postLoginBodySchema,
+  postRefreshAccessTokenBodySchema,
   postResendOtpEmailBodySchema,
   postSendForgotPasswordOTPBodySchema,
   postSignupBodySchema,
@@ -10,6 +11,7 @@ import {
 import {
   getMeHandler,
   postLoginHandler,
+  postRefreshAccessTokenHandler,
   postResendOtpEmail as postResendOtpEmailHandler,
   postSendForgotPasswordOTPHandler,
   postSignupHandler,
@@ -56,5 +58,11 @@ authRouter.post(
 );
 
 authRouter.get('/me', getMeHandler);
+
+authRouter.post(
+  '/refresh',
+  validateRequestBody(postRefreshAccessTokenBodySchema),
+  postRefreshAccessTokenHandler
+);
 
 export default authRouter;

@@ -14,6 +14,7 @@ export const userTable = pgTable('user', {
   password: varchar({ length: 255 }).notNull(),
   otp: integer(),
   is_verified: boolean().default(false).notNull(),
+  is_onboarded: boolean().default(false).notNull(),
   created_at: timestamp({ mode: 'date' }).defaultNow(),
   updated_at: timestamp({ mode: 'date' }).defaultNow(),
 });

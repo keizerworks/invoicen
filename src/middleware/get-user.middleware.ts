@@ -29,7 +29,9 @@ async function getUserMiddleware(
 
     if (!token) {
       req.user = null;
-      next();
+      res.status(StatusCodes.UNAUTHORIZED).json({
+        message: 'please login to access this route',
+      });
       return;
     }
 
@@ -37,11 +39,12 @@ async function getUserMiddleware(
     const { id } = jwt.verify(token, env.ACCESS_TOKEN_PUBLIC_KEY) as {
       id: number;
     };
-    console.log(id);
 
     if (!id) {
       req.user = null;
-      next();
+      res.status(StatusCodes.UNAUTHORIZED).json({
+        message: 'please login to access this route',
+      });
       return;
     }
 
@@ -50,12 +53,29 @@ async function getUserMiddleware(
       .from(userTable)
       .where(eq(userTable.id, id));
 
+    if (!user) {
+      req.user = null;
+      res.status(StatusCodes.UNAUTHORIZED).json({
+        message: 'please login to access this route',
+      });
+      return;
+    }
+
     req.user = user ?? null;
 
     next();
     return;
-  } catch (err) {
+  } catch (err: any) {
     console.error(err);
+
+    // if token is invalid/expired
+    if (err.message === 'jwt expired' || 'jwt malformed') {
+      res.status(StatusCodes.UNAUTHORIZED).json({
+        message: 'token expired',
+      });
+
+      return;
+    }
 
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       message: 'Internal server error',
