@@ -65,8 +65,17 @@ async function getUserMiddleware(
 
     next();
     return;
-  } catch (err) {
+  } catch (err: any) {
     console.error(err);
+
+    // if token is invalid/expired
+    if (err.message === 'jwt expired' || 'jwt malformed') {
+      res.status(StatusCodes.UNAUTHORIZED).json({
+        message: 'token expired',
+      });
+
+      return;
+    }
 
     res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
       message: 'Internal server error',

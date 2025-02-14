@@ -56,3 +56,23 @@ export async function postOnboardingHandler(
     return;
   }
 }
+
+export async function getOnboardingStatus(req: Request, res: Response) {
+  try {
+    const user = req.user as User;
+
+    res.status(StatusCodes.OK).json({
+      is_onboarded: user.is_onboarded ?? false,
+    });
+
+    return;
+  } catch (err) {
+    console.error(err);
+
+    res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+      message: 'Internal server error',
+    });
+
+    return;
+  }
+}
