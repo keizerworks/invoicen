@@ -4,16 +4,18 @@ import {
   timestamp,
   varchar,
   index,
+  uuid,
 } from 'drizzle-orm/pg-core';
 import { userTable } from './user';
+import { sql } from 'drizzle-orm';
 
 export const organizationTable = pgTable(
   'organization',
   {
-    id: integer().primaryKey().generatedAlwaysAsIdentity(),
+    id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
     name: varchar({ length: 255 }).notNull(),
     slug: varchar({ length: 255 }).notNull(),
-    user_id: integer()
+    user_id: uuid()
       .references(() => userTable.id)
       .notNull(),
     logo_url: varchar({ length: 255 }),

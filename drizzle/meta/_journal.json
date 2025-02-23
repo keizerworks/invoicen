@@ -5,15 +5,8 @@
     {
       "idx": 0,
       "version": "7",
-      "when": 1739542050103,
-      "tag": "0000_spooky_demogoblin",
-      "breakpoints": true
-    },
-    {
-      "idx": 1,
-      "version": "7",
-      "when": 1740294567448,
-      "tag": "0001_lean_marvex",
+      "when": 1740321618873,
+      "tag": "0000_typical_tombstone",
       "breakpoints": true
     }
   ]

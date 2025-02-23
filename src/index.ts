@@ -8,6 +8,7 @@ import authRouter from './modules/auth/auth.routes';
 import env from './libs/env';
 import getUserMiddleware from './middleware/get-user.middleware';
 import onboardingRouter from './modules/onboarding/onboarding.router';
+import clientRouter from './modules/clients/clients.routes';
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use('/auth', authRouter);
 
 app.use(getUserMiddleware);
 app.use('/onboarding', onboardingRouter);
+app.use('/clients', clientRouter);
 
 const PORT = env.PORT || 8000;
 

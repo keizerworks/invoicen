@@ -401,7 +401,7 @@ export async function postRefreshAccessTokenHandler(
     const [user] = await db
       .select()
       .from(userTable)
-      .where(eq(userTable.id, id));
+      .where(eq(userTable.id, String(id)));
 
     if (!user) {
       res.status(StatusCodes.UNAUTHORIZED).json({

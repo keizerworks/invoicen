@@ -1,6 +1,7 @@
 import { z } from 'zod';
 
 export const postSignupBodySchema = z.object({
+  id: z.string().optional(),
   name: z
     .string({ required_error: 'name is required' })
     .min(3, { message: 'name must be at least 3 characters long' }),
