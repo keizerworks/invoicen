@@ -1,7 +1,8 @@
-import { pgTable, serial, text, timestamp, jsonb } from "drizzle-orm/pg-core";
+import { sql } from "drizzle-orm";
+import { pgTable, serial, text, timestamp, jsonb, uuid } from "drizzle-orm/pg-core";
 
 export const templates = pgTable("templates", {
-  id: serial("id").primaryKey(),
+  id: uuid("id").primaryKey().default(sql`gen_random_uuid()`),
   name: text("name").notNull(),
   description: text("description"),
   templateData: jsonb("template_data").notNull(),

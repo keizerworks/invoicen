@@ -19,7 +19,7 @@ export async function postOnboardingHandler(
     // check if user is already onboarded
     if (req.user?.is_onboarded) {
       res.status(StatusCodes.CONFLICT).json({
-        message: 'usser is already onboarded',
+        message: 'user is already onboarded',
       });
 
       return;
