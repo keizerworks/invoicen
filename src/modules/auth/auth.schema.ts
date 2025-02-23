@@ -12,7 +12,7 @@ export const postSignupBodySchema = z.object({
     .min(6, { message: 'password must be at least 6 characters long' }),
 });
 
-export type PostSignupBody = z.infer<typeof postSignupBodySchema>;
+export type  PostSignupBody = z.infer<typeof postSignupBodySchema>;
 
 export const postVerifyOtpBodySchema = z.object({
   email: z
