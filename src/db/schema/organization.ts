@@ -16,6 +16,7 @@ export const organizationTable = pgTable(
     user_id: integer()
       .references(() => userTable.id)
       .notNull(),
+    logo_url: varchar({ length: 255 }),
     created_at: timestamp({ mode: 'date' }).defaultNow(),
     updated_at: timestamp({ mode: 'date' }).defaultNow(),
   },

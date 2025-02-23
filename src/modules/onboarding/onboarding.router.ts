@@ -5,7 +5,7 @@ import {
   getOnboardingStatus,
   postOnboardingHandler,
 } from './onboarding.controller';
-import fileUpload from '@/libs/file-upload';
+import {fileUpload} from '@/middleware/file-upload';
 
 const onboardingRouter = Router();
 

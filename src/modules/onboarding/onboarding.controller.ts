@@ -5,14 +5,13 @@ import db from '@/db';
 import { organizationTable } from '@/db/schema/organization';
 import { User, userTable } from '@/db/schema/user';
 import logger from '@/libs/logger';
+import { uploadFileToS3 } from "@/libs/s3";
 
 export async function postOnboardingHandler(
   req: Request<{}, {}, PostOnboardingBody>,
   res: Response
 ) {
   try {
-    // TODO: handle file upload
-
     // This route will get user from req iteself i.e. only logged in user can be onboarded
     const { org_name, org_slug } = req.body;
     const user = req.user as User;
@@ -26,11 +25,17 @@ export async function postOnboardingHandler(
       return;
     }
 
+    let logoUrl: string | null = null;
+    if (req.file) {
+      logoUrl = await uploadFileToS3(req.file.buffer, req.file.originalname, req.file.mimetype);
+    }
+
     // create new organization for user
     await db.insert(organizationTable).values({
       name: org_name,
       user_id: user.id,
       slug: org_slug,
+      logo_url: logoUrl,
       created_at: new Date(),
       updated_at: new Date(),
     });
