@@ -25,6 +25,7 @@
     "@types/jsonwebtoken": "^9.0.8",
     "@types/multer": "^1.4.12",
     "@types/nodemailer": "^6.4.17",
+    "@types/pdfkit": "^0.13.9",
     "@types/pg": "^8.11.11",
     "@typescript-eslint/eslint-plugin": "^8.24.0",
     "@typescript-eslint/parser": "^8.24.0",
@@ -42,6 +43,7 @@
     "@aws-sdk/client-s3": "^3.750.0",
     "@t3-oss/env-core": "^0.12.0",
     "@types/express": "^5.0.0",
+    "axios": "^1.7.9",
     "bcrypt": "^5.1.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.7",
@@ -51,6 +53,7 @@
     "jsonwebtoken": "^9.0.2",
     "multer": "1.4.5-lts.1",
     "nodemailer": "^6.10.0",
+    "pdfkit": "^0.16.0",
     "pg": "^8.13.1",
     "winston": "^3.17.0",
     "zod": "^3.24.1"

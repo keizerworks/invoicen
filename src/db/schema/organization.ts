@@ -19,6 +19,9 @@ export const organizationTable = pgTable(
       .references(() => userTable.id)
       .notNull(),
     logo_url: varchar({ length: 255 }),
+    tax_id: varchar({ length: 100 }), // Optional
+    address: varchar({ length: 500 }),
+    phone: varchar({ length: 20 }),
     created_at: timestamp({ mode: 'date' }).defaultNow(),
     updated_at: timestamp({ mode: 'date' }).defaultNow(),
   },

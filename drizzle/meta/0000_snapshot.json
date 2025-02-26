@@ -1,5 +1,5 @@
 {
-  "id": "8abdef1e-cef3-4a63-9daa-04f4527d0503",
+  "id": "12591c73-eb4a-4280-b6ef-6fb352309dd9",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "version": "7",
   "dialect": "postgresql",
@@ -119,17 +119,11 @@
           "primaryKey": false,
           "notNull": true
         },
-        "customer_name": {
-          "name": "customer_name",
-          "type": "text",
+        "client_id": {
+          "name": "client_id",
+          "type": "uuid",
           "primaryKey": false,
           "notNull": true
-        },
-        "customer_email": {
-          "name": "customer_email",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false
         },
         "issued_date": {
           "name": "issued_date",
@@ -150,6 +144,84 @@
           "primaryKey": false,
           "notNull": true,
           "default": "'pending'"
+        },
+        "sender_name": {
+          "name": "sender_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "sender_email": {
+          "name": "sender_email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sender_address": {
+          "name": "sender_address",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sender_phone": {
+          "name": "sender_phone",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sender_logo_url": {
+          "name": "sender_logo_url",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sender_tax_id": {
+          "name": "sender_tax_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "sender_company": {
+          "name": "sender_company",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "client_name": {
+          "name": "client_name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true
+        },
+        "client_email": {
+          "name": "client_email",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "client_address": {
+          "name": "client_address",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "client_phone": {
+          "name": "client_phone",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "client_tax_id": {
+          "name": "client_tax_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "client_company": {
+          "name": "client_company",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false
         },
         "items": {
           "name": "items",
@@ -179,6 +251,13 @@
         },
         "tax_total": {
           "name": "tax_total",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "default": 0
+        },
+        "discount": {
+          "name": "discount",
           "type": "integer",
           "primaryKey": false,
           "notNull": true,
@@ -219,6 +298,19 @@
       },
       "indexes": {},
       "foreignKeys": {
+        "invoices_client_id_client_id_fk": {
+          "name": "invoices_client_id_client_id_fk",
+          "tableFrom": "invoices",
+          "tableTo": "client",
+          "columnsFrom": [
+            "client_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
         "invoices_template_id_templates_id_fk": {
           "name": "invoices_template_id_templates_id_fk",
           "tableFrom": "invoices",
@@ -279,6 +371,24 @@
         "logo_url": {
           "name": "logo_url",
           "type": "varchar(255)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "tax_id": {
+          "name": "tax_id",
+          "type": "varchar(100)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "address": {
+          "name": "address",
+          "type": "varchar(500)",
+          "primaryKey": false,
+          "notNull": false
+        },
+        "phone": {
+          "name": "phone",
+          "type": "varchar(20)",
           "primaryKey": false,
           "notNull": false
         },
