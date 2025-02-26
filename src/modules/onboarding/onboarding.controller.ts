@@ -13,7 +13,7 @@ export async function postOnboardingHandler(
 ) {
   try {
     // This route will get user from req iteself i.e. only logged in user can be onboarded
-    const { org_name, org_slug } = req.body;
+    const { org_name, org_slug, address, phone, tax_id } = req.body;
     const user = req.user as User;
 
     // check if user is already onboarded
@@ -36,6 +36,9 @@ export async function postOnboardingHandler(
       user_id: user.id,
       slug: org_slug,
       logo_url: logoUrl,
+      address: address,
+      phone: phone,
+      tax_id: tax_id,
       created_at: new Date(),
       updated_at: new Date(),
     });
