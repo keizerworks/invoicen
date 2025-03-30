@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/assets/og/og-bg.png",
+        url: "https://invoicen.ayushchugh.com/assets/og/og-bg.png",
         width: 1200,
         height: 630,
         alt: "Home page of Invoicen",
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
     site: "@aayushchugh_x",
     siteId: "@aayushchugh_x",
     description: metaDescription,
-    images: ["/assets/og/og-bg.png"],
+    images: ["https://invoicen.ayushchugh.com/assets/og/og-bg.png"],
   },
   icons: {
     shortcut: "/assets/logos/logo-icon.png",
