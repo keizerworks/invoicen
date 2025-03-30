@@ -4,7 +4,7 @@ services:
     container_name: invoicen.ayushchugh.com
     working_dir: /app
     ports:
-      - "3007:3000"
+      - "3008:3000"
     expose:
       - "3000"
     command: "npm start"
