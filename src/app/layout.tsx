@@ -38,11 +38,10 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/assets/og/og.png",
-        alt: "Invoicen Logo",
+        url: "/assets/og/og-bg.png",
         width: 1200,
         height: 630,
-        type: "image/png",
+        alt: "Home page of Invoicen",
       },
     ],
   },
@@ -55,15 +54,7 @@ export const metadata: Metadata = {
     site: "@aayushchugh_x",
     siteId: "@aayushchugh_x",
     description: metaDescription,
-    images: [
-      {
-        url: "/assets/og/og.png",
-        alt: "Invoicen Logo",
-        width: 1200,
-        height: 630,
-        type: "image/png",
-      },
-    ],
+    images: ["/assets/og/og-bg.png"],
   },
   icons: {
     shortcut: "/assets/logos/logo-icon.png",
