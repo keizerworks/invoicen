@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/assets/logos/logo-icon.png",
+        url: "/assets/og/og.png",
         alt: "Invoicen Logo",
       },
     ],
@@ -52,7 +52,7 @@ export const metadata: Metadata = {
     site: "@aayushchugh_x",
     siteId: "@aayushchugh_x",
     description: metaDescription,
-    images: ["/assets/logos/logo-icon.png"],
+    images: ["/assets/og/og.png"],
   },
   icons: {
     shortcut: "/assets/logos/logo-icon.png",
