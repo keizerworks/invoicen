@@ -40,19 +40,30 @@ export const metadata: Metadata = {
       {
         url: "/assets/og/og.png",
         alt: "Invoicen Logo",
+        width: 1200,
+        height: 630,
+        type: "image/png",
       },
     ],
   },
 
   twitter: {
     title: "Invoicen",
-    card: "summary",
+    card: "summary_large_image",
     creator: "@aayushchugh_x",
     creatorId: "@aayushchugh_x",
     site: "@aayushchugh_x",
     siteId: "@aayushchugh_x",
     description: metaDescription,
-    images: ["/assets/og/og.png"],
+    images: [
+      {
+        url: "/assets/og/og.png",
+        alt: "Invoicen Logo",
+        width: 1200,
+        height: 630,
+        type: "image/png",
+      },
+    ],
   },
   icons: {
     shortcut: "/assets/logos/logo-icon.png",
