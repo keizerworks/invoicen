@@ -8,7 +8,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/footer";
 import TanstackProvider from "../providers/TanstackProvider";
 import CurrencyProvider from "../providers/CurrencyProvider";
-import PlausibleProvider from "next-plausible";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const satioshi = localFont({
   src: "./fonts/satoshi.ttf",
@@ -32,13 +32,13 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Invoicen",
     description: metaDescription,
-    url: "https://invoicen.keizerworks.com",
+    url: "https://invoicen.ayushchugh.com",
     siteName: "Invoicen",
     locale: "en_US",
     type: "website",
     images: [
       {
-        url: "/assets/logos/logo-icon-light.png",
+        url: "/assets/logos/logo-icon.png",
         alt: "Invoicen Logo",
       },
     ],
@@ -47,15 +47,15 @@ export const metadata: Metadata = {
   twitter: {
     title: "Invoicen",
     card: "summary",
-    creator: "@keizerHQ",
-    creatorId: "@keizerHQ",
-    site: "@keizerHQ",
-    siteId: "@keizerHQ",
+    creator: "@aayushchugh_x",
+    creatorId: "@aayushchugh_x",
+    site: "@aayushchugh_x",
+    siteId: "@aayushchugh_x",
     description: metaDescription,
-    images: ["/assets/logos/logo-icon-light.png"],
+    images: ["/assets/logos/logo-icon.png"],
   },
   icons: {
-    shortcut: "/assets/logos/logo-icon-light.png",
+    shortcut: "/assets/logos/logo-icon.png",
   },
   robots: {
     index: true,
@@ -77,24 +77,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link
-          rel="icon"
-          href="/assets/logos/logo-icon-light.png"
-          media="(prefers-color-scheme: light)"
-        />
-        <link
-          rel="icon"
-          href="/assets/logos/logo-icon-dark.png"
-          media="(prefers-color-scheme: dark)"
-        />
-        <PlausibleProvider
-          domain={process.env.NEXT_PUBLIC_ANALYTICS_DOMAIN ?? ""}
-          customDomain={process.env.NEXT_PUBLIC_ANALYTICS_FILE_URL ?? ""}
-          selfHosted
-          trackFileDownloads
-          enabled={process.env.NODE_ENV === "production"}
-          trackLocalhost
-        />
+        <link rel="icon" href="/assets/logos/logo-icon.png" media="(prefers-color-scheme: light)" />
+        <link rel="icon" href="/assets/logos/logo-icon.png" media="(prefers-color-scheme: dark)" />
       </head>
       <body
         className={`${manrope.variable} ${satioshi.variable} font-primary antialiased flex items-center justify-center`}
@@ -116,6 +100,10 @@ export default function RootLayout({
           </CurrencyProvider>
         </TanstackProvider>
       </body>
+
+      {process.env.GOOGLE_ANALYTICS_ID && process.env.NODE_ENV === "production" && (
+        <GoogleAnalytics gaId={process.env.GOOGLE_ANALYTICS_ID} />
+      )}
     </html>
   );
 }

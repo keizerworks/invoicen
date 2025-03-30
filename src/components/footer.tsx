@@ -27,8 +27,8 @@ export default function Footer() {
                         ? "/assets/logos/logo-light.svg"
                         : "/assets/logos/logo-dark.svg"
                     }
-                    height={50}
-                    width={100}
+                    height={150}
+                    width={150}
                     alt="logo"
                     aria-label="logo"
                   />
