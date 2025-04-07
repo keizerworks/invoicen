@@ -38,6 +38,7 @@ const GenerateInvoice = () => {
     billedTo: "",
     payTo: "",
   });
+  const [customMessage, setCustomMessage] = useState("");
 
   useEffect(() => {
     const subtotal = entries.reduce((sum, entry) => sum + entry.amount * entry.quantity, 0);
@@ -79,6 +80,7 @@ const GenerateInvoice = () => {
       billingDetails,
       totalAmount: formatToCurrency(totalAmount, activeCurrency),
       totalWithTaxAmount: formatToCurrency(totalWithTax, activeCurrency),
+      customMessage,
     });
   };
 
@@ -90,7 +92,7 @@ const GenerateInvoice = () => {
           <BillingInfo billingDetails={billingDetails} setBillingDetails={setBillingDetails} />
           <EntriesTable entries={entries} setEntries={setEntries} totalAmount={totalAmount} />
           <TaxDetailsTable taxDetails={taxDetails} setTaxDetails={setTaxDetails} />
-          <InvoiceFooter totalWithTax={totalWithTax} onInvoiceGenerate={onInvoiceGenerate} />
+          <InvoiceFooter totalWithTax={totalWithTax} onInvoiceGenerate={onInvoiceGenerate} customMessage={customMessage} setCustomMessage={setCustomMessage} />
         </div>
       </div>
     </main>

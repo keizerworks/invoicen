@@ -9,9 +9,16 @@ import { CurrencyContext } from "../../../providers/CurrencyProvider";
 interface InvoiceFooterProps {
   totalWithTax: number;
   onInvoiceGenerate: () => void;
+  customMessage: string;
+  setCustomMessage: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const InvoiceFooter: FC<InvoiceFooterProps> = ({ totalWithTax, onInvoiceGenerate }) => {
+const InvoiceFooter: FC<InvoiceFooterProps> = ({
+  totalWithTax,
+  onInvoiceGenerate,
+  customMessage,
+  setCustomMessage,
+}) => {
   const { activeCurrency } = useContext(CurrencyContext);
   return (
     <div className="my-4 space-y-4 w-full ">
@@ -24,7 +31,12 @@ const InvoiceFooter: FC<InvoiceFooterProps> = ({ totalWithTax, onInvoiceGenerate
         </Typography>
       </div>
       <Separator className="mt-4" />
-      <Textarea placeholder="Add a custom message" className="border-none p-4 shadow-none mt-4" />
+      <Textarea
+        placeholder="Add a custom message"
+        className="border-none p-4 shadow-none mt-4"
+        value={customMessage}
+        onChange={(e) => setCustomMessage(e.target.value)}
+      />
       <div className="flex justify-end">
         <Button className="text-right" onClick={onInvoiceGenerate}>
           Generate Invoice
