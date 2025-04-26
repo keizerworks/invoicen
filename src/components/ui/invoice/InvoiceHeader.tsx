@@ -3,9 +3,11 @@ import Image from "next/image";
 import { Input } from "../input";
 import type React from "react";
 import { FileIcon } from "@radix-ui/react-icons";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { HeaderDetails } from "../../../services/invoiceService";
 import { InfoIcon } from "../info-icon";
+import { DatePicker } from "../date-picker";
+import { format } from "date-fns";
 
 interface InvoiceHeaderProps {
   headerDetails: HeaderDetails;
@@ -73,12 +75,23 @@ const UploadLogo: React.FC<IUploadLogoProps> = ({ setHeaderDetails }) => {
 };
 
 const InvoiceHeader = ({ headerDetails, setHeaderDetails }: InvoiceHeaderProps) => {
+  const [invoiceDate, setInvoiceDate] = useState<Date>(new Date());
+  const [dueDate, setDueDate] = useState<Date>(new Date());
+
   const onChangeHandler = (key: keyof HeaderDetails, value: string) => {
     setHeaderDetails((prev) => ({
       ...prev,
       [key]: value,
     }));
   };
+
+  useEffect(() => {
+    onChangeHandler("invoiceDate", format(invoiceDate, "PPP"));
+  }, [invoiceDate]);
+
+  useEffect(() => {
+    onChangeHandler("dueDate", format(dueDate, "PPP"));
+  }, [dueDate]);
 
   return (
     <div className="flex flex-col-reverse md:flex-row gap-4 md:gap-0 md:items-center justify-between">
@@ -104,12 +117,10 @@ const InvoiceHeader = ({ headerDetails, setHeaderDetails }: InvoiceHeaderProps) 
           <Typography variant="p" className="md:text-lg text-sm font-semibold">
             Invoice Date:
           </Typography>
-          {/* TODO: open calendar when clicked on this */}
-          <Input
-            value={headerDetails?.invoiceDate}
-            onChange={(e) => onChangeHandler("invoiceDate", e.target.value)}
-            className="md:text-lg text-sm ml-[5rem] text-right border-none w-fit mt-2 bg-transparent"
-            placeholder="Add invoice date"
+          <DatePicker
+            date={invoiceDate}
+            setDate={setInvoiceDate}
+            className="md:text-lg text-sm text-right border-none w-fit mt-2 bg-transparent ml-[5rem] font-normal"
           />
         </div>
 
@@ -117,12 +128,10 @@ const InvoiceHeader = ({ headerDetails, setHeaderDetails }: InvoiceHeaderProps) 
           <Typography variant="p" className="md:text-lg text-sm font-semibold">
             Due Date:
           </Typography>
-          {/* TODO: open calendar when clicked on this */}
-          <Input
-            value={headerDetails?.dueDate}
-            onChange={(e) => onChangeHandler("dueDate", e.target.value)}
-            className="md:text-lg text-sm ml-[5rem] text-right border-none w-fit mt-2 bg-transparent"
-            placeholder="Add due date"
+          <DatePicker
+            date={dueDate}
+            setDate={setDueDate}
+            className="md:text-lg text-sm text-right border-none w-fit mt-2 bg-transparent ml-[5rem] font-normal"
           />
         </div>
 
