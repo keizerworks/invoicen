@@ -5,6 +5,7 @@ import type React from "react";
 import { FileIcon } from "@radix-ui/react-icons";
 import { useState } from "react";
 import { HeaderDetails } from "../../../services/invoiceService";
+import { InfoIcon } from "../info-icon";
 
 interface InvoiceHeaderProps {
   headerDetails: HeaderDetails;
@@ -126,9 +127,12 @@ const InvoiceHeader = ({ headerDetails, setHeaderDetails }: InvoiceHeaderProps) 
         </div>
 
         <div className="flex items-center justify-between w-full">
-          <Typography variant="p" className="md:text-lg text-sm font-semibold">
-            Payment terms:
-          </Typography>
+          <div className="flex items-center gap-2">
+            <Typography variant="p" className="md:text-lg text-sm font-semibold">
+              Payment terms:
+            </Typography>
+            <InfoIcon content="How you want your payment? eg: $100 per hour, or split 50-50 between start and end" />
+          </div>
           <Input
             value={headerDetails?.paymentTerms}
             onChange={(e) => onChangeHandler("paymentTerms", e.target.value)}

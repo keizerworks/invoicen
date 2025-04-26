@@ -9,6 +9,7 @@ import {
 import TaxDetail from "@/components/ui/invoice/TaxDetail";
 import Typography from "@/components/ui/typography";
 import { TaxDetails } from "../../../services/invoiceService";
+import { InfoIcon } from "../info-icon";
 
 interface TaxDetailsTableProps {
   taxDetails: TaxDetails[];
@@ -20,7 +21,10 @@ const TaxDetailsTable = ({ taxDetails, setTaxDetails }: TaxDetailsTableProps) =>
 
   return (
     <div className="mb-10 mt-4">
-      <Typography variant="h3">Tax Details</Typography>
+      <div className="flex items-center gap-2">
+        <Typography variant="h3">Tax Details</Typography>
+        <InfoIcon content="Add tax rates that apply to your invoice. Include description and percentage for each tax." />
+      </div>
       <Table>
         <TableHeader>
           <TableRow>

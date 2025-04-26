@@ -13,6 +13,7 @@ import { formatToCurrency } from "../../../lib/utils";
 import { useContext } from "react";
 import { CurrencyContext } from "../../../providers/CurrencyProvider";
 import { Entry } from "../../../services/invoiceService";
+import { InfoIcon } from "../info-icon";
 
 interface EntriesTableProps {
   entries: Entry[];
@@ -26,7 +27,10 @@ const EntriesTable = ({ entries, setEntries, totalAmount }: EntriesTableProps) =
 
   return (
     <div>
-      <Typography variant="h3">Entries</Typography>
+      <div className="flex items-center gap-2">
+        <Typography variant="h3">Entries</Typography>
+        <InfoIcon content="Add line items for your services or products. Include description, quantity, and amount for each entry." />
+      </div>
       <Table className="mt-2">
         <TableHeader>
           <TableRow className="gap-2">
