@@ -3,11 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "dev": "next dev",
     "format": "pnpm biome format --write .",
-    "lint": "pnpm biome lint --write ."
+    "lint": "pnpm biome lint --write .",
+    "start": "next start"
   },
   "dependencies": {
     "@biomejs/biome": "^1.9.4",
@@ -34,6 +34,7 @@
     "react-day-picker": "8.10.1",
     "react-dom": "^18.3.1",
     "sharp": "^0.33.5",
+    "sst": "3.17.0",
     "tailwind-merge": "^2.5.4",
     "tailwindcss-animate": "^1.0.7"
   },
@@ -46,5 +47,6 @@
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "typescript": "^5"
-  }
+  },
+  "packageManager": "pnpm@10.8.1+sha512.c50088ba998c67b8ca8c99df8a5e02fd2ae2e2b29aaf238feaa9e124248d3f48f9fb6db2424949ff901cffbb5e0f0cc1ad6aedb602cd29450751d11c35023677"
 }
